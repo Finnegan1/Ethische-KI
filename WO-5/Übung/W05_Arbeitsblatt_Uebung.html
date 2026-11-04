@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>W05 Arbeitsblatt · Erklärungen prüfen</title>
+<style>
+:root{--void:#0F0B1A;--deep:#24163A;--paper:#FAFAFC;--ink:#1E1A2E;--violet:#7C3AED;--magenta:#C026D3;--glow:#E879F9;--sage:#2E9E7E;
+--body:#4A4460;--mute:#6B6580;--lilac:#EDE7F8;--border:#E4DFEF;--dbody:#C9C2DE;--mono:'Courier New',monospace;--sans:Arial,Helvetica,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.45;padding:16px}
+main{max-width:1000px;margin:0 auto}
+.eyebrow,.tag{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--magenta);text-transform:uppercase}
+.tag{color:var(--violet);display:block;margin-bottom:6px;font-size:11px}
+h1{font-size:26px;margin:6px 0 2px}
+h2{font-size:20px;margin:0 0 8px}
+h3{font-size:16px;margin:14px 0 6px}
+p{color:var(--body)}
+.head{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;justify-content:space-between;margin-bottom:14px}
+.card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.task{background:var(--lilac);border-radius:10px;padding:12px 16px;margin-bottom:12px}
+.task ol{margin:6px 0 6px 22px;color:var(--ink)}
+.task .meta{font-size:14px;color:var(--body)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid>div{min-width:0}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.grid3>div{min-width:0}
+.feat{display:grid;grid-template-columns:2fr 1fr 1.3fr 1fr;gap:10px;padding:6px 0;border-bottom:1px solid var(--border)}
+.feat:last-child{border-bottom:0}
+.feat>div{min-width:0}
+@media(max-width:760px){.grid,.grid3{grid-template-columns:1fr}.feat{grid-template-columns:1fr 1fr}}
+label{display:block;font-size:14px;color:var(--body);margin:8px 0 3px}
+input[type=text],select,textarea{width:100%;font:inherit;font-size:15px;padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:#fff;color:var(--ink)}
+input[type=file]{font:inherit;font-size:14px;max-width:100%}
+textarea{min-height:58px;resize:vertical}
+.row{display:flex;align-items:center;gap:10px}
+input[type=range]{flex:1;min-width:0;accent-color:var(--violet);height:30px}
+output{font-family:var(--mono);font-weight:bold;min-width:56px;text-align:right}
+button{font:inherit;font-size:15px;padding:10px 16px;border-radius:8px;border:1px solid var(--violet);background:#fff;color:var(--violet);cursor:pointer;margin:6px 8px 0 0}
+button.primary{background:var(--violet);color:#fff}
+button:disabled{opacity:.45;cursor:default}
+.step{border-top:1px solid var(--border);padding-top:12px;margin-top:12px}
+.step:first-of-type{border-top:0;margin-top:0;padding-top:0}
+.num{display:inline-block;font-family:var(--mono);font-weight:bold;color:var(--violet);margin-right:6px}
+.src-box{border:1px solid var(--border);border-radius:8px;padding:10px 12px}
+.src-box .tag{margin-bottom:2px}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:15px;margin-top:8px}
+th,td{border-bottom:1px solid var(--border);padding:6px;text-align:right}
+th:first-child,td:first-child{text-align:left}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--mute);font-weight:normal;text-transform:uppercase}
+td.l{text-align:left}
+.kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+@media(max-width:760px){.kpi{grid-template-columns:repeat(2,1fr)}}
+.kpi div{background:var(--lilac);border-radius:8px;padding:8px 10px}
+.kpi b{display:block;font-size:21px;font-family:var(--mono)}
+.kpi span{font-size:13px;color:var(--body)}
+.info{font-size:14px;color:var(--body);margin-top:6px}
+.note{font-size:14px;color:var(--ink);margin-top:8px;padding:6px 10px;border-left:3px solid var(--magenta);background:#FBF5FD}
+.bars{margin-top:10px}
+.bar{display:grid;grid-template-columns:minmax(110px,190px) 1fr 84px;gap:10px;align-items:center;font-size:14px;margin:4px 0}
+.bar .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink)}
+.bar .tr{position:relative;height:18px;background:#F6F4FA;border-radius:4px}
+.bar .fl{position:absolute;top:0;bottom:0;border-radius:3px}
+.bar .v{font-family:var(--mono);font-size:14px;text-align:right}
+.pos{background:var(--violet)}
+.neg{background:repeating-linear-gradient(45deg,var(--magenta) 0 4px,#D95BE6 4px 8px)}
+.sum{background:var(--deep)}
+.zero{position:absolute;top:-3px;bottom:-3px;width:0;border-left:2px dashed var(--ink)}
+.legend{font-size:13px;color:var(--mute);margin-top:4px}
+.verdict{margin-top:10px;padding:10px 12px;border-radius:8px;border:2px solid var(--violet);background:#fff}
+.verdict.no{border:2px dashed var(--magenta)}
+.verdict b{font-family:var(--mono);letter-spacing:.08em}
+.probe{font-family:var(--mono);font-size:14px;margin-top:8px;color:var(--ink)}
+.inset{background:var(--deep);border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.inset .tag{color:var(--glow)}
+.inset p,.inset li{color:var(--dbody);font-size:14px}
+.inset ul{margin:4px 0 0 18px}
+.inset li{margin-bottom:4px}
+.inset code{color:#fff;overflow-wrap:anywhere}
+.inset .src{color:var(--dbody)}
+code{font-family:var(--mono);font-size:13px}
+.hidden{display:none}
+.line{font-family:var(--mono);font-size:14px;background:#F6F4FA;border:1px solid var(--border);border-radius:6px;padding:8px;word-break:break-word}
+.src{font-size:12px;color:var(--mute);font-style:italic;margin-top:8px}
+.vl{position:relative;display:inline-block;width:16px;height:16px;line-height:14px;border:1px solid var(--violet);border-radius:50%;font-family:var(--mono);font-size:11px;font-weight:bold;font-style:normal;text-align:center;color:var(--violet);background:#fff;cursor:help;vertical-align:2px;margin-left:4px;user-select:none}
+.vl::before{content:"";position:absolute;inset:-5px}
+.vl:hover,.vl:focus{background:var(--violet);color:#fff;outline:none}
+.vl:focus-visible{box-shadow:0 0 0 2px var(--glow)}
+.inset .vl{background:transparent;border-color:var(--glow);color:var(--glow)}
+.inset .vl:hover,.inset .vl:focus{background:var(--glow);color:var(--void)}
+#vltip{position:fixed;z-index:50;max-width:min(330px,calc(100vw - 16px));background:var(--void);border:1px solid var(--violet);border-radius:8px;padding:8px 11px;box-shadow:0 6px 18px rgba(15,11,26,.28);font-size:13px;line-height:1.4;color:var(--dbody);pointer-events:none}
+#vltip .t{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--glow);margin-bottom:4px}
+#vltip .l{display:block}
+#vltip b{color:#fff;font-family:var(--mono);font-weight:bold}
+#vltip i{color:var(--mute)}
+@media print{
+  body{padding:0;font-size:11pt;background:#fff}
+  button,.noprint{display:none!important}
+  .task,.inset,.step,.kpi,table,.feat,.verdict{break-inside:avoid}
+  .card{border:0;padding:0}
+  .grid{grid-template-columns:1fr 1fr!important}
+  .grid3{grid-template-columns:repeat(3,1fr)!important}
+  .feat{grid-template-columns:2fr 1fr 1.3fr 1fr!important}
+  .kpi{grid-template-columns:repeat(4,1fr)!important}
+  h1{font-size:20px} h3{margin:8px 0 4px;break-after:avoid} label{margin:4px 0 2px}
+  textarea{min-height:44px}
+  .inset{background:#fff;border:1px solid var(--border)}
+  .inset .tag,.inset p,.inset li,.inset code,.inset .src{color:var(--ink)}
+  .pos,.neg,.sum{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  #vltip{display:none!important}
+  .vl{width:auto;height:auto;border:0;border-radius:0;background:none!important;font-size:0;margin-left:3px;vertical-align:baseline}
+  .vl::before{display:none}
+  .vl::after{content:"(VL " attr(data-vl) ")";font-size:8pt;font-weight:normal;color:var(--mute)}
+}
+</style></head><body><main>
+
+<div class="head">
+  <div><div class="eyebrow">W05 // Übung // 04.11.2026 // Arbeitsblatt im Browser</div>
+  <h1>Erklärungen prüfen</h1>
+  <p>Keine Installation. Alles läuft in diesem Browserfenster, nichts wird gesendet. Die Daten sind synthetisch.</p></div>
+  <div style="min-width:280px" class="grid">
+    <div><label for="gruppe">Gruppe</label><select id="gruppe"></select></div>
+    <div><label for="thema">Thema</label><select id="thema"></select></div>
+  </div>
+</div>
+
+<!-- TEIL A -->
+<div class="card" id="teilA">
+  <div class="tag">Teil A // Phase 1 // 25 Min</div>
+  <div class="task"><strong>Aufgabenkarte 1: Erklärbedarf festlegen</strong>
+    <p style="color:var(--ink)"><strong>Ziel:</strong> Festlegen, für wen Ihre Erklärung ist und woran sie sich messen lässt.</p>
+    <ol><li>Nennen Sie Entscheidung Ŷ und die Betroffenen.</li>
+    <li>Beschreiben Sie Adressat, Zweck und Rechtsgrundlage.</li>
+    <li>Nennen Sie, welche Merkmale veränderbar sind und wie weit.</li>
+    <li>Erläutern Sie Ihre Gütekriterien für Stabilität und Zielwahrscheinlichkeit.</li></ol>
+    <p class="meta"><strong>Ergebnis:</strong> Arbeitsblatt Teil A · <strong>Zeit:</strong> 25 Minuten · <strong>Abgabe:</strong> mit der Ergebnisdatei</p>
+  </div>
+
+  <div class="step"><h3><span class="num">1</span>Entscheidung und Betroffene <span class="vl" tabindex="0" role="button" data-vl="5">i</span></h3>
+    <div class="grid">
+      <div><label for="yhat">Ŷ = 1 bedeutet</label><input type="text" id="yhat" placeholder="z. B. zum Gespräch eingeladen"></div>
+      <div><label for="betroffen">Betroffen ist</label><input type="text" id="betroffen" placeholder="z. B. Bewerberin oder Bewerber"></div>
+    </div></div>
+
+  <div class="step"><h3><span class="num">2</span>Adressat, Zweck, Rechtsgrundlage <span class="vl" tabindex="0" role="button" data-vl="13">i</span></h3>
+    <div class="grid">
+      <div><label for="adressat">Adressat der Erklärung</label><select id="adressat"><option value="">bitte wählen</option><option>betroffene Person</option><option>Betreiber/Fachabteilung</option><option>Aufsicht/Audit</option></select></div>
+      <div><label for="zweck">Zweck: was der Adressat mit der Erklärung tun können soll</label><textarea id="zweck"></textarea></div>
+      <div><label for="recht">Rechtsgrundlage <span class="vl" tabindex="0" role="button" data-vl="5, 26, 34, 35">i</span></label><select id="recht"><option value="">bitte wählen</option><option>Art. 86 KI-VO</option><option>Art. 13 KI-VO</option><option>Art. 15 Abs. 1 lit. h DSGVO</option><option>keine Pflicht, freiwillig</option></select></div>
+      <div><label for="rechtwarum">Begründung der Rechtsgrundlage</label><textarea id="rechtwarum"></textarea></div>
+    </div>
+    <p class="info">Lehrkontext, keine Rechtsberatung.</p></div>
+
+  <div class="step"><h3><span class="num">3</span>Veränderbarkeit der Merkmale <span class="vl" tabindex="0" role="button" data-vl="23, 24">i</span></h3>
+    <p class="info">Namen kommen aus dem Kopf Ihrer W04-CSV, aus den Demodaten oder aus Ihrer Eingabe. Die Grenzen steuern das Counterfactual in Teil B, Schritt 3. Höchständerung in Standardabweichungen (SD) der Trainingsdaten.</p>
+    <div id="featBox"></div></div>
+
+  <div class="step"><h3><span class="num">4</span>Gütekriterium <span class="vl" tabindex="0" role="button" data-vl="14, 30">i</span></h3>
+    <div class="grid">
+      <div><label for="s_top">Mindestanteil Bootstrap-Modelle mit gleichem wichtigsten Merkmal</label><div class="row"><input type="range" id="s_top" min="0.5" max="1" step="0.05" value="0.80"><output id="o_s_top"></output></div></div>
+      <div><label for="s_cf">Mindestanteil, in dem das Counterfactual gültig bleibt</label><div class="row"><input type="range" id="s_cf" min="0.5" max="1" step="0.05" value="0.80"><output id="o_s_cf"></output></div></div>
+      <div><label for="s_pt">Zielwahrscheinlichkeit des Counterfactuals (Abstand zur Schwelle 0,50)</label><div class="row"><input type="range" id="s_pt" min="0.5" max="0.8" step="0.05" value="0.50"><output id="o_s_pt"></output></div></div>
+      <div style="grid-column:1/-1"><label for="guetewarum">Begründung: warum diese Schwellen für Ihren Adressaten</label><textarea id="guetewarum"></textarea></div>
+    </div></div>
+</div>
+
+<!-- TEIL B -->
+<div class="card" id="teilB">
+  <div class="tag">Teil B // Phase 2 // 35 Min</div>
+  <div class="task"><strong>Aufgabenkarte 2: Erklären und prüfen</strong>
+    <p style="color:var(--ink)"><strong>Ziel:</strong> Abgelehnten Fall erklären, Erklärung prüfen.</p>
+    <ol><li>Analysieren Sie die globale Wichtigkeit der Merkmale.</li>
+    <li>Erläutern Sie den gewählten Fall in einem Satz an Ihren Adressaten.</li>
+    <li>Bewerten Sie das Counterfactual: umsetzbar, sparsam?</li>
+    <li>Analysieren Sie die Stabilität; erhöhen Sie bei Bedarf das Ziel.</li>
+    <li>Entwerfen Sie den Absatz „Grenzen der Erklärung“.</li></ol>
+    <p class="meta"><strong>Ergebnis:</strong> Teil B, Matrixzeile · <strong>Zeit:</strong> 35 Minuten · <strong>Abgabe:</strong> Ergebnisdatei</p>
+  </div>
+
+  <div class="step"><h3><span class="num">0</span>Datensatz aus W04 oder Demodaten</h3>
+    <div class="grid3">
+      <div class="src-box"><span class="tag">Weg a // W04-CSV laden</span>
+        <label for="csvfile">Ihre Datei „W04_G??_Datensatz.csv“ (wird nur in diesem Browser gelesen)</label>
+        <input type="file" id="csvfile" accept=".csv,text/csv" class="noprint">
+        <p class="info">Spaltennamen werden aus dem Kopf übernommen. Tragen Sie unten den Seed aus W04 ein.</p></div>
+      <div class="src-box"><span class="tag">Weg b // mit den W04-Werten neu erzeugen</span>
+        <p class="info">Gleiche Werte wie in W04 Teil A, Schritt 5, ergeben denselben Datensatz.</p>
+        <button class="primary" id="btnGen">Datensatz erzeugen</button></div>
+      <div class="src-box"><span class="tag">Weg c // ohne W04-Daten</span>
+        <label for="demo">Demodaten Thema</label>
+        <select id="demo" class="noprint"></select>
+        <p class="info">Nur, wenn Ihre W04-CSV und Ihre W04-Werte fehlen. Setzt Werte, Seed und Merkmalsnamen; gleicher Datensatz wie die Datei W05_Demodaten_Txx.csv im OPAL. Synthetisch.</p></div>
+    </div>
+    <div class="grid" id="genParams">
+      <div><label for="pa">Basisrate Gruppe a</label><div class="row"><input type="range" id="pa" min="0.05" max="0.95" step="0.05" value="0.50"><output id="o_pa"></output></div></div>
+      <div><label for="pb">Basisrate Gruppe b</label><div class="row"><input type="range" id="pb" min="0.05" max="0.95" step="0.05" value="0.30"><output id="o_pb"></output></div></div>
+      <div><label for="proxy">Proxy-Stärke</label><div class="row"><input type="range" id="proxy" min="0" max="1" step="0.1" value="0.8"><output id="o_proxy"></output></div></div>
+      <div><label for="n">Fallzahl</label><select id="n"><option value="2000">2.000</option><option value="5000" selected>5.000</option><option value="10000">10.000</option></select></div>
+      <div><label for="anteilb">Anteil der Gruppe b</label><div class="row"><input type="range" id="anteilb" min="0.1" max="0.9" step="0.05" value="0.40"><output id="o_anteilb"></output></div></div>
+      <div><label for="labelbias">Label-Bias</label><div class="row"><input type="range" id="labelbias" min="0" max="0.5" step="0.05" value="0"><output id="o_labelbias"></output></div></div>
+      <div><label for="seed">Zufallswert (Seed) des Datensatzes; Bootstrap nutzt Seed + 1000</label><input type="text" id="seed" value="42" inputmode="numeric"></div>
+    </div>
+    <p class="info" id="genInfo">Noch kein Datensatz. Laden Sie Ihre W04-CSV, erzeugen Sie den Datensatz mit Ihren W04-Werten neu oder wählen Sie ohne W04-Daten die Demodaten Ihres Themas.</p></div>
+
+  <div class="step"><h3><span class="num">1</span>Modell trainieren und global erklären <span class="vl" tabindex="0" role="button" data-vl="17, 19, 21">i</span></h3>
+    <button class="primary" id="btnTrain" disabled>Modell trainieren und global erklären</button>
+    <div id="out1"></div></div>
+
+  <div class="step"><h3><span class="num">2</span>Fall wählen und lokal erklären <span class="vl" tabindex="0" role="button" data-vl="20, 22, 45">i</span></h3>
+    <div class="grid">
+      <div><label for="fall">Fall-Nr. (Index in den Messfällen, ab 0)</label><input type="text" id="fall" inputmode="numeric" placeholder="z. B. 17"></div>
+      <div style="align-self:end"><button class="primary" id="btnPick" disabled>Abgelehnten Fall wählen (p nahe 0,40)</button><button id="btnCase" disabled>Fall erklären</button></div>
+    </div>
+    <div id="out2"></div>
+    <label for="satz">Ihre Erklärung in einem Satz an den Adressaten aus Teil A</label>
+    <textarea id="satz" placeholder="Für diese Entscheidung zählten vor allem … und …; … wirkte dagegen."></textarea></div>
+
+  <div class="step"><h3><span class="num">3</span>Counterfactual berechnen <span class="vl" tabindex="0" role="button" data-vl="23, 24, 47">i</span></h3>
+    <button class="primary" id="btnCF" disabled>Counterfactual berechnen</button>
+    <div id="out3"></div>
+    <label for="cfbew">Bewertung: umsetzbar, sparsam?</label>
+    <textarea id="cfbew"></textarea></div>
+
+  <div class="step"><h3><span class="num">4</span>Stabilität testen <span class="vl" tabindex="0" role="button" data-vl="29, 30">i</span></h3>
+    <button class="primary" id="btnStab" disabled>20 Bootstrap-Modelle rechnen</button>
+    <div id="out4"></div></div>
+
+  <div class="step"><h3><span class="num">5</span>Grenzen der Erklärung <span class="vl" tabindex="0" role="button" data-vl="33">i</span></h3>
+    <label for="grenzen">Absatz für die Model Card und Kapitel 3</label>
+    <textarea id="grenzen" style="min-height:96px" placeholder="Die Erklärung gilt nur …; sie setzt voraus, dass …; nicht geprüft wurde …"></textarea></div>
+</div>
+
+<!-- ABGABE -->
+<div class="card">
+  <div class="tag">Abgabe // bis So 08.11.2026, 23:59 Uhr // OPAL</div>
+  <p>Zeile für die Vergleichsmatrix:</p>
+  <div class="line" id="matrixLine">erscheint nach Schritt 4</div>
+  <button id="btnCopy" class="noprint">Zeile kopieren</button>
+  <button class="primary noprint" id="btnSave">Ergebnisdatei herunterladen</button>
+  <button class="noprint" id="btnPrint">Drucken oder als PDF sichern</button>
+  <p class="info"><strong>Abgabe bis Ende KW45, So 08.11.2026, 23:59 Uhr, im OPAL:</strong> Ergebnisdatei. Der Absatz aus Schritt 5 geht in die Model Card (bis W07) und in Kapitel 3.</p>
+</div>
+
+<div class="inset">
+  <div class="tag">Was im Hintergrund passiert</div>
+  <ul>
+    <li><strong>Modell:</strong> logistische Regression auf den Trainingsfällen mit den drei Merkmalen, ohne das Gruppenmerkmal; Newton-Verfahren mit L2-Strafterm 1 auf die Gewichte. Entspricht <code>sklearn.linear_model.LogisticRegression(C=1)</code>. Genauigkeit gegen <code>y_altdaten</code> auf den Messfällen, Schwelle 0,5.</li>
+    <li><strong>SHAP:</strong> Für ein lineares Modell sind die SHAP-Werte exakt berechenbar: φ<sub>j</sub> = w<sub>j</sub> · (x<sub>j</sub> − Mittelwert<sub>j</sub>), Basiswert = b + Σ w<sub>j</sub> · Mittelwert<sub>j</sub>, beides auf der Logit-Skala (Log-Odds). Hintergrund sind die Trainingsfälle. Die Formel unterstellt unabhängige Merkmale; hängen Merkmale zusammen, etwa Proxy und Eignung, teilt sie Beiträge trotzdem einzeln zu. Entspricht <code>shap.LinearExplainer(model, shap.maskers.Independent(X_train, max_samples=len(X_train)))</code>; ohne <code>max_samples</code> zieht shap nur 100 Hintergrundfälle und weicht deutlich ab: im Kontrollfall (Seed 42, Fall-Nr. 1263) φ +0,60 statt +0,51 und Basiswert −0,56 statt −0,48. <span class="vl" tabindex="0" role="button" data-vl="19, 45">i</span></li>
+    <li><strong>Globale Wichtigkeit:</strong> mittlerer Betrag der SHAP-Werte über die Messfälle, wie <code>shap.plots.bar</code>.</li>
+    <li><strong>Counterfactual:</strong> kleinste Summe der Änderungen in Standardabweichungen (L1), sodass der Logit mindestens logit(Zielwahrscheinlichkeit) + 0,01 erreicht (bei Ziel 0,50 also 0,01), nur über veränderbare Merkmale, in erlaubter Richtung und bis zur Höchständerung. Beim linearen Modell ist das ein lineares Optimierungsproblem; die Lösung nimmt zuerst das Merkmal mit dem größten |w<sub>j</sub>| · SD<sub>j</sub> bis zur Grenze, dann das nächste. Entspricht <code>scipy.optimize.linprog</code>; DiCE sucht dagegen mehrere, verschiedene Counterfactuals. <span class="vl" tabindex="0" role="button" data-vl="23, 24, 47">i</span></li>
+    <li><strong>Robustheit:</strong> Ein Counterfactual knapp an der Schwelle kann seine Gültigkeit schon bei kleinen Modelländerungen verlieren, etwa nach einem Neutraining; eine höhere Zielwahrscheinlichkeit kann Abstand zur Schwelle schaffen, um den Preis größerer Änderungen (Upadhyay, Joshi &amp; Lakkaraju 2021).</li>
+    <li><strong>Demodaten:</strong> je Thema feste Werte, Seed und Merkmalsnamen, erzeugt mit dem Generator aus W04. Das Blatt schreibt den Datensatz wie der W04-Export als CSV (vier Nachkommastellen) und liest ihn wieder ein; deshalb sind Auswahl und Datei W05_Demodaten_Txx.csv identisch. Vollständig synthetisch, nur für Gruppen ohne eigene W04-Daten.</li>
+    <li><strong>Fallauswahl:</strong> Der Knopf wählt den abgelehnten Messfall (Ŷ = 0), dessen Wahrscheinlichkeit am nächsten an 0,40 liegt, bei Gleichstand den kleinsten Index. So liegt der Fall deutlich, aber nicht weit unter der Schwelle. Jede andere Fall-Nr. lässt sich eintragen.</li>
+    <li><strong>Stabilität:</strong> 20 Bootstrap-Stichproben der Trainingsfälle (Ziehen mit Zurücklegen, Seed des Datensatzes + 1000), je Stichprobe ein neues Modell und neue SHAP-Werte für denselben Fall. Gezählt wird, wie oft wichtigstes Merkmal und Entscheidung gleich bleiben und ob das Counterfactual unter dem neuen Modell noch zur Annahme führt. Geprüft wird die Unsicherheit aus den Trainingsdaten, nicht die aus dem Erklärverfahren.</li>
+  </ul>
+  <p class="src">Lundberg &amp; Lee (2017), NeurIPS · Wachter, Mittelstadt &amp; Russell (2018), Harvard JOLT · Ustun, Spangher &amp; Liu (2019), FAT* · Upadhyay, Joshi &amp; Lakkaraju (2021), NeurIPS · Molnar (2025), Interpretable Machine Learning, 3. Aufl.</p>
+</div>
+<p class="src">I050 Ethische und vertrauenswürdige KI · HTW Dresden · Fassung 02.11.2026 · Eingaben bleiben nur in diesem Browser gespeichert.</p>
+</main>
+<script>
+(function(){
+"use strict";
+var $=function(id){return document.getElementById(id);};
+var fx=function(v,d){return (isFinite(v)?v:0).toFixed(d).replace('.',',');};
+var f2=function(v){return fx(v,2);},f3=function(v){return fx(v,3);};
+var sg=function(v,d){var s=fx(v,d);if(s.replace(/[-0,]/g,'')==='')return s.replace('-','');return v>0?'+'+s:s;};
+var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});};
+
+/* ---------- Rechenkern (Generator und Modell 1:1 aus W04) ---------- */
+var E={};
+E.rng=function(seed){var a=seed>>>0;return function(){a=(a+0x6D2B79F5)|0;var t=Math.imul(a^(a>>>15),1|a);t=(t+Math.imul(t^(t>>>7),61|t))^t;return((t^(t>>>14))>>>0)/4294967296;};};
+E.normal=function(r){var u=0,v=0;while(u===0)u=r();while(v===0)v=r();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);};
+E.generate=function(p){
+  var r=E.rng(p.seed),rows=[],i;
+  for(i=0;i<p.n;i++){
+    var b=r()<p.anteilB?1:0, yt=r()<(b?p.pb:p.pa)?1:0;
+    var x=[1.2*yt+E.normal(r),0.8*yt+E.normal(r),2.5*p.proxy*b+E.normal(r)];
+    var y=yt; if(b&&yt&&r()<p.labelBias)y=0;
+    rows.push({b:b,yt:yt,y:y,x:x});
+  }
+  var idx=rows.map(function(_,k){return k;});
+  for(i=idx.length-1;i>0;i--){var j=Math.floor(r()*(i+1));var t=idx[i];idx[i]=idx[j];idx[j]=t;}
+  var cut=Math.round(p.n*0.7);
+  idx.forEach(function(k,pos){rows[k].split=pos<cut?'train':'test';});
+  return {rows:rows,train:rows.filter(function(q){return q.split==='train';}),test:rows.filter(function(q){return q.split==='test';})};
+};
+E.sig=function(z){return 1/(1+Math.exp(-z));};
+E.solve=function(A,b){var n=b.length,M=A.map(function(row,i){return row.concat([b[i]]);}),c,r,k;
+  for(c=0;c<n;c++){var p=c;for(r=c+1;r<n;r++)if(Math.abs(M[r][c])>Math.abs(M[p][c]))p=r;var t=M[c];M[c]=M[p];M[p]=t;
+    for(r=c+1;r<n;r++){var f=M[r][c]/M[c][c];for(k=c;k<=n;k++)M[r][k]-=f*M[c][k];}}
+  var x=new Array(n).fill(0);for(r=n-1;r>=0;r--){var s=M[r][n];for(k=r+1;k<n;k++)s-=M[r][k]*x[k];x[r]=s/M[r][r];}return x;};
+E.fitLR=function(X,y){ /* Newton, L2 = 1 auf die Gewichte wie scikit-learn (C = 1) */
+  var d=X[0].length+1,w=new Array(d).fill(0),it,i,k,l;
+  for(it=0;it<30;it++){
+    var g=new Array(d).fill(0),H=[];for(k=0;k<d;k++)H.push(new Array(d).fill(0));
+    for(i=0;i<X.length;i++){var xi=[1].concat(X[i]),z=0;for(k=0;k<d;k++)z+=w[k]*xi[k];
+      var p=E.sig(z),s=p*(1-p),e=p-y[i];for(k=0;k<d;k++){g[k]+=e*xi[k];for(l=0;l<d;l++)H[k][l]+=s*xi[k]*xi[l];}}
+    for(k=1;k<d;k++){g[k]+=w[k];H[k][k]+=1;}
+    var st=E.solve(H,g),mx=0;for(k=0;k<d;k++){w[k]-=st[k];mx=Math.max(mx,Math.abs(st[k]));}
+    if(mx<1e-9)break;}
+  return w;};
+E.proba=function(w,X){return X.map(function(x){var z=w[0];for(var k=0;k<x.length;k++)z+=w[k+1]*x[k];return E.sig(z);});};
+/* ---------- W05: Erklären und prüfen ---------- */
+E.logit=function(w,x){var z=w[0];for(var k=0;k<x.length;k++)z+=w[k+1]*x[k];return z;};
+E.stats=function(X){var n=X.length,d=X[0].length,m=new Array(d).fill(0),s=new Array(d).fill(0),i,j;
+  for(i=0;i<n;i++)for(j=0;j<d;j++)m[j]+=X[i][j];m=m.map(function(v){return v/n;});
+  for(i=0;i<n;i++)for(j=0;j<d;j++)s[j]+=(X[i][j]-m[j])*(X[i][j]-m[j]);
+  return {mean:m,sd:s.map(function(v){return Math.sqrt(v/n);})};}; /* SD mit Nenner n, wie numpy.std */
+E.phi=function(w,mean,x){return x.map(function(v,j){return w[j+1]*(v-mean[j]);});};
+E.baseValue=function(w,mean){var z=w[0];for(var j=0;j<mean.length;j++)z+=w[j+1]*mean[j];return z;};
+E.globalImp=function(w,mean,X){var d=mean.length,s=new Array(d).fill(0);X.forEach(function(x){for(var j=0;j<d;j++)s[j]+=Math.abs(w[j+1]*(x[j]-mean[j]));});return s.map(function(v){return v/X.length;});};
+E.argmaxAbs=function(a){var b=0;for(var j=1;j<a.length;j++)if(Math.abs(a[j])>Math.abs(a[b]))b=j;return b;};
+E.TARGET_P=0.40;
+E.pickCase=function(p,target){ /* abgelehnter Messfall (p < 0,5) mit p am nächsten am Zielwert; bei Gleichstand kleinster Index */
+  target=target===undefined?E.TARGET_P:target;var best=-1,bd=Infinity;
+  for(var i=0;i<p.length;i++){if(p[i]>=0.5)continue;var dd=Math.abs(p[i]-target);if(dd<bd){bd=dd;best=i;}}return best;};
+E.MARGIN=0.01;
+E.counterfactual=function(w,x,sd,cons,margin){ /* min Σ|δj|/sdj  u. d. N. logit(x+δ) ≥ margin; exakt per Greedy (fraktionales Rucksackproblem) */
+  margin=margin===undefined?E.MARGIN:margin;
+  var z=E.logit(w,x),d=x.length,dsd=new Array(d).fill(0),j;
+  if(z>=margin)return {already:true,feasible:true,logit:z,dsd:dsd,delta:dsd.slice(),newLogit:z,newP:E.sig(z),l1:0,order:[]};
+  var need=margin-z,cand=[];
+  for(j=0;j<d;j++){var c=cons[j],wj=w[j+1];if(!c.mut||wj===0||!(c.max>0))continue;
+    var dir=wj>0?'up':'down';if(c.dir!=='both'&&c.dir!==dir)continue;cand.push({j:j,rate:Math.abs(wj)*sd[j],max:c.max,s:wj>0?1:-1});}
+  cand.sort(function(a,b){return b.rate-a.rate||a.j-b.j;});
+  var order=[],reach=z;
+  for(var q=0;q<cand.length;q++){var c2=cand[q];reach+=c2.rate*c2.max;
+    if(need<=1e-12)continue;var u=Math.min(need/c2.rate,c2.max);dsd[c2.j]=c2.s*u;need-=u*c2.rate;order.push(c2.j);}
+  var feasible=need<=1e-12,delta=dsd.map(function(v,k){return v*sd[k];}),xn=x.map(function(v,k){return v+delta[k];}),nl=E.logit(w,xn);
+  return {already:false,feasible:feasible,logit:z,dsd:dsd,delta:delta,x:xn,newLogit:nl,newP:E.sig(nl),l1:dsd.reduce(function(s,v){return s+Math.abs(v);},0),order:order,maxLogit:reach,maxP:E.sig(reach)};};
+E.single=function(w,x,sd,margin){margin=margin===undefined?E.MARGIN:margin;var z=E.logit(w,x);
+  return x.map(function(_,j){var wj=w[j+1];if(wj===0)return {delta:Infinity,dsd:Infinity};var dl=(margin-z)/wj;return {delta:dl,dsd:dl/sd[j]};});};
+E.bootstrap=function(X,y,seed,B,x,ref){ /* ref: {top, dec, cfx} des Basismodells */
+  var r=E.rng(seed),n=X.length,out=[],b,i;
+  for(b=0;b<B;b++){var Xb=new Array(n),yb=new Array(n);for(i=0;i<n;i++){var k=Math.floor(r()*n);Xb[i]=X[k];yb[i]=y[k];}
+    var w=E.fitLR(Xb,yb),st=E.stats(Xb),ph=E.phi(w,st.mean,x),z=E.logit(w,x);
+    out.push({w:w,phi:ph,top:E.argmaxAbs(ph),logit:z,dec:z>=0?1:0,cfLogit:ref.cfx?E.logit(w,ref.cfx):null});}
+  var cnt=function(f){return out.filter(f).length;};
+  return {runs:out,B:B,seed:seed,topSame:cnt(function(o){return o.top===ref.top;}),decSame:cnt(function(o){return o.dec===ref.dec;}),
+    cfValid:ref.cfx?cnt(function(o){return o.cfLogit>=0;}):null};};
+E.parseCSV=function(text){
+  var lines=text.replace(/^\uFEFF/,'').split(/\r?\n/).filter(function(l){return l.trim()!=='';});
+  var split=function(l){var out=[],cur='',q=false;for(var i=0;i<l.length;i++){var c=l[i];
+    if(q){if(c==='"'){if(l[i+1]==='"'){cur+='"';i++;}else q=false;}else cur+=c;}
+    else if(c==='"')q=true;else if(c===','){out.push(cur);cur='';}else cur+=c;}out.push(cur);return out;};
+  if(lines.length<20)throw new Error('Zu wenige Zeilen.');
+  var head=split(lines[0]).map(function(s){return s.trim();});
+  if(head.length<7||head[4]!=='y_altdaten'||head[5]!=='y_wahr'||head[6]!=='teil')throw new Error('Unerwartete Spalten. Erwartet wird der CSV-Export aus dem W04-Arbeitsblatt (Gruppenmerkmal, drei Merkmale, y_altdaten, y_wahr, teil).');
+  var rows=[];
+  for(var i=1;i<lines.length;i++){var c=split(lines[i]);if(c.length<7)throw new Error('Zeile '+(i+1)+' unvollständig.');
+    var x=[+c[1],+c[2],+c[3]],t=c[6].trim();
+    if(!x.every(isFinite))throw new Error('Zeile '+(i+1)+': Merkmal ist keine Zahl.');
+    if(t!=='training'&&t!=='messung')throw new Error('Zeile '+(i+1)+': Spalte teil ist weder training noch messung.');
+    rows.push({b:c[0].trim()==='b'?1:0,x:x,y:+c[4]===1?1:0,yt:+c[5]===1?1:0,split:t==='training'?'train':'test'});}
+  var tr=rows.filter(function(q){return q.split==='train';}),te=rows.filter(function(q){return q.split==='test';});
+  if(tr.length<10||te.length<1)throw new Error('Zu wenige Trainings- oder Messfälle.');
+  return {rows:rows,train:tr,test:te,names:head.slice(1,4),groupName:head[0]};};
+/* ---------- Demodaten je Thema: synthetisch, nur ohne eigene W04-Daten; Seed = Hunderter + Themennummer ---------- */
+E.DEMO=[
+ {id:'T01',yhat:'Kredit gewährt',gruppe:'Staatsangehörigkeit (a: deutsch; b: andere)',namen:['Einkommen','Zahlungshistorie','Postleitzahlgebiet'],p:{pa:0.70,pb:0.55,proxy:0.8,n:5000,anteilB:0.40,labelBias:0,seed:42}},
+ {id:'T02',yhat:'Rabatt angezeigt',gruppe:'Altersgruppe (a: unter 50; b: 50 und älter)',namen:['Kaufhistorie','Klickverhalten','Endgerät'],p:{pa:0.40,pb:0.25,proxy:0.6,n:10000,anteilB:0.40,labelBias:0,seed:42}},
+ {id:'T03',yhat:'zum Gespräch eingeladen',gruppe:'Altersgruppe (a: unter 45; b: 45 und älter)',namen:['Berufserfahrung','Qualifikation','Abschlussjahrgang'],p:{pa:0.50,pb:0.30,proxy:0.8,n:5000,anteilB:0.40,labelBias:0,seed:42}},
+ {id:'T04',yhat:'an einen Menschen weitergegeben',gruppe:'Sprache der Anfrage (a: Deutsch; b: andere)',namen:['Angabenvollständigkeit','Dringlichkeit','Sprachabweichung'],p:{pa:0.35,pb:0.25,proxy:0.6,n:5000,anteilB:0.30,labelBias:0,seed:304}},
+ {id:'T05',yhat:'Angebot in die engere Wahl',gruppe:'Anbietergröße (a: groß; b: klein)',namen:['Preisvorteil','Lieferzuverlässigkeit','Fehlende Produktangaben'],p:{pa:0.45,pb:0.30,proxy:0.7,n:5000,anteilB:0.50,labelBias:0,seed:305}},
+ {id:'T06',yhat:'Datensatz als vollständig angenommen',gruppe:'Herkunftsregion (a: EU; b: außerhalb der EU)',namen:['Nachweisdichte','Feldvollständigkeit','Übersetzungsanteil'],p:{pa:0.60,pb:0.45,proxy:0.8,n:5000,anteilB:0.35,labelBias:0.10,seed:306}},
+ {id:'T07',yhat:'Person erkannt, Ausweichen ausgelöst',gruppe:'Körpergröße (a: ab 1,60 m; b: unter 1,60 m)',namen:['Warnkleidung','Bewegungskontrast','Verdeckungsgrad'],p:{pa:0.75,pb:0.60,proxy:0.6,n:10000,anteilB:0.20,labelBias:0,seed:207}},
+ {id:'T08',yhat:'Bild freigegeben',gruppe:'Art der Quelle (a: Agentur; b: Bürgerjournalismus)',namen:['Content Credentials','Metadatenvollständigkeit','Kompressionsgrad'],p:{pa:0.65,pb:0.45,proxy:0.9,n:5000,anteilB:0.30,labelBias:0.15,seed:108}},
+ {id:'T09',yhat:'kein Abbruchrisiko gemeldet',gruppe:'Studienform (a: Vollzeit; b: berufsbegleitend)',namen:['Abgabequote','Teilnahme','Abendaktivität'],p:{pa:0.70,pb:0.55,proxy:0.7,n:2000,anteilB:0.40,labelBias:0.20,seed:209}}];
+E.toCSV=function(d,head){ /* wie csv() im W04-Arbeitsblatt: Kopf in Anführungszeichen, vier Nachkommastellen, Zeilenende \n */
+  var q=function(s){return '"'+String(s).replace(/"/g,'""')+'"';};
+  var L=[[q(head[0]),q(head[1]),q(head[2]),q(head[3]),'y_altdaten','y_wahr','teil'].join(',')];
+  d.rows.forEach(function(r){L.push([r.b?'b':'a',r.x[0].toFixed(4),r.x[1].toFixed(4),r.x[2].toFixed(4),r.y,r.yt,r.split==='train'?'training':'messung'].join(','));});return L.join('\n');};
+E.demoCSV=function(k){var t=E.DEMO[k];return E.toCSV(E.generate(t.p),[t.gruppe].concat(t.namen));};
+window.W05Engine=E;
+
+/* ---------- Oberfläche ---------- */
+var G=['G01','G02','G03','G04','G05','G06','G07','G08','G09','G10','G11','G12'];
+var T=['T01 Kreditwürdigkeitsprüfung','T02 Empfehlungssystem im Online-Handel','T03 Vorauswahl von Bewerbungen','T04 Generativer Kundenservice-Assistent','T05 Verifizierter Einkaufsagent','T06 Digitaler Produktpass','T07 Humanoider Serviceroboter','T08 Herkunftsnachweise in der Bildredaktion','T09 KI-gestützte Lernplattform'];
+$('gruppe').innerHTML='<option value="">bitte wählen</option>'+G.map(function(g){return '<option>'+g+'</option>';}).join('');
+$('thema').innerHTML='<option value="">bitte wählen</option>'+T.map(function(t){return '<option>'+t+'</option>';}).join('');
+$('demo').innerHTML='<option value="">bitte wählen</option>'+E.DEMO.map(function(t,k){return '<option value="'+k+'">'+T[k]+'</option>';}).join('');
+var DEFN=['fachmerkmal_1','fachmerkmal_2','proxy'],TITLE=['Merkmal 1','Merkmal 2','Merkmal 3 (Proxy)'];
+$('featBox').innerHTML=[0,1,2].map(function(j){return '<div class="feat">'+
+  '<div><label for="fn'+j+'">'+TITLE[j]+': Name</label><input type="text" id="fn'+j+'" placeholder="'+DEFN[j]+'"></div>'+
+  '<div><label for="fm'+j+'">veränderbar</label><select id="fm'+j+'"><option value="ja">ja</option><option value="nein">nein</option></select></div>'+
+  '<div><label for="fd'+j+'">erlaubte Richtung</label><select id="fd'+j+'"><option value="up">nur hoch</option><option value="down">nur runter</option><option value="both" selected>beide</option></select></div>'+
+  '<div><label for="fx'+j+'">Höchständerung (SD)</label><input type="text" id="fx'+j+'" value="1,0" inputmode="decimal"></div></div>';}).join('');
+$('fm2').value='nein';
+var CONS=['fm0','fd0','fx0','fm1','fd1','fx1','fm2','fd2','fx2'],NAMES=['fn0','fn1','fn2'],GEN=['pa','pb','proxy','n','anteilb','labelbias'];
+var FIELDS=['gruppe','thema','yhat','betroffen','adressat','zweck','recht','rechtwarum','s_top','s_cf','s_pt','guetewarum','fall','satz','cfbew','grenzen','seed'].concat(NAMES,CONS,GEN);
+var KEY='W05_Arbeitsblatt_v1';
+function save(){try{var o={};FIELDS.forEach(function(f){o[f]=$(f).value;});localStorage.setItem(KEY,JSON.stringify(o));}catch(e){}}
+function load(){try{var o=JSON.parse(localStorage.getItem(KEY)||'null');if(o)FIELDS.forEach(function(f){if(o[f]!==undefined)$(f).value=o[f];});}catch(e){}}
+var S={data:null,src:null,demo:null,model:null,ci:null,cf:null,stab:null,msg:{}};
+function params(){return {pa:+$('pa').value,pb:+$('pb').value,proxy:+$('proxy').value,n:+$('n').value,anteilB:+$('anteilb').value,labelBias:+$('labelbias').value,seed:parseInt($('seed').value,10)||42};}
+function seed(){return parseInt($('seed').value,10)||42;}
+function nm(j){return $('fn'+j).value.trim()||(S.data&&S.data.names?S.data.names[j]:DEFN[j]);}
+function num(v){var x=parseFloat(String(v).replace(',','.'));return isFinite(x)?Math.min(Math.max(x,0),10):0;}
+function cons(){return [0,1,2].map(function(j){return {mut:$('fm'+j).value==='ja',dir:$('fd'+j).value,max:num($('fx'+j).value)};});}
+var DIRT={up:'nur hoch',down:'nur runter',both:'beide'};
+function outs(){[['pa',f2],['pb',f2],['proxy',f2],['anteilb',f2],['labelbias',f2],['s_top',f2],['s_cf',f2],['s_pt',f2]].forEach(function(e){$('o_'+e[0]).textContent=e[1](+$(e[0]).value);});}
+function kpis(a){return '<div class="kpi">'+a.map(function(k){return '<div><b>'+k[0]+'</b><span>'+k[1]+'</span></div>';}).join('')+'</div>';}
+function tbl(head,rows){return '<div class="tbl"><table><thead><tr>'+head.map(function(h){return '<th>'+h+'</th>';}).join('')+'</tr></thead><tbody>'+rows.map(function(r){return '<tr>'+r.map(function(c){return '<td>'+c+'</td>';}).join('')+'</tr>';}).join('')+'</tbody></table></div>';}
+function note(k){return S.msg[k]?'<p class="note">'+S.msg[k]+'</p>':'';}
+
+/* Zurücksetzen: 0 Daten, 1 Modell, 2 Fall, 3 Counterfactual, 4 Stabilität */
+var WHY={0:'Datensatz geändert',1:'Modell geändert',2:'Fall geändert',3:'Grenzen aus Teil A, Schritt 3 geändert',4:'Gütekriterium aus Teil A, Schritt 4 geändert',5:'Zielwahrscheinlichkeit aus Teil A, Schritt 4 geändert'};
+function reset(from,why){var had={1:!!S.model,2:!!S.ci,3:!!S.cf,4:!!S.stab};
+  if(from<=0){S.data=null;S.src=null;S.demo=null;$('demo').value='';}
+  if(from<=1)S.model=null;
+  if(from<=2)S.ci=null;
+  if(from<=3)S.cf=null;
+  S.stab=null;S.msg={};
+  if(why)[1,2,3,4].forEach(function(k){if(k>=from&&had[k])S.msg[k]='Zurückgesetzt: '+why+'. Bitte diesen Schritt erneut ausführen.';});
+  if(from<=0&&why)$('genInfo').textContent='Zurückgesetzt: '+why+'. Bitte Datensatz neu erzeugen oder CSV erneut laden.';
+  render();}
+
+function setData(d,src,info){S.data=d;S.src=src;reset(1);
+  var c=[0,0],y=[0,0];d.rows.forEach(function(r){c[r.b]++;y[r.b]+=r.y;});
+  $('genInfo').innerHTML=info+' '+d.rows.length.toLocaleString('de-DE')+' Fälle, davon '+c[1]+' in Gruppe b. Training: '+d.train.length+' Fälle, Messung: '+d.test.length+' Fälle. Das Gruppenmerkmal geht nicht ins Modell.';}
+function gen(){var p=params();$('demo').value='';S.demo=null;setData(E.generate(p),'gen','Datensatz neu erzeugt (Seed '+p.seed+').');}
+function demo(k){var t=E.DEMO[k];if(!t)return;var p=t.p;
+  $('pa').value=p.pa;$('pb').value=p.pb;$('proxy').value=p.proxy;$('n').value=String(p.n);$('anteilb').value=p.anteilB;$('labelbias').value=p.labelBias;$('seed').value=String(p.seed);
+  t.namen.forEach(function(n,j){$('fn'+j).value=n;});$('demo').value=String(k);outs();save();
+  var d=E.parseCSV(E.demoCSV(k));S.demo=t.id;
+  setData(d,'demo','Demodaten '+t.id+' erzeugt (synthetisch, gleich der Datei W05_Demodaten_'+t.id+'.csv), Gruppenmerkmal „'+esc(d.groupName)+'“, Merkmale: '+d.names.map(esc).join(', ')+'; Ŷ = 1 bedeutet hier: '+esc(t.yhat)+'; Seed '+p.seed+'.');}
+function loadCSVText(text,fname){try{var d=E.parseCSV(text);}catch(e){$('genInfo').textContent='CSV nicht gelesen: '+e.message;return false;}
+  $('demo').value='';S.demo=null;d.names.forEach(function(n,j){$('fn'+j).value=n;});save();
+  setData(d,'csv','W04-CSV „'+esc(fname||'Datensatz.csv')+'“ geladen, Gruppenmerkmal „'+esc(d.groupName)+'“, Merkmale: '+d.names.map(esc).join(', ')+'.');return true;}
+
+function train(){var d=S.data,Xtr=d.train.map(function(r){return r.x;}),ytr=d.train.map(function(r){return r.y;}),Xte=d.test.map(function(r){return r.x;});
+  var w=E.fitLR(Xtr,ytr),st=E.stats(Xtr),p=E.proba(w,Xte),ok=0;
+  p.forEach(function(v,i){if((v>=0.5?1:0)===d.test[i].y)ok++;});
+  S.model={w:w,mean:st.mean,sd:st.sd,base:E.baseValue(w,st.mean),imp:E.globalImp(w,st.mean,Xte),p:p,acc:ok/Xte.length,rej:p.filter(function(v){return v<0.5;}).length,Xtr:Xtr,ytr:ytr};
+  reset(2);}
+function pick(){var i=E.pickCase(S.model.p);if(i<0){S.msg[2]='Kein abgelehnter Messfall vorhanden.';render();return;}$('fall').value=i;save();explain(i);}
+function explain(i){if(i===undefined)i=parseInt($('fall').value,10);var d=S.data;
+  if(!(i>=0&&i<d.test.length)){reset(2);S.msg[2]='Fall-Nr. muss zwischen 0 und '+(d.test.length-1)+' liegen.';render();return;}
+  var x=d.test[i].x,m=S.model,ph=E.phi(m.w,m.mean,x),z=E.logit(m.w,x);
+  S.ci={i:i,x:x,y:d.test[i].y,phi:ph,logit:z,p:E.sig(z),dec:z>=0?1:0,top:E.argmaxAbs(ph)};reset(3);}
+E.targetLogit=function(pt){return Math.log(pt/(1-pt))+E.MARGIN;};
+function cf(){var m=S.model,c=cons(),pt=+$('s_pt').value,mg=E.targetLogit(pt);S.cf=E.counterfactual(m.w,S.ci.x,m.sd,c,mg);S.cf.cons=c;S.cf.pt=pt;S.cf.margin=mg;S.cf.single=E.single(m.w,S.ci.x,m.sd,mg);reset(4);}
+function stab(){var m=S.model,ci=S.ci;
+  S.stab=E.bootstrap(m.Xtr,m.ytr,seed()+1000,20,ci.x,{top:ci.top,dec:ci.dec,cfx:(S.cf&&S.cf.feasible&&!S.cf.already)?S.cf.x:null});
+  S.stab.sTop=+$('s_top').value;S.stab.sCf=+$('s_cf').value;S.msg={};render();}
+
+function bars(items,lo,hi){ /* items: [name, from, to, cls, label] */
+  var span=(hi-lo)||1,pc=function(v){return ((v-lo)/span*100).toFixed(2)+'%';},z0=lo<0&&hi>0?'<span class="zero" style="left:'+pc(0)+'"></span>':'';
+  return '<div class="bars">'+items.map(function(it){var a=Math.min(it[1],it[2]),b=Math.max(it[1],it[2]);
+    return '<div class="bar"><span class="nm" title="'+esc(it[0])+'">'+esc(it[0])+'</span><span class="tr">'+z0+'<span class="fl '+it[3]+'" style="left:'+pc(a)+';width:calc('+pc(b)+' - '+pc(a)+')"></span></span><span class="v">'+it[4]+'</span></div>';}).join('')+'</div>';}
+
+function render(){var d=S.data,m=S.model,ci=S.ci,c=S.cf,st=S.stab;
+  $('btnTrain').disabled=!d;$('btnPick').disabled=!m;$('btnCase').disabled=!m;$('btnCF').disabled=!ci;$('btnStab').disabled=!ci||!c;
+  /* Schritt 1 */
+  var h1=note(1);
+  if(m){var rank=[0,1,2].sort(function(a,b){return m.imp[b]-m.imp[a];}),mx=Math.max.apply(null,m.imp)||1;
+    h1+=kpis([[f3(m.acc),'Genauigkeit (Messfälle, gegen y_altdaten)'],[sg(m.w[0],3),'Achsenabschnitt b'],[sg(m.base,3),'Basiswert (Logit)'],[String(m.rej),'abgelehnte Messfälle (Ŷ = 0)']])+
+      tbl(['Merkmal','Gewicht w','Mittelwert','SD','mittlerer |φ|','Rang'],[0,1,2].map(function(j){return [esc(nm(j)),sg(m.w[j+1],3),f3(m.mean[j]),f3(m.sd[j]),f3(m.imp[j]),String(rank.indexOf(j)+1)];}))+
+      bars(rank.map(function(j){return [nm(j),0,m.imp[j],'pos',f3(m.imp[j])];}),0,mx)+
+      '<p class="legend">Balken: mittlerer Betrag der SHAP-Werte über die Messfälle, Logit-Skala.</p>';}
+  $('out1').innerHTML=h1;
+  /* Schritt 2 */
+  var h2=note(2);
+  if(ci){var cum=m.base,items=[['Basiswert',0,m.base,'sum',sg(m.base,3)]];
+    ci.phi.forEach(function(v,j){items.push([nm(j)+(v>=0?' (hebt)':' (senkt)'),cum,cum+v,v>=0?'pos':'neg',sg(v,3)]);cum+=v;});
+    items.push(['f(x) = Logit',0,ci.logit,'sum',sg(ci.logit,4)]);
+    var pts=[0,m.base,ci.logit],cc=m.base;ci.phi.forEach(function(v){cc+=v;pts.push(cc);});
+    var lo=Math.min.apply(null,pts),hi=Math.max.apply(null,pts),pad=(hi-lo)*0.06||0.1;
+    var sum=ci.phi.reduce(function(s,v){return s+v;},0);
+    h2+=kpis([[String(ci.i),'Fall-Nr. (Messfälle)'],[sg(ci.logit,4),'Logit f(x)'],[fx(ci.p,4),'Wahrscheinlichkeit'],['Ŷ = '+ci.dec,ci.dec?'angenommen':'abgelehnt']])+
+      tbl(['Merkmal','Wert','Mittelwert Training','φ (Logit)','Wirkung'],[0,1,2].map(function(j){return [esc(nm(j)),f3(ci.x[j]),f3(m.mean[j]),sg(ci.phi[j],3),ci.phi[j]>=0?'hebt':'senkt'];}))+
+      bars(items,lo-pad,hi+pad)+
+      '<p class="legend">Wasserfall auf der Logit-Skala: Basiswert, dann je Merkmal φ (voll: hebt, schraffiert: senkt), unten f(x). Gestrichelte Linie: Logit 0, also Wahrscheinlichkeit 0,5.</p>'+
+      '<p class="probe">Probe: Basiswert '+sg(m.base,4)+' + Σφ '+sg(sum,4)+' = '+sg(m.base+sum,4)+' = Logit '+sg(ci.logit,4)+'</p>'+
+      (ci.dec?'<p class="note">Dieser Fall ist angenommen. Für Schritt 3 einen abgelehnten Fall wählen.</p>':'');}
+  $('out2').innerHTML=h2;
+  /* Schritt 3 */
+  var h3=note(3);
+  if(c){h3+='<p class="info">Ziel: Wahrscheinlichkeit mindestens '+f2(c.pt)+', also Logit mindestens '+sg(c.margin,3)+' (Teil A, Schritt 4).</p>';
+    if(c.already)h3+='<p class="note">Der Fall erreicht die Zielwahrscheinlichkeit bereits (Wahrscheinlichkeit '+f3(c.newP)+'). Ein Counterfactual ist nicht nötig.</p>';
+    else{h3+=(c.feasible?kpis([[f3(c.newP),'neue Wahrscheinlichkeit'],[sg(c.newLogit,3),'neuer Logit'],[f3(c.l1),'Summe der Änderungen (SD)'],[String(c.order.length),'geänderte Merkmale']])
+        :'<p class="note"><strong>Innerhalb Ihrer Grenzen gibt es kein Counterfactual.</strong> Höchstens erreichbar: Wahrscheinlichkeit '+f3(c.maxP)+' (Logit '+sg(c.maxLogit,3)+'). Grenzen in Teil A, Schritt 3 prüfen.</p>')+
+      tbl(['Merkmal','veränderbar','Richtung','Grenze (SD)','Änderung (Datenwert)','Änderung (SD)','neuer Wert'],[0,1,2].map(function(j){var k=c.cons[j];
+        return [esc(nm(j)),k.mut?'ja':'nein',DIRT[k.dir],f2(k.max),c.feasible?sg(c.delta[j],3):'n. a.',c.feasible?sg(c.dsd[j],3):'n. a.',c.feasible?f3(c.x[j]):'n. a.'];}));}
+    if(!c.already)h3+='<h3>Einzeländerung: nötige Änderung, wenn nur dieses Merkmal sich ändert (ohne Grenzen)</h3>'+
+      tbl(['Merkmal','Änderung (Datenwert)','Änderung (SD)','veränderbar','in Ihren Grenzen'],[0,1,2].map(function(j){var s=c.single[j],k=c.cons[j],dirOk=k.dir==='both'||(k.dir==='up'?s.delta>0:s.delta<0);
+        var inG=isFinite(s.dsd)&&k.mut&&dirOk&&Math.abs(s.dsd)<=k.max+1e-12;return [esc(nm(j)),isFinite(s.delta)?sg(s.delta,3):'nicht erreichbar',isFinite(s.dsd)?sg(s.dsd,3):'n. a.',k.mut?'ja':'nein',inG?'ja':'nein'];}));}
+  $('out3').innerHTML=h3;
+  /* Schritt 4 */
+  var h4=note(4);
+  if(st){var B=st.B,agg=[0,1,2].map(function(j){var v=st.runs.map(function(o){return o.phi[j];});return {mean:v.reduce(function(s,x){return s+x;},0)/B,min:Math.min.apply(null,v),max:Math.max.apply(null,v)};});
+    var okTop=st.topSame/B>=st.sTop-1e-9,okCf=st.cfValid!==null&&st.cfValid/B>=st.sCf-1e-9,ok=okTop&&okCf;
+    h4+=kpis([[st.topSame+'/'+B,'gleiches wichtigstes Merkmal ('+esc(nm(ci.top))+')'],[st.decSame+'/'+B,'gleiche Entscheidung'],[st.cfValid===null?'n. a.':st.cfValid+'/'+B,'Counterfactual gültig'],[String(st.seed),'Seed Bootstrap']])+
+      tbl(['Merkmal','φ Basismodell','φ Mittel','φ Min','φ Max'],[0,1,2].map(function(j){return [esc(nm(j)),sg(ci.phi[j],3),sg(agg[j].mean,3),sg(agg[j].min,3),sg(agg[j].max,3)];}))+
+      '<div class="verdict'+(ok?'':' no')+'"><b>'+(ok?'URTEIL: TRÄGT':'URTEIL: TRÄGT NICHT')+'</b><br>'+
+      'Wichtigstes Merkmal stabil: '+st.topSame+'/'+B+' = '+f2(st.topSame/B)+(okTop?' ≥ ':' &lt; ')+f2(st.sTop)+(okTop?', erfüllt':', nicht erfüllt')+'.<br>'+
+      'Counterfactual gültig: '+(st.cfValid===null?'nicht prüfbar, weil es kein Counterfactual gibt; nicht erfüllt':st.cfValid+'/'+B+' = '+f2(st.cfValid/B)+(okCf?' ≥ ':' &lt; ')+f2(st.sCf)+(okCf?', erfüllt':', nicht erfüllt'))+'.</div>'+
+      '<p class="legend">Schwellen aus Teil A, Schritt 4. Gültig heißt: Unter dem Bootstrap-Modell führt das Counterfactual weiterhin zur Annahme (Logit ≥ 0). Liegt es knapp über der Schwelle, können schon kleine Modelländerungen es ungültig machen; eine höhere Zielwahrscheinlichkeit in Teil A, Schritt 4 kann Abstand schaffen.</p>';}
+  $('out4').innerHTML=h4;
+  $('matrixLine').textContent=st?matrix():'erscheint nach Schritt 4';}
+
+function cfText(){var c=S.cf;if(!c)return 'n. a.';if(c.already)return 'nicht nötig (Ziel erreicht)';if(!c.feasible)return 'keins in Grenzen';
+  return c.order.map(function(j){return nm(j)+' '+sg(c.dsd[j],2)+' SD';}).join(' und ');}
+function matrix(){var m=S.model,ci=S.ci,st=S.stab,g=E.argmaxAbs(m.imp);
+  return ($('gruppe').value||'G??')+' · '+(($('thema').value||'T??').split(' ')[0])+' · global: '+nm(g)+' · lokal: '+nm(ci.top)+' (φ '+sg(ci.phi[ci.top],2)+') · CF (Ziel '+f2(S.cf?S.cf.pt:+$('s_pt').value)+'): '+cfText()+
+    ' · Top-Merkmal stabil '+st.topSame+'/'+st.B+' · CF gültig '+(st.cfValid===null?'n. a.':st.cfValid+'/'+st.B);}
+function download(name,text,type){var blob=new Blob([text],{type:type});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},500);}
+function report(){var v=function(id){return $(id).value||'';},p=params(),d=S.data,m=S.model,ci=S.ci,c=S.cf,st=S.stab,cs=cons();
+  var L=['# W05 Ergebnis · '+(v('gruppe')||'Gruppe')+' · '+v('thema'),'','## Teil A',
+    '1. Ŷ = 1 bedeutet: '+v('yhat')+' · Betroffen: '+v('betroffen'),
+    '2. Adressat: '+v('adressat')+' · Zweck: '+v('zweck')+' · Rechtsgrundlage: '+v('recht')+' · Begründung: '+v('rechtwarum'),
+    '3. Veränderbarkeit: '+[0,1,2].map(function(j){return nm(j)+' ('+(cs[j].mut?'veränderbar, '+DIRT[cs[j].dir]+', bis '+f2(cs[j].max)+' SD':'nicht veränderbar')+')';}).join('; '),
+    '4. Gütekriterium: wichtigstes Merkmal stabil mindestens '+f2(+v('s_top'))+', Counterfactual gültig mindestens '+f2(+v('s_cf'))+', Zielwahrscheinlichkeit des Counterfactuals '+f2(+v('s_pt'))+' · '+v('guetewarum'),'','## Teil B'];
+  if(d)L.push('0. Datensatz: '+(S.src==='csv'?'W04-CSV':(S.src==='demo'?'Demodaten '+S.demo+' (synthetisch), ':'neu erzeugt, ')+'Basisrate a '+f2(p.pa)+', b '+f2(p.pb)+', Proxy-Stärke '+f2(p.proxy)+', Fallzahl '+p.n+', Anteil b '+f2(p.anteilB)+', Label-Bias '+f2(p.labelBias))+' · Seed '+seed()+' · Training '+d.train.length+', Messung '+d.test.length);
+  if(m){L.push('1. Modell: Genauigkeit '+f3(m.acc)+' · Achsenabschnitt '+sg(m.w[0],4)+' · Basiswert '+sg(m.base,4));
+    [0,1,2].forEach(function(j){L.push('   '+nm(j)+': Gewicht '+sg(m.w[j+1],4)+', Mittelwert '+f3(m.mean[j])+', SD '+f3(m.sd[j])+', mittlerer |φ| '+f3(m.imp[j]));});}
+  if(ci){L.push('2. Fall '+ci.i+': Logit '+sg(ci.logit,4)+', Wahrscheinlichkeit '+fx(ci.p,4)+', Ŷ = '+ci.dec+', y_altdaten = '+ci.y);
+    [0,1,2].forEach(function(j){L.push('   '+nm(j)+': Wert '+f3(ci.x[j])+', φ '+sg(ci.phi[j],4));});
+    L.push('   Probe: Basiswert + Σφ = '+sg(m.base+ci.phi.reduce(function(s,x){return s+x;},0),4)+' = Logit');}
+  L.push('   Satz: '+v('satz'));
+  if(c){if(c.already)L.push('3. Counterfactual (Ziel '+f2(c.pt)+'): nicht nötig, Ziel erreicht');
+    else if(!c.feasible)L.push('3. Counterfactual (Ziel '+f2(c.pt)+'): innerhalb der Grenzen keins; höchstens Wahrscheinlichkeit '+f3(c.maxP));
+    else{L.push('3. Counterfactual (Ziel '+f2(c.pt)+'): neue Wahrscheinlichkeit '+f3(c.newP)+', Summe '+f3(c.l1)+' SD');
+      [0,1,2].forEach(function(j){L.push('   '+nm(j)+': '+sg(c.delta[j],4)+' (Datenwert), '+sg(c.dsd[j],3)+' SD');});}
+    if(!c.already)L.push('   Einzeländerung: '+[0,1,2].map(function(j){var s=c.single[j];return nm(j)+' '+(isFinite(s.dsd)?sg(s.dsd,3)+' SD':'nicht erreichbar');}).join('; '));}
+  L.push('   Bewertung: '+v('cfbew'));
+  if(st){L.push('4. Stabilität (20 Bootstrap-Modelle, Seed '+st.seed+'): wichtigstes Merkmal gleich '+st.topSame+'/20, Entscheidung gleich '+st.decSame+'/20, Counterfactual gültig '+(st.cfValid===null?'n. a.':st.cfValid+'/20'));
+    L.push('   Urteil: '+$('out4').querySelector('.verdict b').textContent.replace('URTEIL: ','').toLowerCase());}
+  L.push('5. Grenzen der Erklärung: '+v('grenzen'));
+  if(st)L.push('','Vergleichsmatrix: '+matrix());
+  L.push('','Arbeitsblatt W05, Fassung 02.11.2026. Daten synthetisch.');
+  return L.join('\n');}
+
+load();outs();render();
+GEN.forEach(function(id){$(id).addEventListener('change',function(){if(S.data&&(S.src==='gen'||S.src==='demo'))reset(0,WHY[0]);});});
+$('seed').addEventListener('change',function(){if(S.data&&(S.src==='gen'||S.src==='demo'))reset(0,WHY[0]);else if(S.stab)reset(4,'Seed geändert');});
+CONS.forEach(function(id){$(id).addEventListener('change',function(){if(S.cf)reset(3,WHY[3]);});});
+['s_top','s_cf'].forEach(function(id){$(id).addEventListener('change',function(){if(S.stab)reset(4,WHY[4]);});});
+$('s_pt').addEventListener('change',function(){if(S.cf)reset(3,WHY[5]);});
+NAMES.forEach(function(id){$(id).addEventListener('input',function(){render();});});
+['gruppe','thema'].forEach(function(id){$(id).addEventListener('change',function(){render();});$(id).addEventListener('input',function(){render();});});
+$('fall').addEventListener('change',function(){if(S.ci&&parseInt($('fall').value,10)!==S.ci.i)reset(2,WHY[2]);});
+FIELDS.forEach(function(id){$(id).addEventListener('input',function(){outs();save();});$(id).addEventListener('change',function(){outs();save();});});
+$('csvfile').addEventListener('change',function(e){var f=e.target.files&&e.target.files[0];if(!f)return;var rd=new FileReader();rd.onload=function(){loadCSVText(String(rd.result),f.name);};rd.readAsText(f,'utf-8');});
+$('btnGen').addEventListener('click',gen);
+$('demo').addEventListener('change',function(){if($('demo').value!=='')demo(+$('demo').value);});
+$('btnTrain').addEventListener('click',train);
+$('btnPick').addEventListener('click',pick);
+$('btnCase').addEventListener('click',function(){explain();});
+$('btnCF').addEventListener('click',cf);
+$('btnStab').addEventListener('click',stab);
+$('btnCopy').addEventListener('click',function(){render();var t=$('matrixLine').textContent;try{navigator.clipboard.writeText(t);}catch(e){}});
+$('btnSave').addEventListener('click',function(){download('W05_'+($('gruppe').value||'Gruppe')+'_Ergebnis.txt',report(),'text/plain;charset=utf-8');});
+$('btnPrint').addEventListener('click',function(){window.print();});
+window.W05App={gen:gen,demo:demo,loadCSVText:loadCSVText,train:train,pick:pick,explain:explain,cf:cf,stab:stab,reset:reset,state:S,report:report,matrix:matrix,names:function(){return [0,1,2].map(nm);}};
+})();
+</script>
+<script>
+/* Info-Symbole: Verweise auf die Folien der Vorlesung W05 (Hover, Fokus, Tippen) */
+(function(){
+var F={5:'Art. 86 KI-VO: Recht auf Erläuterung',13:'Wer fragt, bestimmt die Erklärung',14:'Vier Prüfkriterien einer Erklärung',17:'Das Modell hinter Bewerbung 17',19:'SHAP-Wert im linearen Modell',20:'Bewerbung 17 als Wasserfall (lokal)',21:'Global: was im Mittel zählt',22:'SHAP-Werte richtig lesen',23:'Kontrafaktische Erklärung',24:'Vier Änderungen im Vergleich',26:'EuGH C-203/22: Auskunft über ein Bonitätsscoring',29:'Neutraining verschiebt die Erklärung',30:'Stabilität einer Erklärung messen',33:'Model Card',34:'Erläuterungspflichten: wer schuldet wem was',35:'Bewerbung 17 im Rechtsrahmen',45:'Rechenweg: SHAP-Werte für Bewerbung 17',47:'Rechenweg: Counterfactuals im linearen Modell'};
+var VERT=43;
+var tip=document.createElement('div');tip.id='vltip';tip.setAttribute('role','tooltip');tip.hidden=true;document.body.appendChild(tip);
+var cur=null,pin=null;
+function nums(el){return el.getAttribute('data-vl').split(',').map(function(x){return parseInt(x,10);});}
+function zusatz(n){return n>=VERT?' (freiwillige Vertiefung)':'';}
+function show(el){if(pin&&pin!==el)pin=null;if(cur&&cur!==el)cur.removeAttribute('aria-describedby');cur=el;
+  tip.innerHTML='<span class="t">Vorlesung W05</span>'+nums(el).map(function(n){return '<span class="l"><b>Folie '+n+'</b> · '+F[n].replace(/&/g,'&amp;')+(n>=VERT?' <i>(freiwillige Vertiefung)</i>':'')+'</span>';}).join('');
+  tip.hidden=false;el.setAttribute('aria-describedby','vltip');
+  var r=el.getBoundingClientRect(),w=tip.offsetWidth,h=tip.offsetHeight,vw=document.documentElement.clientWidth,vh=window.innerHeight;
+  var x=Math.min(Math.max(8,r.left+r.width/2-w/2),vw-w-8),y=r.bottom+8;if(y+h>vh-8)y=Math.max(8,r.top-h-8);
+  tip.style.left=x+'px';tip.style.top=y+'px';}
+function hide(){tip.hidden=true;if(cur)cur.removeAttribute('aria-describedby');cur=null;pin=null;}
+function toggle(el){if(pin===el){hide();}else{show(el);pin=el;}}
+Array.prototype.forEach.call(document.querySelectorAll('.vl'),function(el){
+  el.setAttribute('aria-label','Vorlesung W05: '+nums(el).map(function(n){return 'Folie '+n+', '+F[n]+zusatz(n);}).join('; '));
+  el.addEventListener('mouseenter',function(){show(el);});
+  el.addEventListener('mouseleave',function(){if(pin!==el&&document.activeElement!==el)hide();});
+  el.addEventListener('focus',function(){show(el);});
+  el.addEventListener('blur',function(){if(pin!==el)hide();});
+  el.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();toggle(el);});
+  el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle(el);}});
+});
+document.addEventListener('click',function(){if(cur)hide();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')hide();});
+window.addEventListener('scroll',function(){if(cur)hide();},{passive:true});
+window.addEventListener('resize',function(){if(cur)hide();});
+})();
+</script>
+</body></html>

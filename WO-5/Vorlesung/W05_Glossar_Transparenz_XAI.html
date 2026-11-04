@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>W05: Glossar Transparenz &amp; Explainability · Trusted &amp; Ethical AI · HTW Dresden</title><style>
+:root{--void:#0F0B1A;--deep:#24163A;--paper:#FAFAFC;--ink:#1E1A2E;--violet:#7C3AED;--magenta:#C026D3;
+--glow:#E879F9;--sage:#2E9E7E;--body:#4A4460;--mute:#6B6580;--lilac:#EDE7F8;--border:#E4DFEF;
+--dbody:#C9C2DE;--dmute:#8A7FB0;--mono:'Courier New',monospace;--sans:Arial,Helvetica,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.6}
+a{color:var(--violet);text-decoration:none}a:hover{text-decoration:underline}
+main{max-width:960px;margin:0 auto;padding:0 24px 64px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.25em;color:var(--magenta);text-transform:uppercase}
+.hero{background:radial-gradient(120% 120% at 25% 20%,var(--deep) 0%,var(--void) 75%);color:#fff;padding:56px 24px 48px}
+.hero-inner{max-width:960px;margin:0 auto}
+.hero .eyebrow{color:var(--glow)}
+.hero h1{font-size:clamp(32px,5.5vw,50px);line-height:1.1;margin:12px 0 14px}
+.hero h1 em{font-style:normal;color:var(--glow)}
+.hero p{color:var(--dbody);max-width:680px}
+.stats{display:flex;flex-wrap:wrap;gap:14px;margin-top:24px}
+.hud{position:relative;padding:10px 16px;min-width:120px}
+.hud:before,.hud:after,.hud i:before,.hud i:after{content:"";position:absolute;width:10px;height:10px;border-color:var(--glow);border-style:solid}
+.hud:before{top:0;left:0;border-width:1.5px 0 0 1.5px}.hud:after{top:0;right:0;border-width:1.5px 1.5px 0 0}
+.hud i:before{bottom:0;left:0;border-width:0 0 1.5px 1.5px}.hud i:after{bottom:0;right:0;border-width:0 1.5px 1.5px 0}
+.hud b{font-size:24px;color:#fff;display:block;line-height:1.1}.hud span{font-size:12px;color:var(--dbody)}
+.audit{margin-top:26px;font-family:var(--mono);font-size:11px;color:var(--dmute)}
+section{padding:34px 0 8px}
+h2{font-size:24px;margin:6px 0 16px}
+.lead{color:var(--body);margin-bottom:18px;max-width:760px}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 4px}
+.badge{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.06em;padding:2px 8px;border-radius:5px;border:1px solid;white-space:nowrap}
+.st-bind{color:#4C1D95;background:#F1EAFE;border-color:#C9B5F7}
+.st-draft{color:#86198F;background:#FBEAFD;border-color:#EBB6F2}
+.st-verified{color:#1F6E58;background:#E5F4EF;border-color:#A9D8C8}
+.st-book{color:#1F6E58;background:#fff;border-color:#A9D8C8}
+.st-open{color:var(--mute);background:#fff;border-color:var(--border)}
+.st-module{color:var(--body);background:var(--lilac);border-color:#D9CEF0}
+.card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin:0 0 14px;
+box-shadow:0 1px 3px rgba(30,26,46,.05);scroll-margin-top:16px}
+.card:target{border-color:var(--violet);box-shadow:0 0 0 2px var(--lilac)}
+.head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;margin-bottom:8px}
+.head h3{font-size:19px;line-height:1.3}
+.en{font-family:var(--mono);font-size:13px;color:var(--mute)}
+.head .badge{margin-left:auto}
+.def{color:var(--ink);margin-bottom:12px}
+.fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px 18px;border-top:1px solid var(--border);padding-top:10px}
+.fields dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--violet);text-transform:uppercase}
+.fields dd{font-size:13.5px;color:var(--body)}
+.meta{margin-top:10px;font-family:var(--mono);font-size:11.5px;color:var(--mute);display:flex;flex-wrap:wrap;gap:4px 16px}
+.chip{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 7px;border-radius:5px;background:var(--lilac);color:var(--violet);margin-right:3px}
+.chip.home{background:var(--deep);color:#fff}
+.mini{list-style:none;columns:2;column-gap:28px}
+.mini li{break-inside:avoid;padding:6px 0;border-bottom:1px solid var(--border);font-size:14px;color:var(--body)}
+.controls{position:sticky;top:0;background:var(--paper);padding:14px 0 10px;z-index:2;border-bottom:1px solid var(--border)}
+.controls input{width:100%;font-size:15px;padding:10px 12px;border:1px solid var(--border);border-radius:8px;font-family:var(--sans);background:#fff}
+.controls input:focus{outline:2px solid var(--violet);outline-offset:1px}
+.filters{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.filters button{font-family:var(--mono);font-size:11.5px;padding:3px 9px;border-radius:5px;border:1px solid var(--border);background:#fff;color:var(--body);cursor:pointer}
+.filters button[aria-pressed=true]{background:var(--deep);color:#fff;border-color:var(--deep)}
+.az{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px;font-family:var(--mono);font-size:12px}
+.az a{padding:1px 6px;border-radius:4px}
+.letter{font-family:var(--mono);font-size:13px;letter-spacing:.3em;color:var(--magenta);margin:26px 0 10px}
+#count{font-family:var(--mono);font-size:12px;color:var(--mute);margin-top:8px}
+.note{background:var(--lilac);border-radius:10px;padding:14px 18px;margin:8px 0 18px;color:var(--body);font-size:14px}
+.note b{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--violet);display:block;margin-bottom:4px}
+footer{padding:26px 24px;background:var(--void);color:var(--dmute);font-family:var(--mono);font-size:12px;text-align:center}
+footer a{color:var(--glow)}
+@media (max-width:700px){.fields{grid-template-columns:1fr}.mini{columns:1}}
+@media print{.controls,.az{display:none}.card{break-inside:avoid;box-shadow:none}
+.hero,.chip.home,footer{-webkit-print-color-adjust:exact;print-color-adjust:exact}body{background:#fff}}
+</style></head><body>
+<header class="hero"><div class="hero-inner"><div class="eyebrow">TEAI :: GLOSSAR // W05 // 04.11.2026</div>
+<h1>Glossar <em>W05</em><br>Transparenz &amp; Explainability</h1>
+<p>Die Begriffe dieser Woche im Format der W02-Übung: Definition in einem Satz, Messgröße, verantwortliche Rolle, Quelle mit Reifegrad.</p>
+<div class="stats"><div class="hud"><i></i><b>10</b><span>neu eingeführt</span></div>
+<div class="hud"><i></i><b>5</b><span>aus früheren Wochen</span></div>
+<div class="hud"><i></i><b>258</b><span>im Gesamtglossar</span></div></div>
+<div class="audit">[TEAI :: W05 // GLOSSAR // 10 BEGRIFFE // SRC:Quellen/W05_glossar.json]</div></div></header>
+<main><section><div class="eyebrow">STATUS // REIFEGRAD DER QUELLE</div>
+<p class="lead">Der Status trennt geltendes Recht, Entwurf, unverbindliche Leitlinie, begutachtete Forschung, Preprint und Anbieterquelle: die Unterscheidung, auf die das Modul in jeder Woche zurückkommt.</p><div class="legend"><span class="badge st-bind" title="bindend, geltendes Recht">Recht</span><span class="badge st-bind" title="Gerichtsentscheidung, Rechtskraft siehe Quelle">Rechtsprechung</span><span class="badge st-bind" title="Norm oder technischer Standard">Norm</span><span class="badge st-draft" title="Entwurf, noch nicht geltend">Entwurf</span><span class="badge st-draft" title="unverbindliche Leitlinie">Leitlinie</span><span class="badge st-verified" title="begutachtete Fachquelle">peer-reviewed</span><span class="badge st-book" title="zitierfähiges Lehrbuch, kein Primärbeleg">Lehrbuch</span><span class="badge st-open" title="Preprint, nicht begutachtet">Preprint</span><span class="badge st-open" title="Anbieter- oder Industriequelle">Anbieter</span><span class="badge st-module" title="Arbeitsbegriff des Moduls">Modulbegriff</span></div>
+<p class="lead" style="margin-top:14px"><a href="00_Glossar_Gesamt_WS2026-27.html">Zum Gesamtglossar mit Suche</a> · <a href="W04_Glossar_Fairness_Bias.html">← W04</a> <a href="W06_Glossar_Agent_Design.html">W06 →</a></p></section>
+<section><div class="eyebrow">W05 // NEU EINGEFÜHRT</div><h2>10 Begriffe der Woche</h2>
+<article class="card" id="algorithmic-recourse">
+<div class="head"><h3>Handlungsoption</h3><span class="en">algorithmic recourse</span><span class="badge st-verified" title="begutachtete Fachquelle">peer-reviewed</span></div>
+<p class="def">Möglichkeit einer betroffenen Person, die Entscheidung eines Modells durch Änderung veränderbarer Merkmale wie Testpunkte oder Berufserfahrung umzukehren, nicht über Merkmale wie Alter oder eine vergangene Lücke im Lebenslauf; eine Handlungsoption gilt nur für das Modell, für das sie berechnet wurde, und kann nach einem Modell-Update ungültig werden.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Existenz und Kosten einer Änderung über veränderbare Merkmale, beim linearen Modell per Optimierung prüfbar; Gültigkeit über 20 Bootstrap-Modelle (Bewerbung 17: 4 von 20 bei der knappen Kombination, 13 von 20 mit einem Jahr mehr Erfahrung); eine Gruppe ohne jede Handlungsoption ist ein Fairnessbefund.</dd></div>
+<div><dt>Verantwortlich</dt><dd>Model Owner (Berechnung, Prüfung nach Neutraining); Betreiber*in (Mitteilung)</dd></div>
+<div><dt>Quelle</dt><dd>Ustun, Spangher &amp; Liu (2019): Actionable Recourse in Linear Classification, FAT* &#x27;19, 10–19 (peer-reviewed); Upadhyay, Joshi &amp; Lakkaraju (2021): Towards Robust and Reliable Algorithmic Recourse, NeurIPS 34, 16926–16937 (peer-reviewed), zu Modell-Updates</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W05</span></span><span>Siehe: <a href="#counterfactual-explanation">Kontrafaktische Erklärung</a>, <a href="#explanation-stability">Stabilität einer Erklärung</a>, <a href="#bootstrap-stability-test">Bootstrap-Stabilitätstest</a></span><span>Beleg: W05_Vorlesung_Final.pptx (Fassung 03.11.2026) Folien 14, 24, 29, 30, 32, 36, 40 und 41, freiwillige Vertiefung Folien 47, 50 und 51; W05_Uebung.pptx (Fassung 28.10.2026) Folien 2, 5 und 6; Arbeitsblatt Übung W05 (Teil A, Schritt 3; Teil B, Schritt 3)</span></div>
+</article><article class="card" id="intrinsic-interpretability">
+<div class="head"><h3>Intrinsische Interpretierbarkeit</h3><span class="en">intrinsic interpretability</span><span class="badge st-book" title="zitierfähiges Lehrbuch, kein Primärbeleg">Lehrbuch</span></div>
+<p class="def">Eigenschaft eines Modells, aus sich heraus lesbar zu sein, etwa einer logistischen Regression mit wenigen Gewichten oder eines kleinen Entscheidungsbaums, sodass Modell und Erklärung zusammenfallen und keine zweite Rechnung vom Modell abweichen kann; lesbar heißt dabei nicht stabil, nach einem Neutraining kann auch ein lesbares Modell anders aussehen.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Keine direkte Messgröße; Nachweis über die dokumentierte Modellwahl und, falls doch ein undurchsichtiges Modell eingesetzt wird, über die Begründung, warum ein gleich gutes lesbares Modell nicht verfügbar ist.</dd></div>
+<div><dt>Verantwortlich</dt><dd>Model Owner</dd></div>
+<div><dt>Quelle</dt><dd>Molnar (2025): Interpretable Machine Learning, 3. Aufl. (Lehrbuch), Einordnung intrinsisch/post-hoc; Rudin (2019), Nature Machine Intelligence 1(5), 206–215 (peer-reviewed), Argument für interpretierbare Modelle bei Entscheidungen mit hohem Einsatz</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W05</span></span><span>Siehe: <a href="#post-hoc-explanation">Post-hoc-Erklärung</a>, <a href="00_Glossar_Gesamt_WS2026-27.html#interpretability">Interpretierbarkeit</a>, <a href="#rashomon-effect">Rashomon-Effekt</a></span><span>Beleg: W05_Vorlesung_Final.pptx (Fassung 03.11.2026) Folien 10, 32 und 40, freiwillige Vertiefung Folie 52</span></div>
+</article><article class="card" id="counterfactual-explanation">
+<div class="head"><h3>Kontrafaktische Erklärung</h3><span class="en">counterfactual explanation</span><span class="badge st-verified" title="begutachtete Fachquelle">peer-reviewed</span></div>
+<p class="def">Erklärung, die die kleinste Änderung der Angaben nennt, mit der eine Entscheidung anders ausgefallen wäre („Mit 10 Testpunkten und 2 Jahren Erfahrung mehr wären Sie eingeladen worden“), und so Verstehen, Anfechten und Handeln ermöglichen soll, ohne das Modell offenzulegen; weil es viele solche Änderungen gibt, ist die mitgeteilte immer eine Auswahl.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Prüfliste umsetzbar, sparsam, mit Abstand zur Schwelle; Suche nur über veränderbare Merkmale in erlaubter Richtung und bis zur Höchständerung; Gültigkeit nach Neutraining erneut prüfen (Anteil gültiger Bootstrap-Modelle).</dd></div>
+<div><dt>Verantwortlich</dt><dd>Betreiber*in (Auswahl der mitgeteilten Änderung, dokumentiert)</dd></div>
+<div><dt>Quelle</dt><dd>Wachter, Mittelstadt &amp; Russell (2018): Counterfactual Explanations without Opening the Black Box, Harvard Journal of Law &amp; Technology 31(2), 841–887 (peer-reviewed); EuGH C-203/22, Rn. 62, lässt eine Auskunft über abweichende Daten als ausreichend zu (Nähe zu Counterfactuals: eigene Einordnung)</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W05</span></span><span>Siehe: <a href="#algorithmic-recourse">Handlungsoption</a>, <a href="#cjeu-c-203-22">EuGH C-203/22 (Dun &amp; Bradstreet Austria)</a>, <a href="#right-to-explanation">Recht auf Erläuterung (Art. 86 KI-VO)</a>, <a href="#contestability">Anfechtbarkeit (Contestability)</a></span><span>Beleg: W05_Vorlesung_Final.pptx (Fassung 03.11.2026) Folien 6, 23, 24, 25, 26, 27, 36 und 40, freiwillige Vertiefung Folien 47 und 49; W05_Uebung.pptx (Fassung 28.10.2026) Folien 3, 6 und 7; Arbeitsblatt Übung W05 (Teil B, Schritt 3)</span></div>
+</article><article class="card" id="local-and-global-explanation">
+<div class="head"><h3>Lokale und globale Erklärung</h3><span class="en">local and global explanation</span><span class="badge st-book" title="zitierfähiges Lehrbuch, kein Primärbeleg">Lehrbuch</span></div>
+<p class="def">Unterscheidung nach der Reichweite einer Erklärung: Eine lokale Erklärung beantwortet, warum ein einzelner Fall so entschieden wurde, eine globale, wie das Modell insgesamt entscheidet, etwa über die Gewichte oder den mittleren Betrag der SHAP-Werte; ein Merkmal, das im Mittel wenig zählt, kann im Einzelfall den Ausschlag geben.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Lokal: SHAP-Werte eines Falls im Wasserfall (Basiswert plus Beiträge ergibt den Modellwert); global: mittlerer Betrag der SHAP-Werte je Merkmal über alle Fälle; Lesefalle: globaler und lokaler Rang 1 können verschieden sein (Spalten der Vergleichsmatrix in der Übung).</dd></div>
+<div><dt>Verantwortlich</dt><dd>Model Owner</dd></div>
+<div><dt>Quelle</dt><dd>Molnar (2025): Interpretable Machine Learning, 3. Aufl. (Lehrbuch), Kap. SHAP; Lundberg &amp; Lee (2017): A Unified Approach to Interpreting Model Predictions, NeurIPS 30 (peer-reviewed)</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W05</span></span><span>Siehe: <a href="#shap">SHAP-Wert</a>, <a href="#base-value">Basiswert</a>, <a href="#audience-specific-explanation">Adressatengerechte Erklärung</a>, <a href="00_Glossar_Gesamt_WS2026-27.html#proxy-variable">Proxy-Variable (Proxy-Merkmal)</a></span><span>Beleg: W05_Vorlesung_Final.pptx (Fassung 03.11.2026) Folien 12, 20, 21, 40 und 42; W05_Uebung.pptx (Fassung 28.10.2026) Folien 3, 6 und 7; Arbeitsblatt Übung W05 (Teil B, Schritte 1 und 2)</span></div>
+</article><article class="card" id="model-card">
+<div class="head"><h3>Model Card</h3><span class="badge st-verified" title="begutachtete Fachquelle">peer-reviewed</span></div>
+<p class="def">Standardisierter Kurzbericht zu einem trainierten Modell in neun Abschnitten, der Zweck und Einsatzgrenzen, Daten, nach Gruppen aufgeschlüsselte Leistung sowie Grenzen und Empfehlungen festhält; eine Konvention der Fachgemeinschaft, keine Rechtspflicht, die dokumentiert, aber nichts prüft.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Vollständigkeit der neun Abschnitte von Model Details bis Caveats and Recommendations; Metriken je Gruppe statt nur Gesamtwert; Modellstand, für den Angaben und Erklärungen gelten; im Audit dokumentarische und damit leicht zu schönende Evidenz.</dd></div>
+<div><dt>Verantwortlich</dt><dd>Dokumentations-Owner im Release-Prozess</dd></div>
+<div><dt>Quelle</dt><dd>Mitchell et al. (2019): Model Cards for Model Reporting, FAT* &#x27;19, 220–229</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W05</span><span class="chip">W13</span><span class="chip">W14</span></span><span>Siehe: <a href="#datasheet-for-datasets">Datasheet for Datasets (Datenblatt für Datensätze)</a>, <a href="#system-card">System Card</a>, <a href="#explanation-card">Explanation Card</a>, <a href="#technical-documentation">Technische Dokumentation nach Anhang IV KI-VO</a></span><span>Beleg: W05_Vorlesung_Final.pptx (Fassung 03.11.2026) Folien 32, 33, 34 und 40, freiwillige Vertiefung Folie 53; W05_Uebung.pptx (Fassung 28.10.2026) Folie 8; Arbeitsblatt Übung W05 (Teil B, Schritt 5); W13_Vorlesung_Final.pptx Folien 27 und 35; W14_Vorlesung_Final.pptx Folie 16</span></div>
+</article><article class="card" id="post-hoc-explanation">
+<div class="head"><h3>Post-hoc-Erklärung</h3><span class="en">post-hoc explanation</span><span class="badge st-verified" title="begutachtete Fachquelle">peer-reviewed</span></div>
+<p class="def">Nachträglich berechnete Erklärung eines Modells, etwa mit SHAP, LIME oder Counterfactuals: eine zweite Rechnung, die das Modell unabhängig von seiner Bauart von außen beschreibt und deshalb vom Modell abweichen kann.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Keine direkte Messgröße; Güte über Treue und Stabilität der Erklärung prüfen, am linearen Modell exakt gegen die Gewichte; Hintergrunddaten, Seed und Bibliotheksversion protokollieren.</dd></div>
+<div><dt>Verantwortlich</dt><dd>Model Owner</dd></div>
+<div><dt>Quelle</dt><dd>Rudin (2019): Stop explaining black box machine learning models for high stakes decisions and use interpretable models instead, Nature Machine Intelligence 1(5), 206–215 (peer-reviewed); Molnar (2025): Interpretable Machine Learning, 3. Aufl. (Lehrbuch), Einordnung intrinsisch/post-hoc</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W05</span></span><span>Siehe: <a href="#intrinsic-interpretability">Intrinsische Interpretierbarkeit</a>, <a href="#fidelity">Treue</a>, <a href="#explanation-stability">Stabilität einer Erklärung</a>, <a href="#shap">SHAP-Wert</a>, <a href="00_Glossar_Gesamt_WS2026-27.html#explainability">Erklärbarkeit (Explainability)</a></span><span>Beleg: W05_Vorlesung_Final.pptx (Fassung 03.11.2026) Folien 10 und 40, freiwillige Vertiefung Folie 52</span></div>
+</article><article class="card" id="right-to-explanation">
+<div class="head"><h3>Recht auf Erläuterung (Art. 86 KI-VO)</h3><span class="en">right to explanation (Art. 86 AI Act)</span><span class="badge st-bind" title="bindend, geltendes Recht">Recht</span></div>
+<p class="def">Anspruch einer betroffenen Person nach Art. 86 KI-VO gegen den Betreiber auf eine klare und aussagekräftige Erläuterung zur Rolle des KI-Systems im Entscheidungsprozess und zu den wichtigsten Elementen der Entscheidung, wenn diese auf einem Hochrisiko-System nach Anhang III (außer Nr. 2) beruht und rechtliche oder ähnlich erhebliche Wirkung hat; er gilt formal ab 02.08.2026, wie er mit den erst ab 02.12.2027 geltenden Anhang-III-Pflichten zusammenwirkt und wie weit er nach Abs. 3 hinter der DSGVO zurücktritt, ist ungeklärt.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Keine direkte Messgröße; Nachweis über ein dokumentiertes Verfahren, mit dem der Betreiber im Einzelfall Rolle des Systems und wichtigste Elemente erläutert, etwa Beiträge der Angaben in Alltagssprache plus Handlungsoption mit dokumentierten Grenzen statt eines einzelnen Plots.</dd></div>
+<div><dt>Verantwortlich</dt><dd>Betreiber*in (einsetzende Organisation)</dd></div>
+<div><dt>Quelle</dt><dd>Verordnung (EU) 2024/1689, Art. 86 Abs. 1 bis 3 und Art. 113 Abs. 2; durch VO (EU) 2026/1744 nicht geändert; Normtext geprüft am 28.10.2026</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W05</span></span><span>Siehe: <a href="#cjeu-c-203-22">EuGH C-203/22 (Dun &amp; Bradstreet Austria)</a>, <a href="#counterfactual-explanation">Kontrafaktische Erklärung</a>, <a href="#instructions-for-use">Betriebsanleitung für Betreiber (Art. 13 KI-VO)</a>, <a href="00_Glossar_Gesamt_WS2026-27.html#deployer">Betreiber (Deployer)</a></span><span>Beleg: W05_Vorlesung_Final.pptx (Fassung 03.11.2026) Folien 5, 34, 35, 38, 40 und 41; W05_Uebung.pptx (Fassung 28.10.2026) Folie 5; Arbeitsblatt Übung W05 (Teil A, Schritt 2); W05_Aktualitaetsbriefing_2026-10-28.md R-04 bis R-06</span></div>
+</article><article class="card" id="shap">
+<div class="head"><h3>SHAP-Wert</h3><span class="en">SHAP value</span><span class="badge st-verified" title="begutachtete Fachquelle">peer-reviewed</span></div>
+<p class="def">Beitrag eines Merkmals zum Modellwert eines einzelnen Falls, gemessen als Verschiebung gegenüber dem Basiswert des Durchschnittsfalls und nach dem Shapley-Wert der Spieltheorie so aufgeteilt, dass Basiswert plus Summe aller Beiträge genau den Modellwert ergibt; bei linearem Modell und unabhängigen Merkmalen gilt φⱼ = wⱼ · (xⱼ − Mittelⱼ), und der Wert beschreibt das Modell, keine Ursache in der Welt.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>φⱼ je Merkmal und Fall auf der Modellskala, bei der logistischen Regression in Log-Odds, nicht in Prozentpunkten; Probe: Basiswert plus Summe der SHAP-Werte gleich Modellwert; Hintergrunddaten dokumentieren, weil andere Hintergrunddaten andere Werte ergeben; exakt nur bei unabhängigen Merkmalen.</dd></div>
+<div><dt>Verantwortlich</dt><dd>Model Owner</dd></div>
+<div><dt>Quelle</dt><dd>Lundberg &amp; Lee (2017): A Unified Approach to Interpreting Model Predictions, NeurIPS 30, Abschn. 4.2, Corollary 1 (Linear SHAP); Kumar et al. (2020), ICML, PMLR 119 (peer-reviewed), zu den Grenzen als Wichtigkeitsmaß</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W05</span></span><span>Siehe: <a href="#shapley-value">Shapley-Wert</a>, <a href="#base-value">Basiswert</a>, <a href="#local-and-global-explanation">Lokale und globale Erklärung</a>, <a href="#lime">LIME (Local Interpretable Model-agnostic Explanations)</a>, <a href="#fidelity">Treue</a></span><span>Beleg: W05_Vorlesung_Final.pptx (Fassung 03.11.2026) Folien 11, 16 bis 22 und 40, freiwillige Vertiefung Folien 45, 46 und 48; W05_Uebung.pptx (Fassung 28.10.2026) Folien 2, 4 und 6; Arbeitsblatt Übung W05 (Teil B, Schritte 1 und 2; „Was im Hintergrund passiert“)</span></div>
+</article><article class="card" id="explanation-stability">
+<div class="head"><h3>Stabilität einer Erklärung</h3><span class="en">explanation stability</span><span class="badge st-book" title="zitierfähiges Lehrbuch, kein Primärbeleg">Lehrbuch</span></div>
+<p class="def">Prüfkriterium dafür, ob eine Erklärung gleich bleibt, wenn das Modell auf leicht veränderten Daten neu trainiert wird, etwa nach einem Update oder auf Bootstrap-Stichproben; begutachtete Arbeiten zeigen zudem, dass Erklärungen schon bei fast gleichen Eingaben schwanken und sich gezielt täuschen lassen können.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Bootstrap-Stabilitätstest: 20-mal neu trainieren, denselben Fall neu erklären, zählen, wie oft das wichtigste Merkmal gleich und das Counterfactual gültig bleibt (Bewerbung 17: 19 von 20, SHAP-Wert der Lücke −1,50 bis −0,02); Ergebnis auch bei Nullbefund dokumentieren.</dd></div>
+<div><dt>Verantwortlich</dt><dd>Model Owner</dd></div>
+<div><dt>Quelle</dt><dd>Molnar (2025): Interpretable Machine Learning, 3. Aufl. (Lehrbuch), Prüfkriterium; begutachtete Befunde: Ghorbani, Abid &amp; Zou (2019), AAAI 33(01), 3681–3688; Slack et al. (2020), AIES &#x27;20, 180–186; Upadhyay, Joshi &amp; Lakkaraju (2021), NeurIPS 34</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W05</span></span><span>Siehe: <a href="#bootstrap-stability-test">Bootstrap-Stabilitätstest</a>, <a href="#fidelity">Treue</a>, <a href="#rashomon-effect">Rashomon-Effekt</a>, <a href="#algorithmic-recourse">Handlungsoption</a></span><span>Beleg: W05_Vorlesung_Final.pptx (Fassung 03.11.2026) Folien 14, 29, 30, 31, 32, 40 und 42, freiwillige Vertiefung Folie 51; W05_Uebung.pptx (Fassung 28.10.2026) Folien 2, 3, 5, 6 und 8; Arbeitsblatt Übung W05 (Teil A, Schritt 4; Teil B, Schritt 4)</span></div>
+</article><article class="card" id="fidelity">
+<div class="head"><h3>Treue</h3><span class="en">fidelity</span><span class="badge st-book" title="zitierfähiges Lehrbuch, kein Primärbeleg">Lehrbuch</span></div>
+<p class="def">Prüfkriterium einer Erklärung dafür, ob sie richtig wiedergibt, wie das Modell tatsächlich rechnet, nicht wie die Welt ist; begutachtete Befunde zeigen, dass sich die Treue von Erklärungen zwischen Personengruppen unterscheiden kann.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Übereinstimmung zwischen Erklärung und Modellausgaben, beim linearen Modell exakt prüfbar (Basiswert plus SHAP-Werte gleich Modellwert); getrennt je Gruppe prüfen; kein Maß für kausale Gültigkeit.</dd></div>
+<div><dt>Verantwortlich</dt><dd>Model Owner</dd></div>
+<div><dt>Quelle</dt><dd>Molnar (2025): Interpretable Machine Learning, 3. Aufl. (Lehrbuch); Balagopalan et al. (2022): The Road to Explainability is Paved with Bias, FAccT &#x27;22, 1194–1206 (peer-reviewed), zu Unterschieden zwischen Gruppen</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W05</span></span><span>Siehe: <a href="#explanation-stability">Stabilität einer Erklärung</a>, <a href="#post-hoc-explanation">Post-hoc-Erklärung</a>, <a href="#surrogate-model">Surrogatmodell (Ersatzmodell)</a></span><span>Beleg: W05_Vorlesung_Final.pptx (Fassung 03.11.2026) Folien 10, 14, 31, 40 und 42; W05_Uebung.pptx (Fassung 28.10.2026) Folie 2</span></div>
+</article></section><section><div class="eyebrow">W05 // ERGÄNZUNGSBEGRIFFE</div><h2>Zum Nachschlagen</h2>
+<p class="lead">Diese Begriffe kommen in W05 vor, gehören aber nicht zu den Begriffen der Woche und werden im Retrieval nicht abgefragt. Die vollständigen Einträge stehen im Gesamtglossar.</p>
+<ul class="mini"><li><a href="00_Glossar_Gesamt_WS2026-27.html#audience-specific-explanation">Adressatengerechte Erklärung</a> <span class="badge st-module" title="Arbeitsbegriff des Moduls">Modulbegriff</span></li><li><a href="00_Glossar_Gesamt_WS2026-27.html#contestability">Anfechtbarkeit (Contestability)</a> <span class="badge st-module" title="Arbeitsbegriff des Moduls">Modulbegriff</span></li><li><a href="00_Glossar_Gesamt_WS2026-27.html#base-value">Basiswert</a> <span class="badge st-verified" title="begutachtete Fachquelle">peer-reviewed</span></li><li><a href="00_Glossar_Gesamt_WS2026-27.html#instructions-for-use">Betriebsanleitung für Betreiber (Art. 13 KI-VO)</a> <span class="badge st-bind" title="bindend, geltendes Recht">Recht</span></li><li><a href="00_Glossar_Gesamt_WS2026-27.html#bootstrap-stability-test">Bootstrap-Stabilitätstest</a> <span class="badge st-module" title="Arbeitsbegriff des Moduls">Modulbegriff</span></li><li><a href="00_Glossar_Gesamt_WS2026-27.html#datasheet-for-datasets">Datasheet for Datasets (Datenblatt für Datensätze)</a> <span class="badge st-verified" title="begutachtete Fachquelle">peer-reviewed</span></li><li><a href="00_Glossar_Gesamt_WS2026-27.html#cjeu-c-203-22">EuGH C-203/22 (Dun &amp; Bradstreet Austria)</a> <span class="badge st-bind" title="Gerichtsentscheidung, Rechtskraft siehe Quelle">Rechtsprechung</span></li><li><a href="00_Glossar_Gesamt_WS2026-27.html#explanation-card">Explanation Card</a> <span class="badge st-open" title="Preprint, nicht begutachtet">Preprint</span></li><li><a href="00_Glossar_Gesamt_WS2026-27.html#lime">LIME (Local Interpretable Model-agnostic Explanations)</a> <span class="badge st-verified" title="begutachtete Fachquelle">peer-reviewed</span></li><li><a href="00_Glossar_Gesamt_WS2026-27.html#rashomon-effect">Rashomon-Effekt</a> <span class="badge st-verified" title="begutachtete Fachquelle">peer-reviewed</span></li><li><a href="00_Glossar_Gesamt_WS2026-27.html#shapley-value">Shapley-Wert</a> <span class="badge st-verified" title="begutachtete Fachquelle">peer-reviewed</span></li><li><a href="00_Glossar_Gesamt_WS2026-27.html#surrogate-model">Surrogatmodell (Ersatzmodell)</a> <span class="badge st-verified" title="begutachtete Fachquelle">peer-reviewed</span></li><li><a href="00_Glossar_Gesamt_WS2026-27.html#system-card">System Card</a> <span class="badge st-open" title="Anbieter- oder Industriequelle">Anbieter</span></li><li><a href="00_Glossar_Gesamt_WS2026-27.html#technical-documentation">Technische Dokumentation nach Anhang IV KI-VO</a> <span class="badge st-bind" title="bindend, geltendes Recht">Recht</span></li></ul></section><section><div class="eyebrow">W05 // AUFGEGRIFFEN</div><h2>Aus früheren Wochen</h2>
+<p class="lead">Diese Begriffe sind früher eingeführt und werden in W05 wieder tragend. Die vollständigen Einträge stehen im Gesamtglossar.</p>
+<ul class="mini"><li><a href="00_Glossar_Gesamt_WS2026-27.html#explainability">Erklärbarkeit (Explainability)</a> <span class="chip">W02</span> <span class="badge st-verified" title="begutachtete Fachquelle">peer-reviewed</span></li><li><a href="00_Glossar_Gesamt_WS2026-27.html#interpretability">Interpretierbarkeit</a> <span class="chip">W02</span> <span class="badge st-verified" title="begutachtete Fachquelle">peer-reviewed</span></li><li><a href="00_Glossar_Gesamt_WS2026-27.html#proxy-variable">Proxy-Variable (Proxy-Merkmal)</a> <span class="chip">W04</span> <span class="badge st-book" title="zitierfähiges Lehrbuch, kein Primärbeleg">Lehrbuch</span></li><li><a href="00_Glossar_Gesamt_WS2026-27.html#transparency">Transparenz</a> <span class="chip">W02</span> <span class="badge st-verified" title="begutachtete Fachquelle">peer-reviewed</span></li><li><a href="00_Glossar_Gesamt_WS2026-27.html#four-level-taxonomy-grid">Vier-Ebenen-Raster (Taxonomie-Raster)</a> <span class="chip">W02</span> <span class="badge st-module" title="Arbeitsbegriff des Moduls">Modulbegriff</span></li></ul></section></main>
+<footer>Trusted &amp; Ethical AI · HTW Dresden · Dr.-Ing. Steffen Tomschke · Stand 2026-11-02</footer>
+</body></html>

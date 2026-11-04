@@ -1,0 +1,62 @@
+# macOS
+.DS_Store
+.AppleDouble
+._*
+
+# Obsidian
+.obsidian/
+.trash/
+~$*.md
+.~lock.*
+
+# Agent-generierte Throwaway-Artefakte
+Agent Client/
+
+# LaTeX Build-Artefakte
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.idx
+*.ist
+*.syi
+*.syg
+*.slg
+*.sty
+*.gls
+*.glo
+*.glg
+*.blg
+*.bbl
+*.alg
+*.eps
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.nav
+*.snm
+*.vrb
+*.xdv
+
+# Office / temporäre Dateien
+~$*.docx
+~$*.xlsx
+~$*.pptx
+*.tmp
+*.swp
+
+# Große Binär-/Mediadateien (bleiben lokal, nicht in Git)
+*.mkv
+*.webm
+*.wav
+*.mp3
+*.mp4
+*.mov
+*.heic
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
