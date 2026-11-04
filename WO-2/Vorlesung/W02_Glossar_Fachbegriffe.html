@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>W02 — Glossar Aufbau &amp; Fachbegriffe · Trusted &amp; Ethical AI · HTW Dresden</title><style>
+:root{--void:#0F0B1A;--deep:#24163A;--paper:#FAFAFC;--ink:#1E1A2E;--violet:#7C3AED;--magenta:#C026D3;
+--glow:#E879F9;--sage:#2E9E7E;--body:#4A4460;--mute:#6B6580;--lilac:#EDE7F8;--border:#E4DFEF;
+--dbody:#C9C2DE;--dmute:#8A7FB0;--mono:'Courier New',monospace;--sans:Arial,Helvetica,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.6}
+a{color:var(--violet);text-decoration:none}a:hover{text-decoration:underline}
+main{max-width:960px;margin:0 auto;padding:0 24px 64px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.25em;color:var(--magenta);text-transform:uppercase}
+.hero{background:radial-gradient(120% 120% at 25% 20%,var(--deep) 0%,var(--void) 75%);color:#fff;padding:56px 24px 48px}
+.hero-inner{max-width:960px;margin:0 auto}
+.hero .eyebrow{color:var(--glow)}
+.hero h1{font-size:clamp(32px,5.5vw,50px);line-height:1.1;margin:12px 0 14px}
+.hero h1 em{font-style:normal;color:var(--glow)}
+.hero p{color:var(--dbody);max-width:680px}
+.stats{display:flex;flex-wrap:wrap;gap:14px;margin-top:24px}
+.hud{position:relative;padding:10px 16px;min-width:120px}
+.hud:before,.hud:after,.hud i:before,.hud i:after{content:"";position:absolute;width:10px;height:10px;border-color:var(--glow);border-style:solid}
+.hud:before{top:0;left:0;border-width:1.5px 0 0 1.5px}.hud:after{top:0;right:0;border-width:1.5px 1.5px 0 0}
+.hud i:before{bottom:0;left:0;border-width:0 0 1.5px 1.5px}.hud i:after{bottom:0;right:0;border-width:0 1.5px 1.5px 0}
+.hud b{font-size:24px;color:#fff;display:block;line-height:1.1}.hud span{font-size:12px;color:var(--dbody)}
+.audit{margin-top:26px;font-family:var(--mono);font-size:11px;color:var(--dmute)}
+section{padding:34px 0 8px}
+h2{font-size:24px;margin:6px 0 16px}
+.lead{color:var(--body);margin-bottom:18px;max-width:760px}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 4px}
+.badge{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.06em;padding:2px 8px;border-radius:5px;border:1px solid;white-space:nowrap}
+.st-bind{color:#4C1D95;background:#F1EAFE;border-color:#C9B5F7}
+.st-draft{color:#86198F;background:#FBEAFD;border-color:#EBB6F2}
+.st-verified{color:#1F6E58;background:#E5F4EF;border-color:#A9D8C8}
+.st-book{color:#1F6E58;background:#fff;border-color:#A9D8C8}
+.st-open{color:var(--mute);background:#fff;border-color:var(--border)}
+.st-module{color:var(--body);background:var(--lilac);border-color:#D9CEF0}
+.card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin:0 0 14px;
+box-shadow:0 1px 3px rgba(30,26,46,.05);scroll-margin-top:16px}
+.card:target{border-color:var(--violet);box-shadow:0 0 0 2px var(--lilac)}
+.head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;margin-bottom:8px}
+.head h3{font-size:19px;line-height:1.3}
+.en{font-family:var(--mono);font-size:13px;color:var(--mute)}
+.head .badge{margin-left:auto}
+.def{color:var(--ink);margin-bottom:12px}
+.fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px 18px;border-top:1px solid var(--border);padding-top:10px}
+.fields dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--violet);text-transform:uppercase}
+.fields dd{font-size:13.5px;color:var(--body)}
+.meta{margin-top:10px;font-family:var(--mono);font-size:11.5px;color:var(--mute);display:flex;flex-wrap:wrap;gap:4px 16px}
+.chip{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 7px;border-radius:5px;background:var(--lilac);color:var(--violet);margin-right:3px}
+.chip.home{background:var(--deep);color:#fff}
+.mini{list-style:none;columns:2;column-gap:28px}
+.mini li{break-inside:avoid;padding:6px 0;border-bottom:1px solid var(--border);font-size:14px;color:var(--body)}
+.controls{position:sticky;top:0;background:var(--paper);padding:14px 0 10px;z-index:2;border-bottom:1px solid var(--border)}
+.controls input{width:100%;font-size:15px;padding:10px 12px;border:1px solid var(--border);border-radius:8px;font-family:var(--sans);background:#fff}
+.controls input:focus{outline:2px solid var(--violet);outline-offset:1px}
+.filters{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.filters button{font-family:var(--mono);font-size:11.5px;padding:3px 9px;border-radius:5px;border:1px solid var(--border);background:#fff;color:var(--body);cursor:pointer}
+.filters button[aria-pressed=true]{background:var(--deep);color:#fff;border-color:var(--deep)}
+.az{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px;font-family:var(--mono);font-size:12px}
+.az a{padding:1px 6px;border-radius:4px}
+.letter{font-family:var(--mono);font-size:13px;letter-spacing:.3em;color:var(--magenta);margin:26px 0 10px}
+#count{font-family:var(--mono);font-size:12px;color:var(--mute);margin-top:8px}
+.note{background:var(--lilac);border-radius:10px;padding:14px 18px;margin:8px 0 18px;color:var(--body);font-size:14px}
+.note b{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--violet);display:block;margin-bottom:4px}
+footer{padding:26px 24px;background:var(--void);color:var(--dmute);font-family:var(--mono);font-size:12px;text-align:center}
+footer a{color:var(--glow)}
+@media (max-width:700px){.fields{grid-template-columns:1fr}.mini{columns:1}}
+@media print{.controls,.az{display:none}.card{break-inside:avoid;box-shadow:none}
+.hero,.chip.home,footer{-webkit-print-color-adjust:exact;print-color-adjust:exact}body{background:#fff}}
+</style></head><body>
+<header class="hero"><div class="hero-inner"><div class="eyebrow">TEAI :: GLOSSAR // W02 // 14.10.2026</div>
+<h1>Glossar <em>W02</em><br>Aufbau &amp; Fachbegriffe</h1>
+<p>Die Begriffe dieser Woche im Format der W02-Übung: Definition in einem Satz, Messgröße, verantwortliche Rolle, Quelle mit Reifegrad.</p>
+<div class="stats"><div class="hud"><i></i><b>20</b><span>neu eingeführt</span></div>
+<div class="hud"><i></i><b>5</b><span>aus früheren Wochen</span></div>
+<div class="hud"><i></i><b>242</b><span>im Gesamtglossar</span></div></div>
+<div class="audit">[TEAI :: W02 // GLOSSAR // 20 BEGRIFFE // SRC:Quellen/W02_glossar.json]</div></div></header>
+<main><section><div class="eyebrow">STATUS // REIFEGRAD DER QUELLE</div>
+<p class="lead">Der Status trennt geltendes Recht, Entwurf, unverbindliche Leitlinie, begutachtete Forschung, Preprint und Anbieterquelle — die Unterscheidung, auf die das Modul in jeder Woche zurückkommt.</p><div class="legend"><span class="badge st-bind" title="bindend — geltendes Recht">Recht</span><span class="badge st-bind" title="Gerichtsentscheidung — Rechtskraft siehe Quelle">Rechtsprechung</span><span class="badge st-bind" title="Norm oder technischer Standard">Norm</span><span class="badge st-draft" title="Entwurf — noch nicht geltend">Entwurf</span><span class="badge st-draft" title="unverbindliche Leitlinie">Leitlinie</span><span class="badge st-verified" title="begutachtete Fachquelle">peer-reviewed</span><span class="badge st-book" title="zitierfähiges Lehrbuch, kein Primärbeleg">Lehrbuch</span><span class="badge st-open" title="Preprint — nicht begutachtet">Preprint</span><span class="badge st-open" title="Anbieter- oder Industriequelle">Anbieter</span><span class="badge st-module" title="Arbeitsbegriff des Moduls">Modulbegriff</span></div>
+<p class="lead" style="margin-top:14px"><a href="00_Glossar_Gesamt_WS2026-27.html">Zum Gesamtglossar mit Suche</a> · <a href="W01_Glossar_Einfuehrung.html">← W01</a> <a href="W03_Glossar_EU_AI_Act.html">W03 →</a></p></section>
+<section><div class="eyebrow">W02 // NEU EINGEFÜHRT</div><h2>20 Begriffe</h2>
+<article class="card" id="accountability">
+<div class="head"><h3>Accountability (Rechenschaftspflicht, Zurechenbarkeit)</h3><span class="en">accountability</span><span class="badge st-verified" title="begutachtete Fachquelle">peer-reviewed</span></div>
+<p class="def">Belegbare Zurechnung von Entscheidung und Schaden zu einer verantwortlichen Stelle, die Rollen, Protokolle und Nachweise voraussetzt und sich damit von gefühlter Verantwortung (Responsibility) unterscheidet.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Keine direkte Messgröße; Nachweis über definierte Rollen, Protokolle und Beschwerdewege sowie einen lückenlosen Audit-Trail.</dd></div>
+<div><dt>Verantwortlich</dt><dd>Betreiber*in</dd></div>
+<div><dt>Quelle</dt><dd>Kaur, Uslu, Rittichier &amp; Durresi (2022): Trustworthy Artificial Intelligence — A Review, ACM Computing Surveys 55(2); HLEG (2019), Kap. II, Anforderung 7</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W02</span><span class="chip">W13</span></span><span>Siehe: <a href="#governance">Governance</a>, <a href="#audit-trail">Audit-Trail (Nachweiskette)</a>, <a href="00_Glossar_Gesamt_WS2026-27.html#operator-liability">Betreiberhaftung (Zurechnung von KI-Aussagen)</a>, <a href="00_Glossar_Gesamt_WS2026-27.html#hleg-key-requirements">Sieben HLEG-Anforderungen (7 Säulen)</a></span><span>Beleg: W02_Vorlesung_Final.pptx Folie 31; W02_Skript_Vorlesung.html Abschnitt „Die Abgrenzungen, an denen es scheitert“; W01_Vorlesung_Final.pptx Folien 47, 50–52</span></div>
+</article><article class="card" id="alignment">
+<div class="head"><h3>Alignment (Zielausrichtung)</h3><span class="en">alignment</span><span class="badge st-verified" title="begutachtete Fachquelle">peer-reviewed</span></div>
+<p class="def">Übereinstimmung des Systemverhaltens mit den intendierten Zielen und Werten statt nur mit der optimierten Metrik, die als Stellvertreter des eigentlich Gewollten stets eine Spezifikationslücke lässt.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Keine direkte Messgröße; Prüfung über den Abgleich zwischen optimierter Metrik und intendiertem Ziel, denn Zielerfüllung ist kein Nachweis von Zielrichtigkeit.</dd></div>
+<div><dt>Verantwortlich</dt><dd>Model Owner</dd></div>
+<div><dt>Quelle</dt><dd>Kaur, Uslu, Rittichier &amp; Durresi (2022): Trustworthy Artificial Intelligence — A Review, ACM Computing Surveys 55(2)</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W02</span></span><span>Siehe: <a href="00_Glossar_Gesamt_WS2026-27.html#situational-awareness">Situational Awareness (Situationsbewusstsein)</a>, <a href="#trustworthiness">Vertrauenswürdigkeit</a></span><span>Beleg: W02_Vorlesung_Final.pptx Folie 29; W02_Skript_Vorlesung.html Abschnitt „Die Abgrenzungen, an denen es scheitert“; W02_Uebung.pptx Folie 7; W01_Vorlesung_Final.pptx Folien 16 und 27–28</span></div>
+</article><article class="card" id="audit">
+<div class="head"><h3>Audit</h3><span class="badge st-module" title="Arbeitsbegriff des Moduls">Modulbegriff</span></div>
+<p class="def">Systematische, evidenzbasierte Prüfung gegen definierte Kriterien, die intern, extern und auch freiwillig erfolgen kann und – anders als die Konformitätsbewertung gegen Rechtsnormen – keine Rechtskonformität bescheinigt.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Keine direkte Messgröße; Nachweis über Prüfbericht mit Kriterien, Evidenz und Befunden.</dd></div>
+<div><dt>Verantwortlich</dt><dd>Auditor*in (intern oder extern)</dd></div>
+<div><dt>Quelle</dt><dd>Begriffssystem des Moduls, Semesterplan WS 2026/27 (W02, W13)</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W02</span><span class="chip">W13</span></span><span>Siehe: <a href="#conformity-assessment">Konformitätsbewertung</a>, <a href="#audit-trail">Audit-Trail (Nachweiskette)</a>, <a href="00_Glossar_Gesamt_WS2026-27.html#altai">ALTAI (Prüfliste für vertrauenswürdige KI)</a></span><span>Beleg: W02_Vorlesung_Final.pptx Folien 32 und 42; W02_Skript_Vorlesung.html Abschnitt „Die Abgrenzungen, an denen es scheitert“; W02_Uebung.pptx Folie 7</span></div>
+</article><article class="card" id="audit-trail">
+<div class="head"><h3>Audit-Trail (Nachweiskette)</h3><span class="en">audit trail</span><span class="badge st-module" title="Arbeitsbegriff des Moduls">Modulbegriff</span></div>
+<p class="def">Lückenlose Nachweiskette über Entscheidungen und Arbeitsschritte, auf die sich sowohl ein Audit als auch eine Konformitätsbewertung stützen.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Lückenlosigkeit der Kette: Für jede Entscheidung bzw. jeden Arbeitsschritt liegt ein protokollierter Nachweis vor (im Modul: Werkzeug, Zweck, Prüfung).</dd></div>
+<div><dt>Verantwortlich</dt><dd>Betreiber*in</dd></div>
+<div><dt>Quelle</dt><dd>Begriffssystem des Moduls, Semesterplan WS 2026/27</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W02</span><span class="chip">W07</span><span class="chip">W13</span></span><span>Siehe: <a href="#audit">Audit</a>, <a href="#conformity-assessment">Konformitätsbewertung</a>, <a href="#accountability">Accountability (Rechenschaftspflicht, Zurechenbarkeit)</a></span><span>Beleg: W02_Vorlesung_Final.pptx Folien 32 und 50; W02_Skript_Vorlesung.html Abschnitte „Die Abgrenzungen, an denen es scheitert“ und „KI-Kompetenz als Nachweis“</span></div>
+</article><article class="card" id="decoupling">
+<div class="head"><h3>Entkopplung (Decoupling)</h3><span class="en">decoupling</span><span class="badge st-verified" title="begutachtete Fachquelle">peer-reviewed</span></div>
+<p class="def">Auseinanderfallen von deklarierter KI-Ethik und tatsächlicher Entwicklungs- und Betriebspraxis, das laut einer Feldstudie in Empirical Software Engineering (2026) in distinkten, also heterogenen statt uniformen Entkopplungs-Profilen auftritt.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Keine direkte Messgröße; Diagnose über das Entkopplungs-Profil der Organisation, das vor jeder Intervention zu bestimmen ist.</dd></div>
+<div><dt>Verantwortlich</dt><dd>AI Governance Lead</dd></div>
+<div><dt>Quelle</dt><dd>Decoupling in AI ethics: Learning how to walk the talk, Empirical Software Engineering (2026); Stand: Anfang September 2026</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W02</span></span><span>Siehe: <a href="#ethics-washing">Ethics Washing</a>, <a href="#principles-to-practice-gap">Principles-to-Practice-Gap (Wirkungslücke)</a></span><span>Beleg: W02_Vorlesung_Final.pptx Folien 6 und 9–11; W02_Skript_Vorlesung.html Abschnitt „Diagnose: Decoupling hat Profile“; W02_Aktualitaetsbriefing_2026-09-03.md Abschnitt 1</span></div>
+</article><article class="card" id="explainability">
+<div class="head"><h3>Erklärbarkeit (Explainability)</h3><span class="en">explainability</span><span class="badge st-verified" title="begutachtete Fachquelle">peer-reviewed</span></div>
+<p class="def">Fähigkeit, eine einzelne Ausgabe eines Systems nachgelagert zu erklären, etwa durch Ausweis der ausschlaggebenden Faktoren, was auch bei nicht interpretierbaren Black-Box-Modellen möglich ist.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Für jede Entscheidung ausgewiesene ausschlaggebende Faktoren (Methoden wie SHAP und Counterfactuals in W05).</dd></div>
+<div><dt>Verantwortlich</dt><dd>Model Owner</dd></div>
+<div><dt>Quelle</dt><dd>Kaur, Uslu, Rittichier &amp; Durresi (2022): Trustworthy Artificial Intelligence — A Review, ACM Computing Surveys 55(2)</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W02</span><span class="chip">W05</span></span><span>Siehe: <a href="#transparency">Transparenz</a>, <a href="#interpretability">Interpretierbarkeit</a>, <a href="00_Glossar_Gesamt_WS2026-27.html#explicability">Explicability (Nachvollziehbarkeit und Rechenschaft)</a>, <a href="00_Glossar_Gesamt_WS2026-27.html#trade-off-field">Spannungsfeld (Trade-off-Feld)</a></span><span>Beleg: W02_Vorlesung_Final.pptx Folien 27–28; W02_Skript_Vorlesung.html Abschnitt „Die Abgrenzungen, an denen es scheitert“; W02_Uebung.pptx Folie 9</span></div>
+</article><article class="card" id="ethics-washing">
+<div class="head"><h3>Ethics Washing</h3><span class="badge st-verified" title="begutachtete Fachquelle">peer-reviewed</span></div>
+<p class="def">Performative Übernahme ethischer Rahmen ohne substanzielle Umsetzung, mit der eine Organisation Vertrauen gewinnen kann, ohne vertrauenswürdig zu sein.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Keine direkte Messgröße; Indiz ist die Lücke zwischen Deklaration und belegter Umsetzung, etwa laut McKinsey-Daten nur 12 % der KI-einsetzenden Unternehmen 2024 mit aktiver Minderung von Bias- und Fairness-Risiken (Sekundärangabe).</dd></div>
+<div><dt>Verantwortlich</dt><dd>AI Governance Lead</dd></div>
+<div><dt>Quelle</dt><dd>Ethics-Washing-Literatur; empirisch fundiert durch Decoupling in AI ethics, Empirical Software Engineering (2026); Stand: Anfang September 2026</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W02</span></span><span>Siehe: <a href="#decoupling">Entkopplung (Decoupling)</a>, <a href="#trustworthiness">Vertrauenswürdigkeit</a>, <a href="#principles-to-practice-gap">Principles-to-Practice-Gap (Wirkungslücke)</a></span><span>Beleg: W02_Vorlesung_Final.pptx Folien 7, 12 und 23; W02_Skript_Vorlesung.html Abschnitte „Diagnose: Decoupling hat Profile“ und „Begriffe als Werkzeuge“; W02_Aktualitaetsbriefing_2026-09-03.md Abschnitt 1</span></div>
+</article><article class="card" id="ethics-vs-compliance">
+<div class="head"><h3>Ethik vs. Compliance</h3><span class="en">ethics vs. compliance</span><span class="badge st-module" title="Arbeitsbegriff des Moduls">Modulbegriff</span></div>
+<p class="def">Unterscheidung zwischen Compliance, die prüft, ob eine bestehende Regel eingehalten ist („Ist es erlaubt?“), und Ethik, die begründet, was gelten soll, auch wo kein Gesetz greift („Ist es richtig?“).</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Keine direkte Messgröße; Compliance wird über den Regelabgleich nachgewiesen, die ethische Position über eine dokumentierte Begründung.</dd></div>
+<div><dt>Verantwortlich</dt><dd>AI Governance Lead</dd></div>
+<div><dt>Quelle</dt><dd>Begriffssystem des Moduls, Semesterplan WS 2026/27 (W02, Learning Outcome 3)</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W02</span></span><span>Siehe: <a href="#soft-law">Soft Law</a>, <a href="00_Glossar_Gesamt_WS2026-27.html#trustworthy-ai">Vertrauenswürdige KI</a></span><span>Beleg: W02_Vorlesung_Final.pptx Folie 33; W02_Skript_Vorlesung.html Abschnitt „Ethik, Compliance und drei Begründungsmuster“; W01_Vorlesung_Final.pptx Folie 43</span></div>
+</article><article class="card" id="governance">
+<div class="head"><h3>Governance</h3><span class="badge st-verified" title="begutachtete Fachquelle">peer-reviewed</span></div>
+<p class="def">Gesamtheit der Strukturen und Prozesse wie Policy, Rollen, Freigaben, Eskalationswege, Review-Takt und Audit, die Accountability organisatorisch wirksam machen.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Keine direkte Messgröße; Nachweis über dokumentierte Policy, Rollenbeschreibungen, Eskalationswege und Audit-Termine.</dd></div>
+<div><dt>Verantwortlich</dt><dd>AI Governance Lead</dd></div>
+<div><dt>Quelle</dt><dd>Kaur, Uslu, Rittichier &amp; Durresi (2022): Trustworthy Artificial Intelligence — A Review, ACM Computing Surveys 55(2)</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W02</span></span><span>Siehe: <a href="#accountability">Accountability (Rechenschaftspflicht, Zurechenbarkeit)</a>, <a href="#audit">Audit</a>, <a href="#iso-iec-42001">ISO/IEC 42001 (KI-Managementsystem)</a></span><span>Beleg: W02_Vorlesung_Final.pptx Folie 31; W02_Skript_Vorlesung.html Abschnitt „Die Abgrenzungen, an denen es scheitert“; W02_Uebung.pptx Folie 7</span></div>
+</article><article class="card" id="interpretability">
+<div class="head"><h3>Interpretierbarkeit</h3><span class="en">interpretability</span><span class="badge st-verified" title="begutachtete Fachquelle">peer-reviewed</span></div>
+<p class="def">Eigenschaft eines Modells, dessen Mechanismus ein Mensch direkt nachvollziehen kann, unabhängig davon, ob das System dokumentiert oder seine Einzelentscheidungen nachgelagert erklärbar sind.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Keine direkte Messgröße; Nachweis über die begründete Modellwahl, etwa eine Scorecard statt eines Ensembles.</dd></div>
+<div><dt>Verantwortlich</dt><dd>Model Owner</dd></div>
+<div><dt>Quelle</dt><dd>Kaur, Uslu, Rittichier &amp; Durresi (2022): Trustworthy Artificial Intelligence — A Review, ACM Computing Surveys 55(2)</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W02</span><span class="chip">W05</span></span><span>Siehe: <a href="#transparency">Transparenz</a>, <a href="#explainability">Erklärbarkeit (Explainability)</a></span><span>Beleg: W02_Vorlesung_Final.pptx Folien 27–28; W02_Skript_Vorlesung.html Abschnitt „Die Abgrenzungen, an denen es scheitert“; W01_Vorlesung_Final.pptx Folie 56</span></div>
+</article><article class="card" id="iso-iec-42001">
+<div class="head"><h3>ISO/IEC 42001 (KI-Managementsystem)</h3><span class="en">ISO/IEC 42001 AI management system</span><span class="badge st-bind" title="Norm oder technischer Standard">Norm</span></div>
+<p class="def">Zertifizierbare Managementsystemnorm, die Prinzipien vertrauenswürdiger KI im Zyklus Planen, Umsetzen, Prüfen, Verbessern in Prozesse mit dokumentierter Verantwortung überführt, ohne eine Rechtspflicht automatisch zu erfüllen oder eine Konformitätsbewertung zu ersetzen.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Zertifizierung des KI-Managementsystems; die Norm macht die Erfüllung von Pflichten nachweisbar, nicht automatisch erfüllt.</dd></div>
+<div><dt>Verantwortlich</dt><dd>AI Governance Lead</dd></div>
+<div><dt>Quelle</dt><dd>ISO/IEC 42001:2023</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W02</span><span class="chip">W03</span><span class="chip">W13</span><span class="chip">W14</span></span><span>Siehe: <a href="#conformity-assessment">Konformitätsbewertung</a>, <a href="#governance">Governance</a>, <a href="#soft-law">Soft Law</a>, <a href="00_Glossar_Gesamt_WS2026-27.html#nist-ai-rmf">NIST AI Risk Management Framework (AI RMF 1.0)</a></span><span>Beleg: W02_Vorlesung_Final.pptx Folie 43; W02_Skript_Vorlesung.html Abschnitt „Frameworks als Positionen“; W03_Vorlesung_Final.pptx Folie 37; W03_Skript_Vorlesung.html Abschnitt „Digital Omnibus: von der Einigung zum geltenden Recht“</span></div>
+</article><article class="card" id="calibrated-trust">
+<div class="head"><h3>Kalibriertes Vertrauen (Over-/Undertrust)</h3><span class="en">calibrated trust</span><span class="badge st-verified" title="begutachtete Fachquelle">peer-reviewed</span></div>
+<p class="def">Vertrauen in genau dem Maß, das die nachgewiesene Vertrauenswürdigkeit eines Systems rechtfertigt, im Gegensatz zu Overtrust, dem Vertrauen ohne Grundlage, und Undertrust, der Verweigerung berechtigten Vertrauens.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Keine direkte Messgröße; Stellschrauben der Kalibrierung sind Transparenz und Erklärbarkeit, Nachweis über deren Artefakte.</dd></div>
+<div><dt>Verantwortlich</dt><dd>Betreiber*in</dd></div>
+<div><dt>Quelle</dt><dd>Kaur, Uslu, Rittichier &amp; Durresi (2022): Trustworthy Artificial Intelligence — A Review, ACM Computing Surveys 55(2)</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W02</span><span class="chip">W12</span></span><span>Siehe: <a href="00_Glossar_Gesamt_WS2026-27.html#trust">Vertrauen</a>, <a href="#trustworthiness">Vertrauenswürdigkeit</a>, <a href="#transparency">Transparenz</a>, <a href="#explainability">Erklärbarkeit (Explainability)</a></span><span>Beleg: W02_Vorlesung_Final.pptx Folie 24; W02_Skript_Vorlesung.html Abschnitt „Begriffe als Werkzeuge“</span></div>
+</article><article class="card" id="ai-literacy">
+<div class="head"><h3>KI-Kompetenz</h3><span class="en">AI literacy</span><span class="badge st-bind" title="bindend — geltendes Recht">Recht</span></div>
+<p class="def">Fähigkeit, Möglichkeiten und Grenzen eines KI-Systems zu verstehen, seine Risiken zu erkennen und Ausgaben im Kontext zu deuten, deren Entwicklung Anbieter*innen und Betreiber*innen nach Art. 4 AI Act in der Fassung des Digital Omnibus bei den mit dem System arbeitenden Personen unabhängig von der Risikoklasse fördern müssen, als Bemühens-, nicht als Erfolgspflicht.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Anteil geschulter Rollen je Anwendungsfall plus dokumentierte Kompetenznachweise; seit dem Digital Omnibus zählt der Nachweis von Maßnahmen, Angeboten und deren Passung (Bemühens-, keine Erfolgspflicht).</dd></div>
+<div><dt>Verantwortlich</dt><dd>Rolle für Kompetenzentwicklung bei Anbieter*in bzw. Betreiber*in</dd></div>
+<div><dt>Quelle</dt><dd>VO (EU) 2024/1689, Art. 4 und Erwägungsgrund 20, i. d. F. VO (EU) 2026/1744 (Abschwächung von „sicherstellen“ zu „fördern“); Art. 4 gilt seit 02.02.2025, national durchsetzbar seit 03.08.2026; Stand: Anfang September 2026</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W02</span><span class="chip">W03</span></span><span>Siehe: <a href="00_Glossar_Gesamt_WS2026-27.html#ai-act">EU AI Act (KI-Verordnung)</a>, <a href="00_Glossar_Gesamt_WS2026-27.html#digital-omnibus">Digital Omnibus on AI</a>, <a href="00_Glossar_Gesamt_WS2026-27.html#provider">Anbieter (Provider)</a>, <a href="00_Glossar_Gesamt_WS2026-27.html#deployer">Betreiber (Deployer)</a></span><span>Beleg: W02_Vorlesung_Final.pptx Folien 16–17 und 46–48; W02_Skript_Vorlesung.html Abschnitte „Der Kontrast: seit einem Monat durchsetzbar“ und „KI-Kompetenz als Nachweis“; W02_Uebung.pptx Folie 27; W02_Aktualitaetsbriefing_2026-09-03.md Abschnitt 2; W03_Uebung.pptx Folien 8–9</span></div>
+</article><article class="card" id="conformity-assessment">
+<div class="head"><h3>Konformitätsbewertung</h3><span class="en">conformity assessment</span><span class="badge st-bind" title="bindend — geltendes Recht">Recht</span></div>
+<p class="def">Formale, vor dem Inverkehrbringen durchzuführende Bewertung, ob ein Hochrisiko-KI-System die Anforderungen des AI Act erfüllt, je nach Fall intern oder unter Beteiligung einer Benannten Stelle (VO (EU) 2024/1689, Art. 40–49).</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Keine Kennzahl; Nachweis über die abgeschlossene Konformitätsbewertung, die CE-Kennzeichnung und die Registrierung in der EU-Datenbank.</dd></div>
+<div><dt>Verantwortlich</dt><dd>Anbieter*in</dd></div>
+<div><dt>Quelle</dt><dd>VO (EU) 2024/1689, Art. 40–49, i. d. F. VO (EU) 2026/1744; Hochrisiko-Pflichten für Annex III ab 02.12.2027, für Annex I ab 02.08.2028; Stand: Anfang September 2026</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W02</span><span class="chip">W03</span><span class="chip">W13</span></span><span>Siehe: <a href="#audit">Audit</a>, <a href="00_Glossar_Gesamt_WS2026-27.html#high-risk-ai-system">Hochrisiko-KI-System</a>, <a href="00_Glossar_Gesamt_WS2026-27.html#harmonised-standards">Harmonisierte Normen (Konformitätsvermutung)</a>, <a href="00_Glossar_Gesamt_WS2026-27.html#provider">Anbieter (Provider)</a></span><span>Beleg: W02_Vorlesung_Final.pptx Folie 32; W02_Skript_Vorlesung.html Abschnitt „Die Abgrenzungen, an denen es scheitert“; W02_Uebung.pptx Folie 7; W03_Vorlesung_Final.pptx Folien 23 und 60</span></div>
+</article><article class="card" id="principles-to-practice-gap">
+<div class="head"><h3>Principles-to-Practice-Gap (Wirkungslücke)</h3><span class="en">principles-to-practice gap</span><span class="badge st-verified" title="begutachtete Fachquelle">peer-reviewed</span></div>
+<p class="def">Lücke zwischen den auf Wortebene weltweit konvergenten KI-Ethik-Prinzipien und ihrer tatsächlichen Wirkung in Entwicklung und Betrieb, die Mittelstadt auf fehlende Profession, fehlende Übersetzungsmethodik und schwache Rechenschaft zurückführt.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Keine direkte Messgröße; Nachweis über das Fehlen oder Vorhandensein von Messgröße, Verantwortlichen und Sanktion je Prinzip.</dd></div>
+<div><dt>Verantwortlich</dt><dd>AI Governance Lead</dd></div>
+<div><dt>Quelle</dt><dd>Mittelstadt (2019): Principles alone cannot guarantee ethical AI, Nature Machine Intelligence 1 (Comment, peer-reviewed); Hagendorff (2020), Minds &amp; Machines 30</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W02</span></span><span>Siehe: <a href="#decoupling">Entkopplung (Decoupling)</a>, <a href="#ethics-washing">Ethics Washing</a>, <a href="00_Glossar_Gesamt_WS2026-27.html#operationalization">Operationalisierung (Arbeitsthese: messbar, auditierbar, operationalisierbar)</a>, <a href="#four-level-taxonomy-grid">Vier-Ebenen-Raster (Taxonomie-Raster)</a></span><span>Beleg: W02_Vorlesung_Final.pptx Folien 44 und 61–62; W02_Skript_Vorlesung.html Abschnitt „Frameworks als Positionen“; W01_Vorlesung_Final.pptx Folien 77 und 84</span></div>
+</article><article class="card" id="robustness">
+<div class="head"><h3>Robustheit</h3><span class="en">robustness</span><span class="badge st-verified" title="begutachtete Fachquelle">peer-reviewed</span></div>
+<p class="def">Zuverlässigkeit eines KI-Systems auch unter Verteilungsverschiebung, technischer Störung und gezieltem Angriff, einschließlich des zuverlässigen Betriebs im organisatorischen Umfeld, und damit ausdrücklich nicht dasselbe wie Genauigkeit im Testfall.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Fehlerrate unter Störung und Angriff (Prüfung über Red-Teaming in W08).</dd></div>
+<div><dt>Verantwortlich</dt><dd>Security-Owner</dd></div>
+<div><dt>Quelle</dt><dd>Kaur, Uslu, Rittichier &amp; Durresi (2022): Trustworthy Artificial Intelligence — A Review, ACM Computing Surveys 55(2); HLEG (2019), Kap. II, Anforderung 2</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W02</span><span class="chip">W08</span></span><span>Siehe: <a href="00_Glossar_Gesamt_WS2026-27.html#trustworthy-ai">Vertrauenswürdige KI</a>, <a href="00_Glossar_Gesamt_WS2026-27.html#hleg-key-requirements">Sieben HLEG-Anforderungen (7 Säulen)</a>, <a href="#four-level-taxonomy-grid">Vier-Ebenen-Raster (Taxonomie-Raster)</a></span><span>Beleg: W02_Vorlesung_Final.pptx Folien 26 und 30; W02_Skript_Vorlesung.html Abschnitte „Das Vier-Ebenen-Raster“ und „Die Abgrenzungen, an denen es scheitert“; W01_Vorlesung_Final.pptx Folien 40, 47 und 49</span></div>
+</article><article class="card" id="soft-law">
+<div class="head"><h3>Soft Law</h3><span class="badge st-module" title="Arbeitsbegriff des Moduls">Modulbegriff</span></div>
+<p class="def">Rechtlich unverbindliche Regelwerke wie Ethik-Rahmen, die begründen und orientieren, aber nicht sanktionieren und über Reputation und freiwillige Übernahme wirken.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Keine Messgröße; Verbindlichkeit entsteht erst durch Recht oder Vertrag.</dd></div>
+<div><dt>Verantwortlich</dt><dd>AI Governance Lead</dd></div>
+<div><dt>Quelle</dt><dd>Begriffssystem des Moduls (drei Verbindlichkeitsgrade); Einordnung von HLEG (2019), OECD (2019, rev. 2024) und UNESCO (2021)</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W02</span></span><span>Siehe: <a href="#ethics-vs-compliance">Ethik vs. Compliance</a>, <a href="#iso-iec-42001">ISO/IEC 42001 (KI-Managementsystem)</a>, <a href="00_Glossar_Gesamt_WS2026-27.html#ai-act">EU AI Act (KI-Verordnung)</a></span><span>Beleg: W02_Vorlesung_Final.pptx Folien 41 und 43; W02_Skript_Vorlesung.html Abschnitt „Frameworks als Positionen“; W01_Vorlesung_Final.pptx Folien 79, 81 und 82</span></div>
+</article><article class="card" id="transparency">
+<div class="head"><h3>Transparenz</h3><span class="en">transparency</span><span class="badge st-verified" title="begutachtete Fachquelle">peer-reviewed</span></div>
+<p class="def">Offenlegung über ein System, also über Zweck, Daten, Grenzen und Verantwortliche, die auf der Dokumentationsebene liegt und weder Interpretierbarkeit noch Erklärbarkeit voraussetzt.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Artefakt statt Kennzahl: Model Card (Methodik in W05).</dd></div>
+<div><dt>Verantwortlich</dt><dd>Dokumentations-Owner im Release-Prozess</dd></div>
+<div><dt>Quelle</dt><dd>Kaur, Uslu, Rittichier &amp; Durresi (2022): Trustworthy Artificial Intelligence — A Review, ACM Computing Surveys 55(2)</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W02</span><span class="chip">W05</span></span><span>Siehe: <a href="#interpretability">Interpretierbarkeit</a>, <a href="#explainability">Erklärbarkeit (Explainability)</a>, <a href="00_Glossar_Gesamt_WS2026-27.html#transparency-obligations">Transparenzpflichten (Art. 50)</a>, <a href="00_Glossar_Gesamt_WS2026-27.html#hleg-key-requirements">Sieben HLEG-Anforderungen (7 Säulen)</a></span><span>Beleg: W02_Vorlesung_Final.pptx Folien 26–28; W02_Skript_Vorlesung.html Abschnitt „Die Abgrenzungen, an denen es scheitert“; W01_Vorlesung_Final.pptx Folien 47 und 49</span></div>
+</article><article class="card" id="trustworthiness">
+<div class="head"><h3>Vertrauenswürdigkeit</h3><span class="en">trustworthiness</span><span class="badge st-verified" title="begutachtete Fachquelle">peer-reviewed</span></div>
+<p class="def">Nachweisbare Eigenschaft eines KI-Systems, berechtigtes Vertrauen zu rechtfertigen, belegt über prüfbare Dimensionen wie Fairness, Robustheit, Transparenz, Accountability und Privatsphäre.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Keine einzelne Messgröße; Nachweis über die Messgrößen und Artefakte der einzelnen Dimensionen, etwa Fairness-Kennzahl, Model Card, Re-Identifikationsrisiko und Fehlerrate unter Störung.</dd></div>
+<div><dt>Verantwortlich</dt><dd>AI Governance Lead</dd></div>
+<div><dt>Quelle</dt><dd>Kaur, Uslu, Rittichier &amp; Durresi (2022): Trustworthy Artificial Intelligence — A Review, ACM Computing Surveys 55(2)</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W02</span></span><span>Siehe: <a href="00_Glossar_Gesamt_WS2026-27.html#trust">Vertrauen</a>, <a href="00_Glossar_Gesamt_WS2026-27.html#trustworthy-ai">Vertrauenswürdige KI</a>, <a href="#calibrated-trust">Kalibriertes Vertrauen (Over-/Undertrust)</a>, <a href="#ethics-washing">Ethics Washing</a></span><span>Beleg: W02_Vorlesung_Final.pptx Folie 23; W02_Skript_Vorlesung.html Abschnitt „Begriffe als Werkzeuge“; W02_Uebung.pptx Folie 7</span></div>
+</article><article class="card" id="four-level-taxonomy-grid">
+<div class="head"><h3>Vier-Ebenen-Raster (Taxonomie-Raster)</h3><span class="en">four-level taxonomy grid</span><span class="badge st-module" title="Arbeitsbegriff des Moduls">Modulbegriff</span></div>
+<p class="def">Arbeitswerkzeug des Moduls, das jede Trustworthiness-Dimension über die vier Ebenen Prinzip, Definition, Messgröße und Verantwortliche konkretisiert, weil eine Dimension erst mit benannter Messgröße und Verantwortlichen arbeitsfähig wird.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Vollständigkeit des Rasters: Für jede Dimension sind Definition, Messgröße oder Artefakt und verantwortliche Rolle benannt.</dd></div>
+<div><dt>Verantwortlich</dt><dd>AI Governance Lead</dd></div>
+<div><dt>Quelle</dt><dd>Taxonomie-Raster des Moduls, Semesterplan WS 2026/27</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W02</span><span class="chip">W04</span><span class="chip">W05</span><span class="chip">W06</span><span class="chip">W08</span></span><span>Siehe: <a href="00_Glossar_Gesamt_WS2026-27.html#operationalization">Operationalisierung (Arbeitsthese: messbar, auditierbar, operationalisierbar)</a>, <a href="#principles-to-practice-gap">Principles-to-Practice-Gap (Wirkungslücke)</a>, <a href="00_Glossar_Gesamt_WS2026-27.html#fairness">Vielfalt, Nichtdiskriminierung und Fairness</a>, <a href="#transparency">Transparenz</a>, <a href="#robustness">Robustheit</a></span><span>Beleg: W02_Vorlesung_Final.pptx Folien 8, 22 und 25–26; W02_Skript_Vorlesung.html Abschnitt „Das Vier-Ebenen-Raster“; W02_Uebung.pptx Folien 7–9 und 26</span></div>
+</article></section><section><div class="eyebrow">W02 // AUFGEGRIFFEN</div><h2>Aus früheren Wochen</h2>
+<p class="lead">Diese Begriffe sind früher eingeführt und werden in W02 wieder tragend. Die vollständigen Einträge stehen im Gesamtglossar.</p>
+<ul class="mini"><li><a href="00_Glossar_Gesamt_WS2026-27.html#altai">ALTAI (Prüfliste für vertrauenswürdige KI)</a> <span class="chip">W01</span> <span class="badge st-draft" title="unverbindliche Leitlinie">Leitlinie</span></li><li><a href="00_Glossar_Gesamt_WS2026-27.html#hleg-key-requirements">Sieben HLEG-Anforderungen (7 Säulen)</a> <span class="chip">W01</span> <span class="badge st-draft" title="unverbindliche Leitlinie">Leitlinie</span></li><li><a href="00_Glossar_Gesamt_WS2026-27.html#trusted-ai">Trusted AI</a> <span class="chip">W01</span> <span class="badge st-module" title="Arbeitsbegriff des Moduls">Modulbegriff</span></li><li><a href="00_Glossar_Gesamt_WS2026-27.html#trust">Vertrauen</a> <span class="chip">W01</span> <span class="badge st-module" title="Arbeitsbegriff des Moduls">Modulbegriff</span></li><li><a href="00_Glossar_Gesamt_WS2026-27.html#trustworthy-ai">Vertrauenswürdige KI</a> <span class="chip">W01</span> <span class="badge st-draft" title="unverbindliche Leitlinie">Leitlinie</span></li></ul></section></main>
+<footer>Trusted &amp; Ethical AI · HTW Dresden · Dr.-Ing. Steffen Tomschke · Stand 2026-10-19</footer>
+</body></html>

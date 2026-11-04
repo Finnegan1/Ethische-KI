@@ -1,0 +1,15 @@
+\contentsline {section}{\nonumberline Danksagung}{}{section*.1}%
+\contentsline {section}{Glossar}{II}{section*.2}%
+\contentsline {section}{Abkürzungsverzeichnis}{II}{section*.3}%
+\contentsline {section}{Symbolverzeichnis}{II}{section*.4}%
+\contentsline {section}{\nonumberline Abbildungsverzeichnis}{III}{section*.4}%
+\contentsline {section}{\nonumberline Tabellenverzeichnis}{IV}{section*.4}%
+\contentsline {section}{\numberline {1}Einleitung}{1}{section.1}%
+\contentsline {section}{\numberline {2}Grundlagen}{2}{section.2}%
+\contentsline {section}{\numberline {3}Material und Methoden}{3}{section.3}%
+\contentsline {section}{\numberline {4}Ergebnisse und Diskussion}{4}{section.4}%
+\contentsline {section}{\numberline {5}Zusammenfassung und Ausblick}{5}{section.5}%
+\contentsline {section}{\nonumberline Literatur}{6}{section*.5}%
+\contentsline {section}{\numberline {A}Anhang}{1}{appendix.A}%
+\contentsline {section}{\nonumberline Erklärung}{}{section*.6}%
+\providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

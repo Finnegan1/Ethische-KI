@@ -1,0 +1,93 @@
+\documentclass[
+   12pt, % Schriftgröße
+   DIV=calc,
+   ngerman, % für Umlaute, Silbentrennung etc.
+   a4paper, % Papierformat
+   oneside, % einseitiges Dokument
+   titlepage, % es wird eine Titelseite verwendet
+   parskip=half, % Abstand zwischen Absätzen (halbe Zeile)
+%   headings=normal, % Grˆﬂe der Überschriften verkleinern
+   listof=totoc, % Verzeichnisse im Inhaltsverzeichnis aufführen
+   bibliography=totoc, % Literaturverzeichnis im Inhaltsverzeichnis aufführen
+   index=totoc, % Index im Inhaltsverzeichnis aufführen
+%   captions=nooneline, % Beschriftung von Tabellen unterhalb ausgeben
+   final, % Status des Dokuments (final/draft)
+   numbers=noenddot
+]{scrartcl}
+
+%Abstände ändern
+%\renewcommand*{\chapterheadstartvskip}{\vspace{-1\baselineskip}} %Abstand vor Section
+\setlength{\headsep}{30pt} %Abstand Kopfzeile Textkörper
+
+\usepackage{graphicx}
+
+\input{Metadaten/Meta.tex} %Informationen über das Dokument
+
+\input{Metadaten/Packages.tex} %benötigte Packages
+
+\input{Metadaten/Glossar}       %Glossar, Acronyme, Symbole
+
+\makeindex
+\makeglossaries
+
+\input{Metadaten/Seitenstil.tex} %Kopf- und Fußzeilen, Seitenränder..
+
+%Hier beginnt das eigentliche Dokument
+\begin{document}
+
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+\include{Metadaten/Deckblatt} %Deckblatt
+
+%\include{Inhalt/Abstract} %Falls ein Abstract eingefügt werden soll
+
+\pagenumbering{gobble}
+
+\include{Inhalt/Danksagung} %Danksagung
+ 
+\pagenumbering{Roman}
+
+\tableofcontents %Inhaltsverzeichnis
+
+\clearpage
+%Glossar
+% Aufruf: makeglossaries Abschlussarbeit_DE.aux
+\printglossaries                %alle Glossare ausgeben (inklusive Acronyme und Symbole)
+% \printglossary[type=main]
+% %Symbole ausgeben
+% \printglossary[type=symbolslist]
+% \printglossary[type=\acronymtype]
+
+\newpage
+\listoffigures % Abbildungsverzeichnis
+\newpage
+\listoftables % Tabellenverzeichnis
+ 
+\clearpage
+
+% 1.5-fachen Zeilenabstand
+\onehalfspacing
+
+% Text includes
+
+\pagenumbering{arabic}
+\include{Metadaten/Inhalt}
+
+% Literaturverzeichnis 
+\bibliography{Bibliographie} % Aufruf: bibtex Abschlussarbeit_DE.aux
+\bibliographystyle{natdin} % DIN-Stil des Literaturverzeichnisses
+
+% Anhang 
+\begin{appendix}
+	\clearpage
+	\pagenumbering{arabic}
+	\input{Inhalt/Anhang}
+\end{appendix}
+
+% Selbständigkeitserklärung
+\include{Metadaten/Erklaerung} %Erklaerung.tex
+
+% Ende des Dokuments
+\end{document}
+%------------------------------------------

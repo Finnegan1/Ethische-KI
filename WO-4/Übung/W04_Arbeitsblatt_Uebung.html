@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>W04 Arbeitsblatt · Fairness am eigenen Thema</title>
+<style>
+:root{--void:#0F0B1A;--deep:#24163A;--paper:#FAFAFC;--ink:#1E1A2E;--violet:#7C3AED;--magenta:#C026D3;--glow:#E879F9;--sage:#2E9E7E;
+--body:#4A4460;--mute:#6B6580;--lilac:#EDE7F8;--border:#E4DFEF;--dbody:#C9C2DE;--mono:'Courier New',monospace;--sans:Arial,Helvetica,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.45;padding:16px}
+main{max-width:1000px;margin:0 auto}
+.eyebrow,.tag{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--magenta);text-transform:uppercase}
+.tag{color:var(--violet);display:block;margin-bottom:6px;font-size:11px}
+h1{font-size:26px;margin:6px 0 2px}
+h2{font-size:20px;margin:0 0 8px}
+h3{font-size:16px;margin:14px 0 6px}
+p{color:var(--body)}
+.head{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;justify-content:space-between;margin-bottom:14px}
+.card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.task{background:var(--lilac);border-radius:10px;padding:12px 16px;margin-bottom:12px}
+.task ol{margin:6px 0 6px 22px;color:var(--ink)}
+.task .meta{font-size:14px;color:var(--body)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media(max-width:760px){.grid,.grid3{grid-template-columns:1fr}}
+label{display:block;font-size:14px;color:var(--body);margin:8px 0 3px}
+input[type=text],select,textarea{width:100%;font:inherit;font-size:15px;padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:#fff;color:var(--ink)}
+textarea{min-height:58px;resize:vertical}
+.row{display:flex;align-items:center;gap:10px}
+input[type=range]{flex:1;accent-color:var(--violet);height:30px}
+output{font-family:var(--mono);font-weight:bold;min-width:56px;text-align:right}
+button{font:inherit;font-size:15px;padding:10px 16px;border-radius:8px;border:1px solid var(--violet);background:#fff;color:var(--violet);cursor:pointer;margin:6px 8px 0 0}
+button.primary{background:var(--violet);color:#fff}
+button:disabled{opacity:.45;cursor:default}
+.step{border-top:1px solid var(--border);padding-top:12px;margin-top:12px}
+.step:first-of-type{border-top:0;margin-top:0;padding-top:0}
+.num{display:inline-block;font-family:var(--mono);font-weight:bold;color:var(--violet);margin-right:6px}
+table{border-collapse:collapse;width:100%;font-size:15px;margin-top:8px}
+th,td{border-bottom:1px solid var(--border);padding:6px;text-align:right}
+th:first-child,td:first-child{text-align:left}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--mute);font-weight:normal;text-transform:uppercase}
+.kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+@media(max-width:760px){.kpi{grid-template-columns:repeat(2,1fr)}}
+.kpi div{background:var(--lilac);border-radius:8px;padding:8px 10px}
+.kpi b{display:block;font-size:21px;font-family:var(--mono)}
+.kpi span{font-size:12px;color:var(--body)}
+.info{font-size:14px;color:var(--body);margin-top:6px}
+.inset{background:var(--deep);border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.inset .tag{color:var(--glow)}
+.inset p,.inset li{color:var(--dbody);font-size:14px}
+.inset ul{margin:4px 0 0 18px}
+.inset code{color:#fff}
+code{font-family:var(--mono);font-size:13px}
+.hidden{display:none}
+.line{font-family:var(--mono);font-size:13px;background:#F6F4FA;border:1px solid var(--border);border-radius:6px;padding:8px;word-break:break-word}
+.src{font-size:12px;color:var(--mute);font-style:italic;margin-top:8px}
+.vl{position:relative;display:inline-block;width:16px;height:16px;line-height:14px;border:1px solid var(--violet);border-radius:50%;font-family:var(--mono);font-size:11px;font-weight:bold;font-style:normal;text-align:center;color:var(--violet);background:#fff;cursor:help;vertical-align:2px;margin-left:4px;user-select:none}
+.vl::before{content:"";position:absolute;inset:-5px}
+.vl:hover,.vl:focus{background:var(--violet);color:#fff;outline:none}
+.vl:focus-visible{box-shadow:0 0 0 2px var(--glow)}
+.inset .vl{background:transparent;border-color:var(--glow);color:var(--glow)}
+.inset .vl:hover,.inset .vl:focus{background:var(--glow);color:var(--void)}
+#vltip{position:fixed;z-index:50;max-width:min(330px,calc(100vw - 16px));background:var(--void);border:1px solid var(--violet);border-radius:8px;padding:8px 11px;box-shadow:0 6px 18px rgba(15,11,26,.28);font-size:13px;line-height:1.4;color:var(--dbody);pointer-events:none}
+#vltip .t{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--glow);margin-bottom:4px}
+#vltip .l{display:block}
+#vltip b{color:#fff;font-family:var(--mono);font-weight:bold}
+#vltip i{color:var(--mute)}
+@media print{
+  body{padding:0;font-size:11pt;background:#fff}
+  button,.noprint{display:none!important}
+  .task,.inset,.step,.kpi,table{break-inside:avoid}
+  .card{border:0;padding:0}
+  .grid{grid-template-columns:1fr 1fr!important}
+  .kpi{grid-template-columns:repeat(4,1fr)!important}
+  h1{font-size:20px} h3{margin:8px 0 4px} label{margin:4px 0 2px}
+  textarea{min-height:44px}
+  .inset{background:#fff;border:1px solid var(--border)}
+  .inset .tag,.inset p,.inset li,.inset code{color:var(--ink)}
+  #vltip{display:none!important}
+  .vl{width:auto;height:auto;border:0;border-radius:0;background:none!important;font-size:0;margin-left:3px;vertical-align:baseline}
+  .vl::before{display:none}
+  .vl::after{content:"(VL " attr(data-vl) ")";font-size:8pt;font-weight:normal;color:var(--mute)}
+}
+</style></head><body><main>
+
+<div class="head">
+  <div><div class="eyebrow">W04 // Übung // 28.10.2026 // Arbeitsblatt im Browser</div>
+  <h1>Fairness am eigenen Thema</h1>
+  <p>Keine Installation. Alles läuft in diesem Browserfenster, nichts wird gesendet. Die Daten sind synthetisch.</p></div>
+  <div style="min-width:280px" class="grid">
+    <div><label for="gruppe">Gruppe</label><select id="gruppe"></select></div>
+    <div><label for="thema">Thema</label><select id="thema"></select></div>
+  </div>
+</div>
+
+<!-- TEIL A -->
+<div class="card" id="teilA">
+  <div class="tag">Teil A // Phase 1 // 25 Min</div>
+  <div class="task"><strong>Aufgabenkarte 1: Metrik und Baseline festlegen</strong>
+    <p style="color:var(--ink)"><strong>Ziel:</strong> Messgröße und Ausgangslage festlegen.</p>
+    <ol><li>Beschreiben Sie Entscheidung Ŷ und Merkmal A.</li>
+    <li>Analysieren Sie die Bias-Quelle: Daten, Label, Modell oder Betrieb.</li>
+    <li>Bewerten Sie, welche Metrik zum Schaden passt.</li>
+    <li>Entwerfen Sie den Eingriff: Daten, Training oder nach dem Training.</li>
+    <li>Nennen Sie die Baseline: Basisrate je Gruppe, Proxy, Fallzahl.</li></ol>
+    <p class="meta"><strong>Ergebnis:</strong> Teil A ausgefüllt · <strong>Zeit:</strong> 25 Minuten · <strong>Abgabe:</strong> mit der Ergebnisdatei am Ende</p>
+  </div>
+
+  <div class="step"><h3><span class="num">1</span>Entscheidung und Merkmal <span class="vl" tabindex="0" role="button" data-vl="18">i</span></h3>
+    <div class="grid">
+      <div><label for="yhat">Ŷ = 1 bedeutet</label><input type="text" id="yhat" placeholder="z. B. zum Gespräch eingeladen"></div>
+      <div><label for="merkmal">Merkmal A <span class="vl" tabindex="0" role="button" data-vl="23, 24">i</span></label><input type="text" id="merkmal" placeholder="z. B. Altersgruppe"></div>
+      <div><label for="ga">Gruppe a ist</label><input type="text" id="ga" placeholder="Ausprägung a"></div>
+      <div><label for="gb">Gruppe b ist</label><input type="text" id="gb" placeholder="Ausprägung b"></div>
+    </div></div>
+
+  <div class="step"><h3><span class="num">2</span>Bias-Quelle <span class="vl" tabindex="0" role="button" data-vl="11, 12">i</span></h3>
+    <div class="grid">
+      <div><label for="ebene">Ebene <span class="vl" tabindex="0" role="button" data-vl="13, 14, 15, 16">i</span></label><select id="ebene"><option value="">bitte wählen</option><option>Daten</option><option>Label</option><option>Modell</option><option>Betrieb</option></select></div>
+      <div><label for="quelle">In einem Satz: woher der Bias kommt</label><textarea id="quelle"></textarea></div>
+    </div></div>
+
+  <div class="step"><h3><span class="num">3</span>Zielmetrik <span class="vl" tabindex="0" role="button" data-vl="19, 21, 22">i</span></h3>
+    <div class="grid">
+      <div><label for="ziel">Zielmetrik</label><select id="ziel"><option value="eo">Equalized Odds (gleiche TPR und FPR)</option><option value="dp">Demografische Parität (gleiche Auswahlrate)</option></select></div>
+      <div><label for="zielwarum">Begründung: Wer trägt welchen Fehler? <span class="vl" tabindex="0" role="button" data-vl="20, 30">i</span></label><textarea id="zielwarum"></textarea></div>
+    </div></div>
+
+  <div class="step"><h3><span class="num">4</span>Eingriff <span class="vl" tabindex="0" role="button" data-vl="31, 47">i</span></h3>
+    <div class="grid">
+      <div><label for="eingriff">Eingriff</label><select id="eingriff"><option value="post">nach dem Training (Schwelle je Gruppe)</option><option value="train">Training (Fairness-Bedingung)</option><option value="daten">Daten (Zusammenhang mit A entfernen)</option></select></div>
+      <div><label for="zugriff">Begründung über den Zugriff</label><textarea id="zugriff"></textarea></div>
+    </div></div>
+
+  <div class="step"><h3><span class="num">5</span>Baseline</h3>
+    <p class="info">Annahmen, keine Recherche. Sie steuern die Daten in Teil B.</p>
+    <div class="grid">
+      <div><label for="pa">Basisrate Gruppe a (Anteil tatsächlich Geeigneter) <span class="vl" tabindex="0" role="button" data-vl="18, 29">i</span></label><div class="row"><input type="range" id="pa" min="0.05" max="0.95" step="0.05" value="0.50"><output id="o_pa"></output></div></div>
+      <div><label for="pb">Basisrate Gruppe b</label><div class="row"><input type="range" id="pb" min="0.05" max="0.95" step="0.05" value="0.30"><output id="o_pb"></output></div></div>
+      <div><label for="proxyname">Proxy: Merkmal, das die Gruppe verrät <span class="vl" tabindex="0" role="button" data-vl="6, 7, 23">i</span></label><input type="text" id="proxyname" placeholder="z. B. Abschlussjahrgang"></div>
+      <div><label for="proxy">Proxy-Stärke (0 verrät nichts, 1 verrät die Gruppe fast sicher)</label><div class="row"><input type="range" id="proxy" min="0" max="1" step="0.1" value="0.8"><output id="o_proxy"></output></div></div>
+      <div><label for="n">Fallzahl</label><select id="n"><option value="2000">2.000</option><option value="5000" selected>5.000</option><option value="10000">10.000</option></select></div>
+      <div><label for="anteilb">Anteil der Gruppe b</label><div class="row"><input type="range" id="anteilb" min="0.1" max="0.9" step="0.05" value="0.40"><output id="o_anteilb"></output></div></div>
+      <div><label for="labelbias">Label-Bias: Anteil Geeigneter in b, in den Altdaten als ungeeignet erfasst <span class="vl" tabindex="0" role="button" data-vl="14, 21">i</span></label><div class="row"><input type="range" id="labelbias" min="0" max="0.5" step="0.05" value="0"><output id="o_labelbias"></output></div></div>
+      <div><label for="seed">Zufallswert (Seed)</label><input type="text" id="seed" value="42" inputmode="numeric"></div>
+      <div><label for="f1">Fachmerkmal 1 (hängt mit der Eignung zusammen)</label><input type="text" id="f1" placeholder="z. B. Berufserfahrung"></div>
+      <div><label for="f2">Fachmerkmal 2</label><input type="text" id="f2" placeholder="z. B. Qualifikation"></div>
+    </div></div>
+</div>
+
+<!-- TEIL B -->
+<div class="card" id="teilB">
+  <div class="tag">Teil B // Phase 2 // 35 Min</div>
+  <div class="task"><strong>Aufgabenkarte 2: Erzeugen, messen, mitigieren</strong>
+    <p style="color:var(--ink)"><strong>Ziel:</strong> Ungleichbehandlung zeigen, gezielt verringern, Preis beziffern.</p>
+    <ol><li>Nennen Sie Ihre Baseline in Teil A, erzeugen Sie die Daten.</li>
+    <li>Analysieren Sie Auswahlrate, TPR und FPR je Gruppe.</li>
+    <li>Analysieren Sie Ihren Eingriff aus Teil A.</li>
+    <li>Bewerten Sie den Preis: Genauigkeit und zweite Metrik, vorher und nachher.</li></ol>
+    <p class="meta"><strong>Ergebnis:</strong> Teil B ausgefüllt, Zeile in der Vergleichsmatrix · <strong>Zeit:</strong> 35 Minuten · <strong>Abgabe:</strong> Ergebnisdatei ins OPAL</p>
+  </div>
+
+  <div class="step"><h3><span class="num">1</span>Daten erzeugen</h3>
+    <button class="primary" id="btnGen">Daten erzeugen</button>
+    <p class="info" id="genInfo">Noch keine Daten. Die Baseline aus Teil A steuert die Erzeugung.</p></div>
+
+  <div class="step"><h3><span class="num">2</span>Basismodell messen <span class="vl" tabindex="0" role="button" data-vl="15, 19, 20, 21">i</span></h3>
+    <button class="primary" id="btnBase" disabled>Basismodell trainieren und messen</button>
+    <div id="baseOut"></div></div>
+
+  <div class="step"><h3><span class="num">3</span>Eingriff <span class="vl" tabindex="0" role="button" data-vl="31">i</span></h3>
+    <p class="info" id="eingriffInfo"></p>
+    <div id="optTrain" class="hidden"><label for="mu">Stärke der Fairness-Bedingung im Training</label><div class="row"><input type="range" id="mu" min="0" max="50" step="1" value="10"><output id="o_mu"></output></div></div>
+    <div id="optPost" class="hidden">
+      <label for="postmode">Schwellen</label><select id="postmode"><option value="auto">automatisch: Schwelle a bleibt 0,50, Schwelle b gleicht die Zielmetrik aus</option><option value="hand">von Hand</option></select>
+      <div id="handBox" class="hidden grid">
+        <div><label for="ta">Schwelle Gruppe a</label><div class="row"><input type="range" id="ta" min="0.05" max="0.95" step="0.01" value="0.50"><output id="o_ta"></output></div></div>
+        <div><label for="tb">Schwelle Gruppe b</label><div class="row"><input type="range" id="tb" min="0.05" max="0.95" step="0.01" value="0.50"><output id="o_tb"></output></div></div>
+      </div>
+    </div>
+    <button class="primary" id="btnMit" disabled>Eingriff anwenden</button>
+    <label class="noprint" style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="wahr"> Zusatz: gegen die wahre Eignung messen (nur im synthetischen Fall möglich) <span class="vl" tabindex="0" role="button" data-vl="14, 21">i</span></label>
+    <div id="mitOut"></div></div>
+
+  <div class="step"><h3><span class="num">4</span>Preis bewerten <span class="vl" tabindex="0" role="button" data-vl="28, 30">i</span></h3>
+    <div class="grid">
+      <div><label for="preis">Preis in einem Satz</label><textarea id="preis"></textarea></div>
+      <div><label for="grenze">Grenze der Messung <span class="vl" tabindex="0" role="button" data-vl="32, 33">i</span></label><textarea id="grenze"></textarea></div>
+    </div></div>
+</div>
+
+<!-- ABGABE -->
+<div class="card">
+  <div class="tag">Abgabe</div>
+  <p>Zeile für die Vergleichsmatrix:</p>
+  <div class="line" id="matrixLine">erscheint nach dem Eingriff</div>
+  <button id="btnCopy" class="noprint">Zeile kopieren</button>
+  <button class="primary noprint" id="btnSave">Ergebnisdatei herunterladen</button>
+  <button class="noprint" id="btnCSV" disabled>Datensatz als CSV</button>
+  <button class="noprint" id="btnPrint">Drucken oder als PDF sichern</button>
+  <p class="info">Ins OPAL: Ergebnisdatei und Datensatz (CSV). W05 arbeitet mit dem Datensatz weiter.</p>
+</div>
+
+<div class="inset">
+  <div class="tag">Was im Hintergrund passiert</div>
+  <ul>
+    <li><strong>Daten:</strong> je Fall Gruppe, wahre Eignung nach Basisrate, zwei Fachmerkmale, ein Proxy. Label-Bias erfasst Geeignete in b als ungeeignet.</li>
+    <li><strong>Basismodell:</strong> logistische Regression auf 70 Prozent der Fälle, ohne A; gemessen auf den übrigen 30 Prozent. <span class="vl" tabindex="0" role="button" data-vl="23">i</span></li>
+    <li><strong>Daten-Eingriff:</strong> entfernt den linearen Zusammenhang der Merkmale mit A, wie <code>CorrelationRemover</code> in fairlearn. <span class="vl" tabindex="0" role="button" data-vl="31">i</span></li>
+    <li><strong>Training:</strong> logistische Regression mit Strafterm für ungleiche mittlere Scores; Ziel wie <code>ExponentiatedGradient</code>, anderes Verfahren.</li>
+    <li><strong>Nach dem Training:</strong> eigene Schwelle für Gruppe b, gewählt auf den Trainingsdaten; Ziel wie <code>ThresholdOptimizer</code>, aber ohne Zufallsanteil.</li>
+    <li><strong>Kennzahlen:</strong> Differenz Parität = Abstand der Auswahlraten; Verhältnis = kleinere durch größere Rate; Differenz Chancen = größerer Abstand von TPR oder FPR, wie <code>equalized_odds_difference</code>. <span class="vl" tabindex="0" role="button" data-vl="19, 21">i</span></li>
+  </ul>
+</div>
+<p class="src">I050 Ethische und vertrauenswürdige KI · HTW Dresden · Fassung 27.10.2026 · Eingaben bleiben nur in diesem Browser gespeichert.</p>
+</main>
+<script>
+(function(){
+"use strict";
+var $=function(id){return document.getElementById(id);};
+var f2=function(v){return (isFinite(v)?v:0).toFixed(2).replace('.',',');};
+var f3=function(v){return (isFinite(v)?v:0).toFixed(3).replace('.',',');};
+
+/* ---------- Rechenkern ---------- */
+var E={};
+E.rng=function(seed){var a=seed>>>0;return function(){a=(a+0x6D2B79F5)|0;var t=Math.imul(a^(a>>>15),1|a);t=(t+Math.imul(t^(t>>>7),61|t))^t;return((t^(t>>>14))>>>0)/4294967296;};};
+E.normal=function(r){var u=0,v=0;while(u===0)u=r();while(v===0)v=r();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);};
+E.generate=function(p){
+  var r=E.rng(p.seed),rows=[],i;
+  for(i=0;i<p.n;i++){
+    var b=r()<p.anteilB?1:0, yt=r()<(b?p.pb:p.pa)?1:0;
+    var x=[1.2*yt+E.normal(r),0.8*yt+E.normal(r),2.5*p.proxy*b+E.normal(r)];
+    var y=yt; if(b&&yt&&r()<p.labelBias)y=0;
+    rows.push({b:b,yt:yt,y:y,x:x});
+  }
+  var idx=rows.map(function(_,k){return k;});
+  for(i=idx.length-1;i>0;i--){var j=Math.floor(r()*(i+1));var t=idx[i];idx[i]=idx[j];idx[j]=t;}
+  var cut=Math.round(p.n*0.7);
+  idx.forEach(function(k,pos){rows[k].split=pos<cut?'train':'test';});
+  return {rows:rows,train:rows.filter(function(q){return q.split==='train';}),test:rows.filter(function(q){return q.split==='test';})};
+};
+E.sig=function(z){return 1/(1+Math.exp(-z));};
+E.solve=function(A,b){var n=b.length,M=A.map(function(row,i){return row.concat([b[i]]);}),c,r,k;
+  for(c=0;c<n;c++){var p=c;for(r=c+1;r<n;r++)if(Math.abs(M[r][c])>Math.abs(M[p][c]))p=r;var t=M[c];M[c]=M[p];M[p]=t;
+    for(r=c+1;r<n;r++){var f=M[r][c]/M[c][c];for(k=c;k<=n;k++)M[r][k]-=f*M[c][k];}}
+  var x=new Array(n).fill(0);for(r=n-1;r>=0;r--){var s=M[r][n];for(k=r+1;k<n;k++)s-=M[r][k]*x[k];x[r]=s/M[r][r];}return x;};
+E.fitLR=function(X,y){ /* Newton, L2 = 1 auf die Gewichte wie scikit-learn (C = 1) */
+  var d=X[0].length+1,w=new Array(d).fill(0),it,i,k,l;
+  for(it=0;it<30;it++){
+    var g=new Array(d).fill(0),H=[];for(k=0;k<d;k++)H.push(new Array(d).fill(0));
+    for(i=0;i<X.length;i++){var xi=[1].concat(X[i]),z=0;for(k=0;k<d;k++)z+=w[k]*xi[k];
+      var p=E.sig(z),s=p*(1-p),e=p-y[i];for(k=0;k<d;k++){g[k]+=e*xi[k];for(l=0;l<d;l++)H[k][l]+=s*xi[k]*xi[l];}}
+    for(k=1;k<d;k++){g[k]+=w[k];H[k][k]+=1;}
+    var st=E.solve(H,g),mx=0;for(k=0;k<d;k++){w[k]-=st[k];mx=Math.max(mx,Math.abs(st[k]));}
+    if(mx<1e-9)break;}
+  return w;};
+E.proba=function(w,X){return X.map(function(x){var z=w[0];for(var k=0;k<x.length;k++)z+=w[k+1]*x[k];return E.sig(z);});};
+E.fitFair=function(X,y,s,w0,mode,mu){ /* Strafterm auf ungleiche mittlere Scores, Adam */
+  var n=X.length,d=w0.length,w=w0.slice(),m=new Array(d).fill(0),v=new Array(d).fill(0),lr=0.05,b1=0.9,b2=0.999,eps=1e-8,it,i,k;
+  var cells=mode==='dp'?[[function(i){return s[i]===0;},function(i){return s[i]===1;}]]
+    :[[function(i){return s[i]===0&&y[i]===1;},function(i){return s[i]===1&&y[i]===1;}],[function(i){return s[i]===0&&y[i]===0;},function(i){return s[i]===1&&y[i]===0;}]];
+  var sets=cells.map(function(c){var A=[],B=[];for(var i=0;i<n;i++){if(c[0](i))A.push(i);else if(c[1](i))B.push(i);}return [A,B];});
+  for(it=1;it<=700;it++){
+    var p=new Array(n),g=new Array(d).fill(0);
+    for(i=0;i<n;i++){var z=w[0];for(k=1;k<d;k++)z+=w[k]*X[i][k-1];p[i]=E.sig(z);var e=(p[i]-y[i])/n;g[0]+=e;for(k=1;k<d;k++)g[k]+=e*X[i][k-1];}
+    for(k=1;k<d;k++)g[k]+=w[k]/n;
+    sets.forEach(function(AB){
+      var A=AB[0],B=AB[1];if(!A.length||!B.length)return;
+      var ma=0,mb=0,ga=new Array(d).fill(0),gb=new Array(d).fill(0);
+      A.forEach(function(i){ma+=p[i];var q=p[i]*(1-p[i]);ga[0]+=q;for(var k=1;k<d;k++)ga[k]+=q*X[i][k-1];});
+      B.forEach(function(i){mb+=p[i];var q=p[i]*(1-p[i]);gb[0]+=q;for(var k=1;k<d;k++)gb[k]+=q*X[i][k-1];});
+      var diff=ma/A.length-mb/B.length;
+      for(var k2=0;k2<d;k2++)g[k2]+=mu*2*diff*(ga[k2]/A.length-gb[k2]/B.length);
+    });
+    for(k=0;k<d;k++){m[k]=b1*m[k]+(1-b1)*g[k];v[k]=b2*v[k]+(1-b2)*g[k]*g[k];
+      var mh=m[k]/(1-Math.pow(b1,it)),vh=v[k]/(1-Math.pow(b2,it));w[k]-=lr*mh/(Math.sqrt(vh)+eps);}
+  }
+  return w;};
+E.corr=function(train){ /* Zusammenhang der Merkmale mit A entfernen (wie CorrelationRemover, alpha = 1) */
+  var n=train.length,ms=0,i,j;train.forEach(function(r){ms+=r.b;});ms/=n;
+  var mx=[0,0,0];train.forEach(function(r){for(j=0;j<3;j++)mx[j]+=r.x[j];});mx=mx.map(function(v){return v/n;});
+  var vs=0,cov=[0,0,0];train.forEach(function(r){var ds=r.b-ms;vs+=ds*ds;for(j=0;j<3;j++)cov[j]+=ds*(r.x[j]-mx[j]);});
+  var beta=cov.map(function(c){return c/vs;});
+  return function(rows){return rows.map(function(r){return r.x.map(function(v,j){return v-beta[j]*(r.b-ms);});});};};
+E.metrics=function(rows,yhat,useTrue){
+  var G=[{n:0,sel:0,pos:0,tp:0,neg:0,fp:0,ok:0},{n:0,sel:0,pos:0,tp:0,neg:0,fp:0,ok:0}];
+  rows.forEach(function(r,i){var g=G[r.b],y=useTrue?r.yt:r.y,h=yhat[i];g.n++;g.sel+=h;if(y){g.pos++;g.tp+=h;}else{g.neg++;g.fp+=h;}if(h===y)g.ok++;});
+  var per=function(g){return {n:g.n,basis:g.n?g.pos/g.n:0,sel:g.n?g.sel/g.n:0,tpr:g.pos?g.tp/g.pos:0,fpr:g.neg?g.fp/g.neg:0,ppv:g.sel?g.tp/g.sel:0};};
+  var a=per(G[0]),b=per(G[1]),mxs=Math.max(a.sel,b.sel);
+  return {a:a,b:b,acc:(G[0].ok+G[1].ok)/(G[0].n+G[1].n),dp:Math.abs(a.sel-b.sel),ratio:mxs>0?Math.min(a.sel,b.sel)/mxs:1,eo:Math.max(Math.abs(a.tpr-b.tpr),Math.abs(a.fpr-b.fpr))};};
+E.thresholds=function(rows,p,mode){ /* Schwelle a bleibt 0,50; Schwelle b so, dass der Abstand der Zielmetrik am kleinsten ist */
+  var rate=function(gr,t){var c={n:0,sel:0,pos:0,tp:0,neg:0,fp:0};
+    rows.forEach(function(r,i){if(r.b!==gr)return;var h=p[i]>=t?1:0;c.n++;c.sel+=h;if(r.y){c.pos++;c.tp+=h;}else{c.neg++;c.fp+=h;}});
+    return {sel:c.sel/c.n,tpr:c.pos?c.tp/c.pos:0,fpr:c.neg?c.fp/c.neg:0,ok:c.tp+(c.neg-c.fp)};};
+  var A=rate(0,0.5),best=null;
+  for(var t=0.05;t<=0.951;t+=0.01){var tb=Math.round(t*100)/100,B=rate(1,tb);
+    var gap=mode==='dp'?Math.abs(A.sel-B.sel):Math.max(Math.abs(A.tpr-B.tpr),Math.abs(A.fpr-B.fpr)),acc=(A.ok+B.ok)/rows.length;
+    if(!best||gap<best.gap-1e-9||(Math.abs(gap-best.gap)<1e-9&&acc>best.acc))best={ta:0.5,tb:tb,gap:gap,acc:acc};}
+  return best;};
+window.W04Engine=E;
+
+/* ---------- Oberfläche ---------- */
+var G=['G01','G02','G03','G04','G05','G06','G07','G08','G09','G10','G11','G12'];
+var T=['T01 Kreditwürdigkeitsprüfung','T02 Empfehlungssystem im Online-Handel','T03 Vorauswahl von Bewerbungen','T04 Generativer Kundenservice-Assistent','T05 Verifizierter Einkaufsagent','T06 Digitaler Produktpass','T07 Humanoider Serviceroboter','T08 Herkunftsnachweise in der Bildredaktion','T09 KI-gestützte Lernplattform'];
+$('gruppe').innerHTML='<option value="">bitte wählen</option>'+G.map(function(g){return '<option>'+g+'</option>';}).join('');
+$('thema').innerHTML='<option value="">bitte wählen</option>'+T.map(function(t){return '<option>'+t+'</option>';}).join('');
+var FIELDS=['gruppe','thema','yhat','merkmal','ga','gb','ebene','quelle','ziel','zielwarum','eingriff','zugriff','pa','pb','proxyname','proxy','n','anteilb','labelbias','seed','f1','f2','preis','grenze','mu','postmode','ta','tb'];
+var KEY='W04_Arbeitsblatt_v2';
+function save(){try{var o={};FIELDS.forEach(function(f){o[f]=$(f).value;});localStorage.setItem(KEY,JSON.stringify(o));}catch(e){}}
+function load(){try{var o=JSON.parse(localStorage.getItem(KEY)||'null');if(o)FIELDS.forEach(function(f){if(o[f]!==undefined)$(f).value=o[f];});}catch(e){}}
+var S={data:null,wBase:null,base:null,mit:null};
+function params(){return {pa:+$('pa').value,pb:+$('pb').value,proxy:+$('proxy').value,n:+$('n').value,anteilB:+$('anteilb').value,labelBias:+$('labelbias').value,seed:parseInt($('seed').value,10)||42};}
+function label(k){var v=k==='a'?$('ga').value:$('gb').value;return v?k+' ('+v+')':k;}
+function outs(){[['pa',f2],['pb',f2],['proxy',f2],['anteilb',f2],['labelbias',f2],['mu',function(v){return String(Math.round(v));}],['ta',f2],['tb',f2]].forEach(function(e){$('o_'+e[0]).textContent=e[1](+$(e[0]).value);});
+  var ein=$('eingriff').value,ziel=$('ziel').value;
+  $('optTrain').classList.toggle('hidden',ein!=='train');$('optPost').classList.toggle('hidden',ein!=='post');
+  $('handBox').classList.toggle('hidden',$('postmode').value!=='hand');
+  $('eingriffInfo').textContent='Ihr Eingriff aus Teil A: '+$('eingriff').options[$('eingriff').selectedIndex].text+' · Zielmetrik: '+(ziel==='eo'?'Equalized Odds':'Demografische Parität')+'. Ändern Sie beides in Teil A, Schritte 3 und 4.';}
+function groupTable(m){return '<table><thead><tr><th>Gruppe</th><th>Fälle</th><th>Basisrate</th><th>Auswahlrate</th><th>TPR</th><th>FPR</th></tr></thead><tbody>'+
+  ['a','b'].map(function(k){var g=m[k];return '<tr><td>'+label(k)+'</td><td>'+g.n+'</td><td>'+f2(g.basis)+'</td><td>'+f2(g.sel)+'</td><td>'+f2(g.tpr)+'</td><td>'+f2(g.fpr)+'</td></tr>';}).join('')+'</tbody></table>';}
+function kpis(m){return '<div class="kpi"><div><b>'+f3(m.acc)+'</b><span>Genauigkeit</span></div><div><b>'+f3(m.dp)+'</b><span>Differenz Parität</span></div><div><b>'+f3(m.ratio)+'</b><span>Verhältnis Auswahlraten</span></div><div><b>'+f3(m.eo)+'</b><span>Differenz Chancen</span></div></div>';}
+function reset(from){if(from<=1){S.data=null;$('btnCSV').disabled=true;$('genInfo').textContent='Baseline geändert. Bitte Daten neu erzeugen.';}
+  if(from<=2){S.wBase=null;S.base=null;$('baseOut').innerHTML='';$('btnBase').disabled=!S.data;}
+  S.mit=null;$('mitOut').innerHTML='';$('btnMit').disabled=!S.base;$('matrixLine').textContent='erscheint nach dem Eingriff';}
+function gen(){var p=params();S.data=E.generate(p);var d=S.data,c=[0,0],y=[0,0];d.rows.forEach(function(r){c[r.b]++;y[r.b]+=r.y;});
+  $('genInfo').innerHTML=d.rows.length.toLocaleString('de-DE')+' Fälle erzeugt, davon '+c[1]+' in Gruppe b. Anteil Geeigneter in den Altdaten: a '+f2(y[0]/c[0])+', b '+f2(y[1]/c[1])+'. Training: '+d.train.length+' Fälle, Messung: '+d.test.length+' Fälle.';
+  $('btnCSV').disabled=false;reset(2);}
+function base(){var d=S.data;S.wBase=E.fitLR(d.train.map(function(r){return r.x;}),d.train.map(function(r){return r.y;}));
+  S.pTr=E.proba(S.wBase,d.train.map(function(r){return r.x;}));S.pTe=E.proba(S.wBase,d.test.map(function(r){return r.x;}));
+  var yh=S.pTe.map(function(p){return p>=0.5?1:0;});S.yBase=yh;S.base=E.metrics(d.test,yh,false);
+  $('baseOut').innerHTML=groupTable(S.base)+kpis(S.base);reset(3);}
+function mitig(){var d=S.data,ein=$('eingriff').value,ziel=$('ziel').value,yh,extra='';
+  if(ein==='daten'){var tf=E.corr(d.train),Xtr=tf(d.train),Xte=tf(d.test);var w=E.fitLR(Xtr,d.train.map(function(r){return r.y;}));
+    yh=E.proba(w,Xte).map(function(p){return p>=0.5?1:0;});extra='Zusammenhang der Merkmale mit A entfernt, Modell neu trainiert.';}
+  else if(ein==='train'){var mu=+$('mu').value;var w2=E.fitFair(d.train.map(function(r){return r.x;}),d.train.map(function(r){return r.y;}),d.train.map(function(r){return r.b;}),S.wBase,ziel,mu);
+    yh=E.proba(w2,d.test.map(function(r){return r.x;})).map(function(p){return p>=0.5?1:0;});extra='Training mit Fairness-Bedingung, Stärke '+mu+'.';}
+  else{var ta,tb;if($('postmode').value==='auto'){var b=E.thresholds(d.train,S.pTr,ziel);ta=b.ta;tb=b.tb;$('ta').value=ta;$('tb').value=tb;outs();}else{ta=+$('ta').value;tb=+$('tb').value;}
+    yh=S.pTe.map(function(p,i){return p>=(d.test[i].b?tb:ta)?1:0;});extra='Schwelle a '+f2(ta)+', Schwelle b '+f2(tb)+' (Basismodell: 0,50).';}
+  S.mit=E.metrics(d.test,yh,false);S.yMit=yh;S.extra=extra;show();}
+function show(){if(!S.mit)return;var wahr=$('wahr').checked,d=S.data;
+  var b=wahr?E.metrics(d.test,S.yBase,true):S.base,m=wahr?E.metrics(d.test,S.yMit,true):S.mit;
+  var row=function(n,x){return '<tr><td>'+n+'</td><td>'+f3(x.acc)+'</td><td>'+f3(x.dp)+'</td><td>'+f3(x.ratio)+'</td><td>'+f3(x.eo)+'</td></tr>';};
+  $('mitOut').innerHTML='<p class="info">'+S.extra+(wahr?' Gemessen gegen die wahre Eignung.':'')+'</p>'+groupTable(m)+
+    '<table><thead><tr><th></th><th>Genauigkeit</th><th>Differenz Parität</th><th>Verhältnis</th><th>Differenz Chancen</th></tr></thead><tbody>'+row('Basismodell',b)+row('Nach Eingriff',m)+'</tbody></table>';
+  var ein=$('eingriff').options[$('eingriff').selectedIndex].text.split(' (')[0],ziel=$('ziel').value;
+  var key=ziel==='eo'?'eo':'dp',name=ziel==='eo'?'Differenz Chancen':'Differenz Parität';
+  $('matrixLine').textContent=($('gruppe').value||'G??')+' · '+(($('thema').value||'T??').split(' ')[0])+' · '+(ziel==='eo'?'Equalized Odds':'Demografische Parität')+' · '+ein+' · '+name+' '+f2(S.base[key])+' → '+f2(S.mit[key])+' · Genauigkeit '+f2(S.base.acc)+' → '+f2(S.mit.acc);}
+function download(name,text,type){var blob=new Blob([text],{type:type});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},500);}
+function report(){var v=function(id){return $(id).value||'';},sel=function(id){return $(id).options[$(id).selectedIndex].text;},p=params();
+  var L=['# W04 Ergebnis · '+(v('gruppe')||'Gruppe')+' · '+v('thema'),'','## Teil A',
+    '1. Ŷ = 1 bedeutet: '+v('yhat')+' · Merkmal A: '+v('merkmal')+' (a: '+v('ga')+', b: '+v('gb')+')',
+    '2. Bias-Quelle: '+v('ebene')+' · '+v('quelle'),'3. Zielmetrik: '+sel('ziel')+' · '+v('zielwarum'),'4. Eingriff: '+sel('eingriff')+' · '+v('zugriff'),
+    '5. Baseline: Basisrate a '+f2(p.pa)+', b '+f2(p.pb)+' · Proxy '+v('proxyname')+', Stärke '+f2(p.proxy)+' · Fallzahl '+p.n+' · Anteil b '+f2(p.anteilB)+' · Label-Bias '+f2(p.labelBias)+' · Seed '+p.seed+' · Fachmerkmale: '+v('f1')+', '+v('f2'),'','## Teil B'];
+  if(S.base){['a','b'].forEach(function(k){var g=S.base[k];L.push('Basismodell '+label(k)+': Auswahlrate '+f2(g.sel)+', TPR '+f2(g.tpr)+', FPR '+f2(g.fpr));});
+    L.push('Basismodell: Genauigkeit '+f3(S.base.acc)+', Differenz Parität '+f3(S.base.dp)+', Verhältnis '+f3(S.base.ratio)+', Differenz Chancen '+f3(S.base.eo));}
+  if(S.mit){L.push('Eingriff: '+S.extra);['a','b'].forEach(function(k){var g=S.mit[k];L.push('Nach Eingriff '+label(k)+': Auswahlrate '+f2(g.sel)+', TPR '+f2(g.tpr)+', FPR '+f2(g.fpr));});
+    L.push('Nach Eingriff: Genauigkeit '+f3(S.mit.acc)+', Differenz Parität '+f3(S.mit.dp)+', Verhältnis '+f3(S.mit.ratio)+', Differenz Chancen '+f3(S.mit.eo));
+    L.push('','Vergleichsmatrix: '+$('matrixLine').textContent);}
+  L.push('','Preis: '+v('preis'),'Grenze: '+v('grenze'),'','Arbeitsblatt W04, Fassung 27.10.2026. Daten synthetisch.');
+  return L.join('\n');}
+function csv(){var d=S.data,n1=$('f1').value||'fachmerkmal_1',n2=$('f2').value||'fachmerkmal_2',np=$('proxyname').value||'proxy',ma=$('merkmal').value||'gruppe';
+  var esc=function(s){return '"'+String(s).replace(/"/g,'""')+'"';};
+  var L=[[esc(ma),esc(n1),esc(n2),esc(np),'y_altdaten','y_wahr','teil'].join(',')];
+  d.rows.forEach(function(r){L.push([r.b?'b':'a',r.x[0].toFixed(4),r.x[1].toFixed(4),r.x[2].toFixed(4),r.y,r.yt,r.split==='train'?'training':'messung'].join(','));});return L.join('\n');}
+
+load();outs();
+['pa','pb','proxy','n','anteilb','labelbias','seed'].forEach(function(id){$(id).addEventListener('change',function(){if(S.data)reset(1);});});
+FIELDS.forEach(function(id){$(id).addEventListener('input',function(){outs();save();});$(id).addEventListener('change',function(){outs();save();if(S.mit&&(id==='eingriff'||id==='ziel'))reset(3);});});
+$('btnGen').addEventListener('click',gen);
+$('btnBase').addEventListener('click',base);
+$('btnMit').addEventListener('click',mitig);
+$('wahr').addEventListener('change',show);
+$('btnCopy').addEventListener('click',function(){var t=$('matrixLine').textContent;try{navigator.clipboard.writeText(t);}catch(e){}});
+$('btnSave').addEventListener('click',function(){download('W04_'+($('gruppe').value||'Gruppe')+'_Ergebnis.txt',report(),'text/plain;charset=utf-8');});
+$('btnCSV').addEventListener('click',function(){if(S.data)download('W04_'+($('gruppe').value||'Gruppe')+'_Datensatz.csv',csv(),'text/csv;charset=utf-8');});
+$('btnPrint').addEventListener('click',function(){window.print();});
+window.W04App={gen:gen,base:base,mitig:mitig,state:S,report:report};
+})();
+</script>
+<script>
+/* Info-Symbole: Verweise auf die Folien der Vorlesung W04 (Hover, Fokus, Tippen) */
+(function(){
+var F={6:'Proxy-Merkmale im Bewerbungsformular',7:'Was ein Proxy-Merkmal ist',11:'Bias: statistisch und sozial',12:'Bias entlang des ML-Lebenszyklus',13:'Ebene 1: Daten',14:'Ebene 2: Label / Parameter',15:'Ebene 3: Modell',16:'Ebene 4: Betrieb',18:'Notation an einem Beispiel',19:'Demografische Parität',20:'Fehlerraten an einem Beispiel',21:'Angeglichene Chancen (Equalized Odds)',22:'Kalibrierung über Gruppen',23:'Weglassen geschützter Merkmale schützt nicht',24:'Messen braucht geschützte Merkmale',28:'Unvereinbare Ansprüche bei ungleichen Basisraten',29:'Was ungleiche Basisraten bewirken',30:'Metrikwahl ist eine Wertentscheidung',31:'Mitigation im Überblick',32:'Forschungsstand zur Messung',33:'Audits gelten für den geprüften Stand',47:'Steckbriefe: Hort et al. und Chen et al. (2023)'};
+var VERT=40;
+var tip=document.createElement('div');tip.id='vltip';tip.setAttribute('role','tooltip');tip.hidden=true;document.body.appendChild(tip);
+var cur=null,pin=null;
+function nums(el){return el.getAttribute('data-vl').split(',').map(function(x){return parseInt(x,10);});}
+function zusatz(n){return n>=VERT?' (freiwillige Vertiefung)':'';}
+function show(el){if(pin&&pin!==el)pin=null;if(cur&&cur!==el)cur.removeAttribute('aria-describedby');cur=el;
+  tip.innerHTML='<span class="t">Vorlesung W04</span>'+nums(el).map(function(n){return '<span class="l"><b>Folie '+n+'</b> · '+F[n]+(n>=VERT?' <i>(freiwillige Vertiefung)</i>':'')+'</span>';}).join('');
+  tip.hidden=false;el.setAttribute('aria-describedby','vltip');
+  var r=el.getBoundingClientRect(),w=tip.offsetWidth,h=tip.offsetHeight,vw=document.documentElement.clientWidth,vh=window.innerHeight;
+  var x=Math.min(Math.max(8,r.left+r.width/2-w/2),vw-w-8),y=r.bottom+8;if(y+h>vh-8)y=Math.max(8,r.top-h-8);
+  tip.style.left=x+'px';tip.style.top=y+'px';}
+function hide(){tip.hidden=true;if(cur)cur.removeAttribute('aria-describedby');cur=null;pin=null;}
+function toggle(el){if(pin===el){hide();}else{show(el);pin=el;}}
+Array.prototype.forEach.call(document.querySelectorAll('.vl'),function(el){
+  el.setAttribute('aria-label','Vorlesung W04: '+nums(el).map(function(n){return 'Folie '+n+', '+F[n]+zusatz(n);}).join('; '));
+  el.addEventListener('mouseenter',function(){show(el);});
+  el.addEventListener('mouseleave',function(){if(pin!==el&&document.activeElement!==el)hide();});
+  el.addEventListener('focus',function(){show(el);});
+  el.addEventListener('blur',function(){if(pin!==el)hide();});
+  el.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();toggle(el);});
+  el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle(el);}});
+});
+document.addEventListener('click',function(){if(cur)hide();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')hide();});
+window.addEventListener('scroll',function(){if(cur)hide();},{passive:true});
+window.addEventListener('resize',function(){if(cur)hide();});
+})();
+</script>
+</body></html>

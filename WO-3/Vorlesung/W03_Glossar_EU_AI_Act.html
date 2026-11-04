@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>W03 — Glossar EU AI Act + erste Rechtsprechung · Trusted &amp; Ethical AI · HTW Dresden</title><style>
+:root{--void:#0F0B1A;--deep:#24163A;--paper:#FAFAFC;--ink:#1E1A2E;--violet:#7C3AED;--magenta:#C026D3;
+--glow:#E879F9;--sage:#2E9E7E;--body:#4A4460;--mute:#6B6580;--lilac:#EDE7F8;--border:#E4DFEF;
+--dbody:#C9C2DE;--dmute:#8A7FB0;--mono:'Courier New',monospace;--sans:Arial,Helvetica,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.6}
+a{color:var(--violet);text-decoration:none}a:hover{text-decoration:underline}
+main{max-width:960px;margin:0 auto;padding:0 24px 64px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.25em;color:var(--magenta);text-transform:uppercase}
+.hero{background:radial-gradient(120% 120% at 25% 20%,var(--deep) 0%,var(--void) 75%);color:#fff;padding:56px 24px 48px}
+.hero-inner{max-width:960px;margin:0 auto}
+.hero .eyebrow{color:var(--glow)}
+.hero h1{font-size:clamp(32px,5.5vw,50px);line-height:1.1;margin:12px 0 14px}
+.hero h1 em{font-style:normal;color:var(--glow)}
+.hero p{color:var(--dbody);max-width:680px}
+.stats{display:flex;flex-wrap:wrap;gap:14px;margin-top:24px}
+.hud{position:relative;padding:10px 16px;min-width:120px}
+.hud:before,.hud:after,.hud i:before,.hud i:after{content:"";position:absolute;width:10px;height:10px;border-color:var(--glow);border-style:solid}
+.hud:before{top:0;left:0;border-width:1.5px 0 0 1.5px}.hud:after{top:0;right:0;border-width:1.5px 1.5px 0 0}
+.hud i:before{bottom:0;left:0;border-width:0 0 1.5px 1.5px}.hud i:after{bottom:0;right:0;border-width:0 1.5px 1.5px 0}
+.hud b{font-size:24px;color:#fff;display:block;line-height:1.1}.hud span{font-size:12px;color:var(--dbody)}
+.audit{margin-top:26px;font-family:var(--mono);font-size:11px;color:var(--dmute)}
+section{padding:34px 0 8px}
+h2{font-size:24px;margin:6px 0 16px}
+.lead{color:var(--body);margin-bottom:18px;max-width:760px}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 4px}
+.badge{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.06em;padding:2px 8px;border-radius:5px;border:1px solid;white-space:nowrap}
+.st-bind{color:#4C1D95;background:#F1EAFE;border-color:#C9B5F7}
+.st-draft{color:#86198F;background:#FBEAFD;border-color:#EBB6F2}
+.st-verified{color:#1F6E58;background:#E5F4EF;border-color:#A9D8C8}
+.st-book{color:#1F6E58;background:#fff;border-color:#A9D8C8}
+.st-open{color:var(--mute);background:#fff;border-color:var(--border)}
+.st-module{color:var(--body);background:var(--lilac);border-color:#D9CEF0}
+.card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin:0 0 14px;
+box-shadow:0 1px 3px rgba(30,26,46,.05);scroll-margin-top:16px}
+.card:target{border-color:var(--violet);box-shadow:0 0 0 2px var(--lilac)}
+.head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;margin-bottom:8px}
+.head h3{font-size:19px;line-height:1.3}
+.en{font-family:var(--mono);font-size:13px;color:var(--mute)}
+.head .badge{margin-left:auto}
+.def{color:var(--ink);margin-bottom:12px}
+.fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px 18px;border-top:1px solid var(--border);padding-top:10px}
+.fields dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--violet);text-transform:uppercase}
+.fields dd{font-size:13.5px;color:var(--body)}
+.meta{margin-top:10px;font-family:var(--mono);font-size:11.5px;color:var(--mute);display:flex;flex-wrap:wrap;gap:4px 16px}
+.chip{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 7px;border-radius:5px;background:var(--lilac);color:var(--violet);margin-right:3px}
+.chip.home{background:var(--deep);color:#fff}
+.mini{list-style:none;columns:2;column-gap:28px}
+.mini li{break-inside:avoid;padding:6px 0;border-bottom:1px solid var(--border);font-size:14px;color:var(--body)}
+.controls{position:sticky;top:0;background:var(--paper);padding:14px 0 10px;z-index:2;border-bottom:1px solid var(--border)}
+.controls input{width:100%;font-size:15px;padding:10px 12px;border:1px solid var(--border);border-radius:8px;font-family:var(--sans);background:#fff}
+.controls input:focus{outline:2px solid var(--violet);outline-offset:1px}
+.filters{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.filters button{font-family:var(--mono);font-size:11.5px;padding:3px 9px;border-radius:5px;border:1px solid var(--border);background:#fff;color:var(--body);cursor:pointer}
+.filters button[aria-pressed=true]{background:var(--deep);color:#fff;border-color:var(--deep)}
+.az{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px;font-family:var(--mono);font-size:12px}
+.az a{padding:1px 6px;border-radius:4px}
+.letter{font-family:var(--mono);font-size:13px;letter-spacing:.3em;color:var(--magenta);margin:26px 0 10px}
+#count{font-family:var(--mono);font-size:12px;color:var(--mute);margin-top:8px}
+.note{background:var(--lilac);border-radius:10px;padding:14px 18px;margin:8px 0 18px;color:var(--body);font-size:14px}
+.note b{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--violet);display:block;margin-bottom:4px}
+footer{padding:26px 24px;background:var(--void);color:var(--dmute);font-family:var(--mono);font-size:12px;text-align:center}
+footer a{color:var(--glow)}
+@media (max-width:700px){.fields{grid-template-columns:1fr}.mini{columns:1}}
+@media print{.controls,.az{display:none}.card{break-inside:avoid;box-shadow:none}
+.hero,.chip.home,footer{-webkit-print-color-adjust:exact;print-color-adjust:exact}body{background:#fff}}
+</style></head><body>
+<header class="hero"><div class="hero-inner"><div class="eyebrow">TEAI :: GLOSSAR // W03 // 21.10.2026</div>
+<h1>Glossar <em>W03</em><br>EU AI Act + erste Rechtsprechung</h1>
+<p>Die Begriffe dieser Woche im Format der W02-Übung: Definition in einem Satz, Messgröße, verantwortliche Rolle, Quelle mit Reifegrad.</p>
+<div class="stats"><div class="hud"><i></i><b>19</b><span>neu eingeführt</span></div>
+<div class="hud"><i></i><b>4</b><span>aus früheren Wochen</span></div>
+<div class="hud"><i></i><b>242</b><span>im Gesamtglossar</span></div></div>
+<div class="audit">[TEAI :: W03 // GLOSSAR // 19 BEGRIFFE // SRC:Quellen/W03_glossar.json]</div></div></header>
+<main><section><div class="eyebrow">STATUS // REIFEGRAD DER QUELLE</div>
+<p class="lead">Der Status trennt geltendes Recht, Entwurf, unverbindliche Leitlinie, begutachtete Forschung, Preprint und Anbieterquelle — die Unterscheidung, auf die das Modul in jeder Woche zurückkommt.</p><div class="legend"><span class="badge st-bind" title="bindend — geltendes Recht">Recht</span><span class="badge st-bind" title="Gerichtsentscheidung — Rechtskraft siehe Quelle">Rechtsprechung</span><span class="badge st-bind" title="Norm oder technischer Standard">Norm</span><span class="badge st-draft" title="Entwurf — noch nicht geltend">Entwurf</span><span class="badge st-draft" title="unverbindliche Leitlinie">Leitlinie</span><span class="badge st-verified" title="begutachtete Fachquelle">peer-reviewed</span><span class="badge st-book" title="zitierfähiges Lehrbuch, kein Primärbeleg">Lehrbuch</span><span class="badge st-open" title="Preprint — nicht begutachtet">Preprint</span><span class="badge st-open" title="Anbieter- oder Industriequelle">Anbieter</span><span class="badge st-module" title="Arbeitsbegriff des Moduls">Modulbegriff</span></div>
+<p class="lead" style="margin-top:14px"><a href="00_Glossar_Gesamt_WS2026-27.html">Zum Gesamtglossar mit Suche</a> · <a href="W02_Glossar_Fachbegriffe.html">← W02</a> <a href="W04_Glossar_Fairness_Bias.html">W04 →</a></p></section>
+<section><div class="eyebrow">W03 // NEU EINGEFÜHRT</div><h2>19 Begriffe</h2>
+<article class="card" id="provider">
+<div class="head"><h3>Anbieter (Provider)</h3><span class="en">provider</span><span class="badge st-bind" title="bindend — geltendes Recht">Recht</span></div>
+<p class="def">Akteur, der ein KI-System entwickelt oder entwickeln lässt und unter eigenem Namen in Verkehr bringt (paraphrasiert nach Art. 3 Nr. 3) und als Hauptpflichtenträger des AI Act gilt.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Keine Messgröße; Nachweis über die dokumentierte Rollenzuordnung je System einschließlich der Prüfung eines Rollenwechsels.</dd></div>
+<div><dt>Verantwortlich</dt><dd>AI Governance Lead (Rollenzuordnung)</dd></div>
+<div><dt>Quelle</dt><dd>VO (EU) 2024/1689 i. d. F. VO (EU) 2026/1744, Art. 3 Nr. 3; Stand: Anfang September 2026</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W03</span></span><span>Siehe: <a href="#deployer">Betreiber (Deployer)</a>, <a href="#value-chain-role-change">Rollenwechsel entlang der KI-Wertschöpfungskette</a>, <a href="#gpai-model">KI-Modell mit allgemeinem Verwendungszweck (GPAI-Modell)</a></span><span>Beleg: W03_Vorlesung_Final.pptx Folien 12 und 30; W03_Skript_Vorlesung.html Abschnitt „Modellebene und Rollen“; W03_Uebung.pptx Folie 10</span></div>
+</article><article class="card" id="annex-i">
+<div class="head"><h3>Annex I (KI in regulierten Produkten)</h3><span class="en">Annex I embedded AI in regulated products</span><span class="badge st-bind" title="bindend — geltendes Recht">Recht</span></div>
+<p class="def">Zweite Hochrisiko-Schiene des AI Act für KI als Sicherheitskomponente in bereits regulierten Produkten wie Maschinen oder Medizinprodukten, die an die bestehende Produktsicherheitsgesetzgebung andockt statt sie zu ersetzen.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Keine Kennzahl; Nachweis über die Zuordnung des Produkts zur einschlägigen Produktgesetzgebung und die Erfüllung der Hochrisiko-Pflichten.</dd></div>
+<div><dt>Verantwortlich</dt><dd>Anbieter*in</dd></div>
+<div><dt>Quelle</dt><dd>VO (EU) 2024/1689 i. d. F. VO (EU) 2026/1744, Art. 6 Abs. 1 i. V. m. Anhang I; Pflichten ab 02.08.2028 (per Digital Omnibus verschoben); Stand: Anfang September 2026</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W03</span><span class="chip">W09</span><span class="chip">W12</span></span><span>Siehe: <a href="#high-risk-ai-system">Hochrisiko-KI-System</a>, <a href="#annex-iii">Annex III (Hochrisiko-Anwendungsbereiche)</a></span><span>Beleg: W03_Vorlesung_Final.pptx Folien 35 und 63; W03_Skript_Vorlesung.html Abschnitt „Digital Omnibus: von der Einigung zum geltenden Recht“; W03_Uebung.pptx Folie 9</span></div>
+</article><article class="card" id="annex-iii">
+<div class="head"><h3>Annex III (Hochrisiko-Anwendungsbereiche)</h3><span class="en">Annex III high-risk areas</span><span class="badge st-bind" title="bindend — geltendes Recht">Recht</span></div>
+<p class="def">Abschließende Liste der Anwendungsbereiche, in denen KI-Systeme nach Art. 6 als Hochrisiko gelten, nämlich Biometrie, kritische Infrastruktur, Bildung, Beschäftigung, essenzielle Dienste einschließlich Kreditwürdigkeit sowie Strafverfolgung, Migration, Justiz und demokratische Prozesse.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Keine Kennzahl; Nachweis über die dokumentierte Zuordnung des Einsatzzwecks zu einem Annex-III-Bereich oder deren begründete Verneinung.</dd></div>
+<div><dt>Verantwortlich</dt><dd>Anbieter*in</dd></div>
+<div><dt>Quelle</dt><dd>VO (EU) 2024/1689 i. d. F. VO (EU) 2026/1744, Art. 6 i. V. m. Anhang III; Pflichten anwendbar ab 02.12.2027 (per Digital Omnibus verschoben); Stand: Anfang September 2026</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W03</span></span><span>Siehe: <a href="#high-risk-ai-system">Hochrisiko-KI-System</a>, <a href="#annex-i">Annex I (KI in regulierten Produkten)</a>, <a href="#digital-omnibus">Digital Omnibus on AI</a></span><span>Beleg: W03_Vorlesung_Final.pptx Folien 26, 35 und 58; W03_Skript_Vorlesung.html Abschnitt „Hochrisiko, Pflichten, Transparenz“; W03_Uebung.pptx Folie 9; W01_Vorlesung_Final.pptx Folie 53</span></div>
+</article><article class="card" id="deployer">
+<div class="head"><h3>Betreiber (Deployer)</h3><span class="en">deployer</span><span class="badge st-bind" title="bindend — geltendes Recht">Recht</span></div>
+<p class="def">Akteur, der ein KI-System eigenverantwortlich einsetzt (paraphrasiert nach Art. 3 Nr. 4) und je nach Risikoklasse Pflichten wie Aufsicht, Sorgfalt bei den Eingaben und Transparenz gegenüber Betroffenen trägt.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Keine Messgröße; Nachweis über die dokumentierte Rollenzuordnung je System und die Erfüllung der Betreiberpflichten.</dd></div>
+<div><dt>Verantwortlich</dt><dd>AI Governance Lead (Rollenzuordnung)</dd></div>
+<div><dt>Quelle</dt><dd>VO (EU) 2024/1689 i. d. F. VO (EU) 2026/1744, Art. 3 Nr. 4; Stand: Anfang September 2026</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W03</span></span><span>Siehe: <a href="#provider">Anbieter (Provider)</a>, <a href="00_Glossar_Gesamt_WS2026-27.html#operator-liability">Betreiberhaftung (Zurechnung von KI-Aussagen)</a>, <a href="#fria">Grundrechte-Folgenabschätzung (FRIA)</a>, <a href="#value-chain-role-change">Rollenwechsel entlang der KI-Wertschöpfungskette</a></span><span>Beleg: W03_Vorlesung_Final.pptx Folien 12 und 30; W03_Skript_Vorlesung.html Abschnitt „Modellebene und Rollen“; W03_Uebung.pptx Folie 10</span></div>
+</article><article class="card" id="digital-omnibus">
+<div class="head"><h3>Digital Omnibus on AI</h3><span class="badge st-bind" title="bindend — geltendes Recht">Recht</span></div>
+<p class="def">Änderungsverordnung (EU) 2026/1744, die den Text des AI Act ändert, ohne ihn zu ersetzen, die Hochrisiko-Fristen verschiebt, neue Verbotskategorien einführt, die Rechtsgrundlage für bestimmte Verarbeitungen zur Bias-Erkennung erweitert, die Durchsetzungsrolle des AI Office ausweitet und die Pflicht aus Art. 4 zur Förderpflicht abschwächt.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Keine Messgröße; relevant ist die korrekte Zitierung der geltenden Fassung mit Standdatum.</dd></div>
+<div><dt>Verantwortlich</dt><dd>AI Governance Lead</dd></div>
+<div><dt>Quelle</dt><dd>Verordnung (EU) 2026/1744: Zustimmung Parlament 16.06.2026, Annahme Rat 29.06.2026, Unterzeichnung 08.07.2026, Amtsblatt 24.07.2026, in Kraft seit 27.07.2026; Annex III ab 02.12.2027, Annex I ab 02.08.2028; Zeitschiene und Kernänderungen referiert bei White &amp; Case, Orrick, Freshfields und Gibson Dunn (2026); Stand: Anfang September 2026</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W03</span></span><span>Siehe: <a href="#ai-act">EU AI Act (KI-Verordnung)</a>, <a href="#annex-iii">Annex III (Hochrisiko-Anwendungsbereiche)</a>, <a href="#annex-i">Annex I (KI in regulierten Produkten)</a>, <a href="00_Glossar_Gesamt_WS2026-27.html#ai-literacy">KI-Kompetenz</a>, <a href="#prohibited-ai-practices">Verbotene KI-Praktiken</a></span><span>Beleg: W03_Vorlesung_Final.pptx Folien 25 und 32–36; W03_Skript_Vorlesung.html Abschnitt „Digital Omnibus: von der Einigung zum geltenden Recht“; W03_Aktualitaetsbriefing_2026-09-03.md Abschnitt 2; W02_Vorlesung_Final.pptx Folie 17</span></div>
+</article><article class="card" id="generation-vs-reproduction">
+<div class="head"><h3>Erzeugung vs. Wiedergabe (Trennlinie Erfinden/Zusammenfassen)</h3><span class="en">generation vs. reproduction of content</span><span class="badge st-module" title="Arbeitsbegriff des Moduls">Modulbegriff</span></div>
+<p class="def">Aus drei nicht rechtskräftigen Entscheidungen abgeleitete Trennlinie, nach der eine KI-Ausgabe, die eine neue Aussage erzeugt, dem Verwender als eigene Aussage zugerechnet wird, während eine erkennbare Wiedergabe fremder Inhalte die Zurechnung entfallen lassen kann, stets abhängig vom geprüften Rechtsgebiet.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Keine Messgröße; Prüfung je Funktion, ob Quellen bewertend zu einer neuen Aussage verdichtet werden oder die Fremdheit durch Quellenangabe, Zitatkennzeichnung und visuelle Trennung erkennbar bleibt.</dd></div>
+<div><dt>Verantwortlich</dt><dd>Betreiber*in</dd></div>
+<div><dt>Quelle</dt><dd>OLG Hamm, Urt. v. 12.05.2026, Az. 4 UKl 3/25 (UWG; nicht rechtskräftig, Revision zum BGH zugelassen); LG München I, Urt. v. 28.05.2026, Az. 26 O 869/26 (Äußerungsrecht; Eilverfahren, Berufung am 12.06.2026 angekündigt); LG Berlin II, Urt. v. 01.06.2026 (Marken- und Wettbewerbsrecht; erstinstanzlich); Stand: Anfang September 2026</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W03</span></span><span>Siehe: <a href="00_Glossar_Gesamt_WS2026-27.html#operator-liability">Betreiberhaftung (Zurechnung von KI-Aussagen)</a>, <a href="#transparency-obligations">Transparenzpflichten (Art. 50)</a>, <a href="#regulatory-duty-vs-civil-liability">Regulierungspflicht vs. zivilrechtliche Haftung</a></span><span>Beleg: W03_Vorlesung_Final.pptx Folien 9–11, 48–49 und 51–52; W03_Skript_Vorlesung.html Abschnitt „Der Bruch: Kein Widerspruch, sondern Unterscheidung“; W03_Uebung.pptx Folien 23–24; W03_Aktualitaetsbriefing_2026-09-03.md Abschnitt 1</span></div>
+</article><article class="card" id="ai-act">
+<div class="head"><h3>EU AI Act (KI-Verordnung)</h3><span class="en">EU Artificial Intelligence Act</span><span class="badge st-bind" title="bindend — geltendes Recht">Recht</span></div>
+<p class="def">EU-Verordnung, seit 01.08.2024 in Kraft und mit gestaffelt geltenden Pflichten, die ohne nationales Umsetzungsgesetz KI-Systeme risikobasiert nach ihrem Einsatzzweck reguliert, Pflichten an die Akteursrollen Anbieter und Betreiber knüpft und bestehendes Recht wie Wettbewerbs-, Äußerungs-, Marken- oder Datenschutzrecht ergänzt statt ersetzt.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Keine direkte Messgröße; Nachweis über die dokumentierte Einordnung je System (Klasse, Rolle, Begründung) und die Erfüllung der daraus folgenden Pflichten.</dd></div>
+<div><dt>Verantwortlich</dt><dd>Anbieter*in bzw. Betreiber*in, je nach Rolle</dd></div>
+<div><dt>Quelle</dt><dd>Verordnung (EU) 2024/1689, in Kraft seit 01.08.2024; Pflichten gelten gestaffelt: Art. 4 und 5 seit 02.02.2025, GPAI-Pflichten seit 02.08.2025, Art. 50 seit 02.08.2026, Hochrisiko-Pflichten für Annex III ab 02.12.2027 und für Annex I ab 02.08.2028; geändert durch VO (EU) 2026/1744 (in Kraft seit 27.07.2026); Stand: Anfang September 2026</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W03</span><span class="chip">W06</span><span class="chip">W12</span></span><span>Siehe: <a href="#risk-categories">Risikoklassen (risikobasierter Ansatz)</a>, <a href="#provider">Anbieter (Provider)</a>, <a href="#deployer">Betreiber (Deployer)</a>, <a href="#digital-omnibus">Digital Omnibus on AI</a>, <a href="#regulatory-duty-vs-civil-liability">Regulierungspflicht vs. zivilrechtliche Haftung</a></span><span>Beleg: W03_Vorlesung_Final.pptx Folien 21–23, 39 und 57; W03_Skript_Vorlesung.html Abschnitte „Der Rechtsakt als Ordnungsraster“ und „Digital Omnibus: von der Einigung zum geltenden Recht“</span></div>
+</article><article class="card" id="systemic-risk">
+<div class="head"><h3>GPAI-Modell mit systemischem Risiko</h3><span class="en">general-purpose AI model with systemic risk</span><span class="badge st-bind" title="bindend — geltendes Recht">Recht</span></div>
+<p class="def">Besonders leistungsfähiges GPAI-Modell, für das über die Basispflichten hinaus Modellevaluierung, Risikominderung, Vorfallmeldung und Cybersicherheit verlangt sind.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Keine Kennzahl; Nachweis über dokumentierte Evaluierungen, Maßnahmen zur Risikominderung und Vorfallmeldungen.</dd></div>
+<div><dt>Verantwortlich</dt><dd>Modellanbieter*in</dd></div>
+<div><dt>Quelle</dt><dd>VO (EU) 2024/1689 i. d. F. VO (EU) 2026/1744, Kapitel V; Pflichten gelten seit 02.08.2025; Stand: Anfang September 2026</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W03</span></span><span>Siehe: <a href="#gpai-model">KI-Modell mit allgemeinem Verwendungszweck (GPAI-Modell)</a></span><span>Beleg: W03_Vorlesung_Final.pptx Folien 29 und 61; W03_Skript_Vorlesung.html Abschnitt „Modellebene und Rollen“</span></div>
+</article><article class="card" id="fria">
+<div class="head"><h3>Grundrechte-Folgenabschätzung (FRIA)</h3><span class="en">fundamental rights impact assessment</span><span class="badge st-bind" title="bindend — geltendes Recht">Recht</span></div>
+<p class="def">Folgenabschätzung für Grundrechte, die bestimmte Betreiber*innen von Hochrisiko-KI-Systemen, etwa Behörden, nach Art. 27 AI Act zusätzlich zum Pflichtenkatalog schulden.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Keine Kennzahl; Nachweis über die dokumentierte Folgenabschätzung.</dd></div>
+<div><dt>Verantwortlich</dt><dd>Betreiber*in</dd></div>
+<div><dt>Quelle</dt><dd>VO (EU) 2024/1689 i. d. F. VO (EU) 2026/1744, Art. 27; Teil des Hochrisiko-Pflichtenkatalogs, der für Annex III ab 02.12.2027 und für Annex I ab 02.08.2028 gilt; Stand: Anfang September 2026</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W03</span><span class="chip">W06</span></span><span>Siehe: <a href="#high-risk-ai-system">Hochrisiko-KI-System</a>, <a href="#deployer">Betreiber (Deployer)</a>, <a href="00_Glossar_Gesamt_WS2026-27.html#privacy-and-data-governance">Privatsphäre und Daten-Governance</a></span><span>Beleg: W03_Vorlesung_Final.pptx Folien 27 und 59; W03_Uebung.pptx Folie 10</span></div>
+</article><article class="card" id="harmonised-standards">
+<div class="head"><h3>Harmonisierte Normen (Konformitätsvermutung)</h3><span class="en">harmonised standards</span><span class="badge st-bind" title="bindend — geltendes Recht">Recht</span></div>
+<p class="def">Europäische Normen von CEN/CENELEC, bei deren Erfüllung für ein Hochrisiko-KI-System die Konformität mit den entsprechenden Anforderungen des AI Act vermutet wird, womit nach der – vom Kurs als zutreffend eingeordneten – Kritik von Veale &amp; Zuiderveen Borgesius (2021) Detailentscheidungen faktisch in die Normung wandern.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Keine Kennzahl; Nachweis über die dokumentierte Anwendung der einschlägigen harmonisierten Normen.</dd></div>
+<div><dt>Verantwortlich</dt><dd>Anbieter*in</dd></div>
+<div><dt>Quelle</dt><dd>VO (EU) 2024/1689 i. d. F. VO (EU) 2026/1744, Art. 40–49; Hochrisiko-Pflichten für Annex III ab 02.12.2027, für Annex I ab 02.08.2028; Kritik: Veale &amp; Zuiderveen Borgesius (2021), Computer Law Review International 22(4), bezogen auf den Verordnungsentwurf von 2021; Stand: Anfang September 2026</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W03</span><span class="chip">W13</span></span><span>Siehe: <a href="00_Glossar_Gesamt_WS2026-27.html#conformity-assessment">Konformitätsbewertung</a>, <a href="#high-risk-ai-system">Hochrisiko-KI-System</a></span><span>Beleg: W03_Vorlesung_Final.pptx Folien 60 und 65–66</span></div>
+</article><article class="card" id="high-risk-ai-system">
+<div class="head"><h3>Hochrisiko-KI-System</h3><span class="en">high-risk AI system</span><span class="badge st-bind" title="bindend — geltendes Recht">Recht</span></div>
+<p class="def">KI-System, das wegen seines Einsatzzwecks in einem Annex-III-Bereich oder als Sicherheitskomponente eines Annex-I-Produkts nach Art. 6 AI Act als hochriskant gilt und den Pflichtenkatalog der Art. 8–15 samt Konformitätsbewertung auslöst.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Keine Kennzahl; Nachweis über Risikomanagementsystem (Art. 9), Daten-Governance (Art. 10), technische Dokumentation und Protokollierung (Art. 11–12), Betreiberinformation (Art. 13), menschliche Aufsicht (Art. 14) und Robustheit (Art. 15) sowie die Konformitätsbewertung.</dd></div>
+<div><dt>Verantwortlich</dt><dd>Anbieter*in</dd></div>
+<div><dt>Quelle</dt><dd>VO (EU) 2024/1689 i. d. F. VO (EU) 2026/1744, Art. 6 und 8–15; Pflichten für Annex III ab 02.12.2027, für Annex I ab 02.08.2028; Stand: Anfang September 2026</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W03</span></span><span>Siehe: <a href="#annex-iii">Annex III (Hochrisiko-Anwendungsbereiche)</a>, <a href="#annex-i">Annex I (KI in regulierten Produkten)</a>, <a href="00_Glossar_Gesamt_WS2026-27.html#conformity-assessment">Konformitätsbewertung</a>, <a href="#fria">Grundrechte-Folgenabschätzung (FRIA)</a>, <a href="00_Glossar_Gesamt_WS2026-27.html#human-oversight">Menschliches Handeln und Aufsicht</a></span><span>Beleg: W03_Vorlesung_Final.pptx Folien 26–27, 35 und 59; W03_Skript_Vorlesung.html Abschnitt „Hochrisiko, Pflichten, Transparenz“; W03_Uebung.pptx Folie 9</span></div>
+</article><article class="card" id="gpai-model">
+<div class="head"><h3>KI-Modell mit allgemeinem Verwendungszweck (GPAI-Modell)</h3><span class="en">general-purpose AI model</span><span class="badge st-bind" title="bindend — geltendes Recht">Recht</span></div>
+<p class="def">KI-Modell mit erheblicher allgemeiner Verwendbarkeit, das ein breites Spektrum unterschiedlicher Aufgaben kompetent erfüllen und in verschiedene nachgelagerte Systeme integriert werden kann (Art. 3 Nr. 63 AI Act) und dessen Anbieter*innen nach Kapitel V eigene Modellpflichten tragen: technische Dokumentation, Information nachgelagerter Anbieter*innen, Urheberrechts-Policy und Zusammenfassung der Trainingsdaten.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Keine Kennzahl; Nachweis über das Vorliegen der Pflichtdokumente — für freie Open-Source-Modelle ohne systemisches Risiko gelten nach Art. 53 Abs. 2 nur zwei der vier Pflichten.</dd></div>
+<div><dt>Verantwortlich</dt><dd>Modellanbieter*in</dd></div>
+<div><dt>Quelle</dt><dd>VO (EU) 2024/1689 i. d. F. VO (EU) 2026/1744, Kapitel V; Pflichten seit 02.08.2025; Stand: Anfang September 2026</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W03</span></span><span>Siehe: <a href="#systemic-risk">GPAI-Modell mit systemischem Risiko</a>, <a href="#provider">Anbieter (Provider)</a>, <a href="#ai-act">EU AI Act (KI-Verordnung)</a></span><span>Beleg: W03_Vorlesung_Final.pptx Folien 29 und 61; W03_Skript_Vorlesung.html Abschnitt „Modellebene und Rollen“</span></div>
+</article><article class="card" id="ai-system">
+<div class="head"><h3>KI-System</h3><span class="en">AI system</span><span class="badge st-bind" title="bindend — geltendes Recht">Recht</span></div>
+<p class="def">Maschinengestütztes System, das mit einem gewissen Grad an Autonomie arbeitet und aus Eingaben Ausgaben wie Vorhersagen, Empfehlungen oder Entscheidungen ableitet, die reale oder virtuelle Umgebungen beeinflussen (paraphrasiert nach Art. 3 Nr. 1 AI Act).</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Keine Messgröße; Nachweis über die dokumentierte Vorprüfung nach Art. 3 mit Zweckbestimmung (Schritt 1 des KI-Impact-Assessment-Templates).</dd></div>
+<div><dt>Verantwortlich</dt><dd>Anbieter*in</dd></div>
+<div><dt>Quelle</dt><dd>VO (EU) 2024/1689 i. d. F. VO (EU) 2026/1744, Art. 3 Nr. 1; Verordnung in Kraft seit 01.08.2024; Stand: Anfang September 2026</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W03</span></span><span>Siehe: <a href="#ai-act">EU AI Act (KI-Verordnung)</a>, <a href="#risk-categories">Risikoklassen (risikobasierter Ansatz)</a></span><span>Beleg: W03_Vorlesung_Final.pptx Folie 22; W03_Skript_Vorlesung.html Abschnitt „Das Eingangstor“; W03_Uebung.pptx Folien 7–8</span></div>
+</article><article class="card" id="nist-ai-rmf">
+<div class="head"><h3>NIST AI Risk Management Framework (AI RMF 1.0)</h3><span class="en">NIST AI Risk Management Framework</span><span class="badge st-draft" title="unverbindliche Leitlinie">Leitlinie</span></div>
+<p class="def">Freiwilliges, sanktionsloses Rahmenwerk der US-Normungsbehörde NIST, das Vertrauenswürdigkeit prozessorientiert über die vier Funktionen Govern, Map, Measure und Manage statt über Risikoklassen operationalisiert.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Keine direkte Messgröße; Nachweis über die dokumentierte Umsetzung der vier Funktionen.</dd></div>
+<div><dt>Verantwortlich</dt><dd>AI Governance Lead</dd></div>
+<div><dt>Quelle</dt><dd>NIST (2023): AI Risk Management Framework 1.0</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W03</span><span class="chip">W13</span></span><span>Siehe: <a href="00_Glossar_Gesamt_WS2026-27.html#iso-iec-42001">ISO/IEC 42001 (KI-Managementsystem)</a>, <a href="00_Glossar_Gesamt_WS2026-27.html#soft-law">Soft Law</a></span><span>Beleg: W03_Vorlesung_Final.pptx Folie 38; W03_Skript_Vorlesung.html Abschnitt „Digital Omnibus: von der Einigung zum geltenden Recht“</span></div>
+</article><article class="card" id="regulatory-duty-vs-civil-liability">
+<div class="head"><h3>Regulierungspflicht vs. zivilrechtliche Haftung</h3><span class="en">regulatory duty vs. civil liability</span><span class="badge st-module" title="Arbeitsbegriff des Moduls">Modulbegriff</span></div>
+<p class="def">Unterscheidung zwischen den Produktpflichten des AI Act mit eigenen, teils verschobenen Fristen und der zivilrechtlichen Haftung aus bestehendem Recht, die unabhängig vom AI-Act-Zeitplan bereits heute wirkt.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Keine Messgröße; Nachweis über ein Regulierungskapitel, das neben dem AI Act auch die einschlägigen Haftungsgrundlagen prüft.</dd></div>
+<div><dt>Verantwortlich</dt><dd>Betreiber*in</dd></div>
+<div><dt>Quelle</dt><dd>Eigene Einordnung des Moduls auf Basis von OLG Hamm (4 UKl 3/25; nicht rechtskräftig, Revision zum BGH zugelassen), LG München I (26 O 869/26; Eilverfahren, Berufung am 12.06.2026 angekündigt), LG Berlin II (01.06.2026; erstinstanzlich) und VO (EU) 2024/1689 i. d. F. VO (EU) 2026/1744; Stand: Anfang September 2026</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W03</span></span><span>Siehe: <a href="00_Glossar_Gesamt_WS2026-27.html#operator-liability">Betreiberhaftung (Zurechnung von KI-Aussagen)</a>, <a href="#ai-act">EU AI Act (KI-Verordnung)</a>, <a href="#generation-vs-reproduction">Erzeugung vs. Wiedergabe (Trennlinie Erfinden/Zusammenfassen)</a></span><span>Beleg: W03_Vorlesung_Final.pptx Folien 16, 19, 39 und 50; W03_Skript_Vorlesung.html Abschnitte „Verfahrensstände, Grenzen, Verdichtung“ und „Digital Omnibus: von der Einigung zum geltenden Recht“; W03_Uebung.pptx Folie 15</span></div>
+</article><article class="card" id="risk-categories">
+<div class="head"><h3>Risikoklassen (risikobasierter Ansatz)</h3><span class="en">risk categories (risk-based approach)</span><span class="badge st-bind" title="bindend — geltendes Recht">Recht</span></div>
+<p class="def">Einordnung von KI-Systemen nach Einsatzzweck und Schadenspotenzial in verbotene Praktiken (Art. 5), Hochrisiko (Art. 6 mit Annex I und III), Transparenzpflichten (Art. 50) und minimales Risiko ohne besondere Pflichten (Art. 95), wobei der Pflichtenkatalog mit dem Risiko wächst und Art. 50 auch neben Hochrisiko greifen kann.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Dokumentierte Klassifikation je System mit Artikel- bzw. Anhangsreferenz, Rolle, Frist und Begründung, geprüft in der festen Reihenfolge Art. 3, Art. 5, Art. 6, Art. 50.</dd></div>
+<div><dt>Verantwortlich</dt><dd>Anbieter*in</dd></div>
+<div><dt>Quelle</dt><dd>VO (EU) 2024/1689 i. d. F. VO (EU) 2026/1744, Art. 5, 6, 50, 95, Annex I und III; Art. 5 gilt seit 02.02.2025, Art. 50 seit 02.08.2026, Hochrisiko-Pflichten für Annex III ab 02.12.2027, für Annex I ab 02.08.2028; Stand: Anfang September 2026</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W03</span><span class="chip">W13</span></span><span>Siehe: <a href="#prohibited-ai-practices">Verbotene KI-Praktiken</a>, <a href="#high-risk-ai-system">Hochrisiko-KI-System</a>, <a href="#transparency-obligations">Transparenzpflichten (Art. 50)</a>, <a href="#ai-system">KI-System</a></span><span>Beleg: W03_Vorlesung_Final.pptx Folie 23; W03_Skript_Vorlesung.html Abschnitt „Vier Klassen, ein Prinzip“; W03_Uebung.pptx Folien 8, 9 und 16</span></div>
+</article><article class="card" id="value-chain-role-change">
+<div class="head"><h3>Rollenwechsel entlang der KI-Wertschöpfungskette</h3><span class="en">role change along the AI value chain</span><span class="badge st-bind" title="bindend — geltendes Recht">Recht</span></div>
+<p class="def">Übergang in die Anbieterrolle mit vollem Pflichtenkatalog, wenn jemand ein fremdes KI-System unter eigenem Namen oder eigener Marke in Verkehr bringt, es wesentlich verändert oder seinen Zweck umwidmet (Art. 25 AI Act).</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Keine Messgröße; Nachweis über die dokumentierte Prüfung nach Art. 25 je System, etwa bei Feinjustierung mit eigenen Daten.</dd></div>
+<div><dt>Verantwortlich</dt><dd>Betreiber*in</dd></div>
+<div><dt>Quelle</dt><dd>VO (EU) 2024/1689 i. d. F. VO (EU) 2026/1744, Art. 25; Stand: Anfang September 2026</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W03</span><span class="chip">W07</span></span><span>Siehe: <a href="#provider">Anbieter (Provider)</a>, <a href="#deployer">Betreiber (Deployer)</a></span><span>Beleg: W03_Vorlesung_Final.pptx Folie 31; W03_Skript_Vorlesung.html Abschnitt „Modellebene und Rollen“; W03_Uebung.pptx Folien 10 und 13; W03_Skript_Uebung.html Abschnitt „Was erfahrungsgemäß hakt“</span></div>
+</article><article class="card" id="transparency-obligations">
+<div class="head"><h3>Transparenzpflichten (Art. 50)</h3><span class="en">transparency obligations (Art. 50)</span><span class="badge st-bind" title="bindend — geltendes Recht">Recht</span></div>
+<p class="def">Pflichten nach Art. 50 AI Act für bestimmte KI-Systeme, Menschen erkennen zu lassen, dass sie mit KI interagieren, sofern das nicht ohnehin offensichtlich ist, KI-generierte Audio-, Bild-, Video- und Textinhalte zu kennzeichnen und maschinenlesbar zu markieren sowie Deepfakes offenzulegen.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Anteil der KI-Interaktionen und synthetischen Inhalte mit Kennzeichnung bzw. maschinenlesbarer Markierung.</dd></div>
+<div><dt>Verantwortlich</dt><dd>Betreiber*in, je nach Pflicht auch Anbieter*in</dd></div>
+<div><dt>Quelle</dt><dd>VO (EU) 2024/1689 i. d. F. VO (EU) 2026/1744, Art. 50; gilt seit 02.08.2026, vom Digital Omnibus nicht verschoben; Stand: Anfang September 2026</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W03</span><span class="chip">W10</span></span><span>Siehe: <a href="00_Glossar_Gesamt_WS2026-27.html#transparency">Transparenz</a>, <a href="#risk-categories">Risikoklassen (risikobasierter Ansatz)</a>, <a href="#generation-vs-reproduction">Erzeugung vs. Wiedergabe (Trennlinie Erfinden/Zusammenfassen)</a></span><span>Beleg: W03_Vorlesung_Final.pptx Folien 23, 28 und 35; W03_Skript_Vorlesung.html Abschnitt „Hochrisiko, Pflichten, Transparenz“; W03_Uebung.pptx Folien 9 und 12; W01_Vorlesung_Final.pptx Folien 53–54</span></div>
+</article><article class="card" id="prohibited-ai-practices">
+<div class="head"><h3>Verbotene KI-Praktiken</h3><span class="en">prohibited AI practices</span><span class="badge st-bind" title="bindend — geltendes Recht">Recht</span></div>
+<p class="def">Nach Art. 5 AI Act untersagte Einsätze wie Social Scoring, schädigende manipulative Techniken, Emotionserkennung am Arbeitsplatz und in Bildungseinrichtungen (mit engen Ausnahmen) sowie biometrische Kategorisierung nach sensiblen Merkmalen und ungezieltes Auslesen von Gesichtsbildern, die sich nicht durch Dokumentation oder Aufsicht heilen lassen.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Keine Messgröße; Nachweis über die dokumentierte Verbotsprüfung als erste Stufe der Prüfreihenfolge, deren positives Ergebnis ein Nein und kein Pflichtenkatalog ist.</dd></div>
+<div><dt>Verantwortlich</dt><dd>Anbieter*in und Betreiber*in</dd></div>
+<div><dt>Quelle</dt><dd>VO (EU) 2024/1689 i. d. F. VO (EU) 2026/1744, Art. 5; gilt seit 02.02.2025; der Digital Omnibus fügt neue Verbotskategorien hinzu, die in der geprüften Quellenlage nicht einzeln ausgewiesen sind; Stand: Anfang September 2026</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W03</span><span class="chip">W11</span></span><span>Siehe: <a href="#risk-categories">Risikoklassen (risikobasierter Ansatz)</a>, <a href="#digital-omnibus">Digital Omnibus on AI</a></span><span>Beleg: W03_Vorlesung_Final.pptx Folien 24–25 und 53; W03_Skript_Vorlesung.html Abschnitt „Vier Klassen, ein Prinzip“; W03_Uebung.pptx Folien 8, 14 und 15</span></div>
+</article></section><section><div class="eyebrow">W03 // AUFGEGRIFFEN</div><h2>Aus früheren Wochen</h2>
+<p class="lead">Diese Begriffe sind früher eingeführt und werden in W03 wieder tragend. Die vollständigen Einträge stehen im Gesamtglossar.</p>
+<ul class="mini"><li><a href="00_Glossar_Gesamt_WS2026-27.html#operator-liability">Betreiberhaftung (Zurechnung von KI-Aussagen)</a> <span class="chip">W01</span> <span class="badge st-bind" title="Gerichtsentscheidung — Rechtskraft siehe Quelle">Rechtsprechung</span></li><li><a href="00_Glossar_Gesamt_WS2026-27.html#iso-iec-42001">ISO/IEC 42001 (KI-Managementsystem)</a> <span class="chip">W02</span> <span class="badge st-bind" title="Norm oder technischer Standard">Norm</span></li><li><a href="00_Glossar_Gesamt_WS2026-27.html#ai-literacy">KI-Kompetenz</a> <span class="chip">W02</span> <span class="badge st-bind" title="bindend — geltendes Recht">Recht</span></li><li><a href="00_Glossar_Gesamt_WS2026-27.html#conformity-assessment">Konformitätsbewertung</a> <span class="chip">W02</span> <span class="badge st-bind" title="bindend — geltendes Recht">Recht</span></li></ul></section></main>
+<footer>Trusted &amp; Ethical AI · HTW Dresden · Dr.-Ing. Steffen Tomschke · Stand 2026-10-19</footer>
+</body></html>

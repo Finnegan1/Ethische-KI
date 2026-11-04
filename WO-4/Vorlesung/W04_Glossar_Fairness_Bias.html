@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>W04: Glossar Fairness &amp; Bias-Metriken · Trusted &amp; Ethical AI · HTW Dresden</title><style>
+:root{--void:#0F0B1A;--deep:#24163A;--paper:#FAFAFC;--ink:#1E1A2E;--violet:#7C3AED;--magenta:#C026D3;
+--glow:#E879F9;--sage:#2E9E7E;--body:#4A4460;--mute:#6B6580;--lilac:#EDE7F8;--border:#E4DFEF;
+--dbody:#C9C2DE;--dmute:#8A7FB0;--mono:'Courier New',monospace;--sans:Arial,Helvetica,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.6}
+a{color:var(--violet);text-decoration:none}a:hover{text-decoration:underline}
+main{max-width:960px;margin:0 auto;padding:0 24px 64px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.25em;color:var(--magenta);text-transform:uppercase}
+.hero{background:radial-gradient(120% 120% at 25% 20%,var(--deep) 0%,var(--void) 75%);color:#fff;padding:56px 24px 48px}
+.hero-inner{max-width:960px;margin:0 auto}
+.hero .eyebrow{color:var(--glow)}
+.hero h1{font-size:clamp(32px,5.5vw,50px);line-height:1.1;margin:12px 0 14px}
+.hero h1 em{font-style:normal;color:var(--glow)}
+.hero p{color:var(--dbody);max-width:680px}
+.stats{display:flex;flex-wrap:wrap;gap:14px;margin-top:24px}
+.hud{position:relative;padding:10px 16px;min-width:120px}
+.hud:before,.hud:after,.hud i:before,.hud i:after{content:"";position:absolute;width:10px;height:10px;border-color:var(--glow);border-style:solid}
+.hud:before{top:0;left:0;border-width:1.5px 0 0 1.5px}.hud:after{top:0;right:0;border-width:1.5px 1.5px 0 0}
+.hud i:before{bottom:0;left:0;border-width:0 0 1.5px 1.5px}.hud i:after{bottom:0;right:0;border-width:0 1.5px 1.5px 0}
+.hud b{font-size:24px;color:#fff;display:block;line-height:1.1}.hud span{font-size:12px;color:var(--dbody)}
+.audit{margin-top:26px;font-family:var(--mono);font-size:11px;color:var(--dmute)}
+section{padding:34px 0 8px}
+h2{font-size:24px;margin:6px 0 16px}
+.lead{color:var(--body);margin-bottom:18px;max-width:760px}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 4px}
+.badge{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.06em;padding:2px 8px;border-radius:5px;border:1px solid;white-space:nowrap}
+.st-bind{color:#4C1D95;background:#F1EAFE;border-color:#C9B5F7}
+.st-draft{color:#86198F;background:#FBEAFD;border-color:#EBB6F2}
+.st-verified{color:#1F6E58;background:#E5F4EF;border-color:#A9D8C8}
+.st-book{color:#1F6E58;background:#fff;border-color:#A9D8C8}
+.st-open{color:var(--mute);background:#fff;border-color:var(--border)}
+.st-module{color:var(--body);background:var(--lilac);border-color:#D9CEF0}
+.card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin:0 0 14px;
+box-shadow:0 1px 3px rgba(30,26,46,.05);scroll-margin-top:16px}
+.card:target{border-color:var(--violet);box-shadow:0 0 0 2px var(--lilac)}
+.head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;margin-bottom:8px}
+.head h3{font-size:19px;line-height:1.3}
+.en{font-family:var(--mono);font-size:13px;color:var(--mute)}
+.head .badge{margin-left:auto}
+.def{color:var(--ink);margin-bottom:12px}
+.fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px 18px;border-top:1px solid var(--border);padding-top:10px}
+.fields dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--violet);text-transform:uppercase}
+.fields dd{font-size:13.5px;color:var(--body)}
+.meta{margin-top:10px;font-family:var(--mono);font-size:11.5px;color:var(--mute);display:flex;flex-wrap:wrap;gap:4px 16px}
+.chip{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 7px;border-radius:5px;background:var(--lilac);color:var(--violet);margin-right:3px}
+.chip.home{background:var(--deep);color:#fff}
+.mini{list-style:none;columns:2;column-gap:28px}
+.mini li{break-inside:avoid;padding:6px 0;border-bottom:1px solid var(--border);font-size:14px;color:var(--body)}
+.controls{position:sticky;top:0;background:var(--paper);padding:14px 0 10px;z-index:2;border-bottom:1px solid var(--border)}
+.controls input{width:100%;font-size:15px;padding:10px 12px;border:1px solid var(--border);border-radius:8px;font-family:var(--sans);background:#fff}
+.controls input:focus{outline:2px solid var(--violet);outline-offset:1px}
+.filters{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.filters button{font-family:var(--mono);font-size:11.5px;padding:3px 9px;border-radius:5px;border:1px solid var(--border);background:#fff;color:var(--body);cursor:pointer}
+.filters button[aria-pressed=true]{background:var(--deep);color:#fff;border-color:var(--deep)}
+.az{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px;font-family:var(--mono);font-size:12px}
+.az a{padding:1px 6px;border-radius:4px}
+.letter{font-family:var(--mono);font-size:13px;letter-spacing:.3em;color:var(--magenta);margin:26px 0 10px}
+#count{font-family:var(--mono);font-size:12px;color:var(--mute);margin-top:8px}
+.note{background:var(--lilac);border-radius:10px;padding:14px 18px;margin:8px 0 18px;color:var(--body);font-size:14px}
+.note b{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--violet);display:block;margin-bottom:4px}
+footer{padding:26px 24px;background:var(--void);color:var(--dmute);font-family:var(--mono);font-size:12px;text-align:center}
+footer a{color:var(--glow)}
+@media (max-width:700px){.fields{grid-template-columns:1fr}.mini{columns:1}}
+@media print{.controls,.az{display:none}.card{break-inside:avoid;box-shadow:none}
+.hero,.chip.home,footer{-webkit-print-color-adjust:exact;print-color-adjust:exact}body{background:#fff}}
+</style></head><body>
+<header class="hero"><div class="hero-inner"><div class="eyebrow">TEAI :: GLOSSAR // W04 // 28.10.2026</div>
+<h1>Glossar <em>W04</em><br>Fairness &amp; Bias-Metriken</h1>
+<p>Die Begriffe dieser Woche im Format der W02-Übung: Definition in einem Satz, Messgröße, verantwortliche Rolle, Quelle mit Reifegrad.</p>
+<div class="stats"><div class="hud"><i></i><b>10</b><span>neu eingeführt</span></div>
+<div class="hud"><i></i><b>2</b><span>aus früheren Wochen</span></div>
+<div class="hud"><i></i><b>249</b><span>im Gesamtglossar</span></div></div>
+<div class="audit">[TEAI :: W04 // GLOSSAR // 10 BEGRIFFE // SRC:Quellen/W04_glossar.json]</div></div></header>
+<main><section><div class="eyebrow">STATUS // REIFEGRAD DER QUELLE</div>
+<p class="lead">Der Status trennt geltendes Recht, Entwurf, unverbindliche Leitlinie, begutachtete Forschung, Preprint und Anbieterquelle: die Unterscheidung, auf die das Modul in jeder Woche zurückkommt.</p><div class="legend"><span class="badge st-bind" title="bindend, geltendes Recht">Recht</span><span class="badge st-bind" title="Gerichtsentscheidung, Rechtskraft siehe Quelle">Rechtsprechung</span><span class="badge st-bind" title="Norm oder technischer Standard">Norm</span><span class="badge st-draft" title="Entwurf, noch nicht geltend">Entwurf</span><span class="badge st-draft" title="unverbindliche Leitlinie">Leitlinie</span><span class="badge st-verified" title="begutachtete Fachquelle">peer-reviewed</span><span class="badge st-book" title="zitierfähiges Lehrbuch, kein Primärbeleg">Lehrbuch</span><span class="badge st-open" title="Preprint, nicht begutachtet">Preprint</span><span class="badge st-open" title="Anbieter- oder Industriequelle">Anbieter</span><span class="badge st-module" title="Arbeitsbegriff des Moduls">Modulbegriff</span></div>
+<p class="lead" style="margin-top:14px"><a href="00_Glossar_Gesamt_WS2026-27.html">Zum Gesamtglossar mit Suche</a> · <a href="W03_Glossar_EU_AI_Act.html">← W03</a> <a href="W05_Glossar_Transparenz_XAI.html">W05 →</a></p></section>
+<section><div class="eyebrow">W04 // NEU EINGEFÜHRT</div><h2>10 Begriffe der Woche</h2>
+<article class="card" id="equalized-odds">
+<div class="head"><h3>Angeglichene Chancen (Equalized Odds)</h3><span class="en">equalized odds</span><span class="badge st-book" title="zitierfähiges Lehrbuch, kein Primärbeleg">Lehrbuch</span></div>
+<p class="def">Fairness-Kriterium der Separation-Familie (gleiche Behandlung bei gleicher Eignung), nach dem Richtig-Positiv-Rate und Falsch-Positiv-Rate in allen Gruppen gleich sind, sodass Geeignete überall gleich zuverlässig erkannt werden und Irrtümer alle Gruppen gleich oft treffen; gemessen wird gegen die vorhandenen Labels, die selbst verzerrt sind, wenn sie aus früheren Entscheidungen stammen.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>TPR und FPR je Gruppe; verdichtet als größter Abstand der Raten zwischen den Gruppen (fairlearn: equalized_odds_difference); setzt verlässliche Wahrheitslabels voraus; im Arbeitsblatt W04 „Differenz Chancen“.</dd></div>
+<div><dt>Verantwortlich</dt><dd>Model Owner</dd></div>
+<div><dt>Quelle</dt><dd>Barocas, Hardt &amp; Narayanan (2023): Fairness and Machine Learning, MIT Press / fairmlbook.org (Lehrbuch), Kap. Classification</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W04</span></span><span>Siehe: <a href="#equal-opportunity">Gleiche Chancen (Equal Opportunity)</a>, <a href="#demographic-parity">Demografische Parität</a>, <a href="#impossibility-theorem">Unmöglichkeitsresultat (Impossibility Theorem)</a></span><span>Beleg: W04_Vorlesung_Final.pptx (Fassung 27.10.2026) Folien 20, 21 und 37; W04_Uebung.pptx (Fassung 27.10.2026) Folien 5, 6 und 7; Arbeitsblatt Übung W04</span></div>
+</article><article class="card" id="bias">
+<div class="head"><h3>Bias (systematische Verzerrung)</h3><span class="en">bias</span><span class="badge st-module" title="Arbeitsbegriff des Moduls">Modulbegriff</span></div>
+<p class="def">Systematische Verzerrung, die Personen oder Gruppen ungerechtfertigt ungleich behandelt und sich anders als ein Zufallsfehler bei Wiederholung erneut zeigt; das Modul unterscheidet den wertneutralen statistischen vom normativen sozialen Bias-Begriff.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Keine direkte Messgröße; Nachweis über gruppenweise aufgeschlüsselte Fairness-Kennzahlen (Auswahl- und Fehlerraten je Gruppe) und darüber, dass ein zweiter Durchlauf denselben Effekt zeigt.</dd></div>
+<div><dt>Verantwortlich</dt><dd>Model Owner</dd></div>
+<div><dt>Quelle</dt><dd>W04-Arbeitsdefinition; Vokabular nach Mehrabi, Morstatter, Saxena, Lerman &amp; Galstyan (2021): A Survey on Bias and Fairness in Machine Learning, ACM Computing Surveys 54(6), Kap. 3</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W04</span></span><span>Siehe: <a href="#historical-bias">Historische Verzerrung (Historical Bias)</a>, <a href="#proxy-variable">Proxy-Variable (Proxy-Merkmal)</a>, <a href="#group-fairness">Gruppenfairness</a></span><span>Beleg: W04_Vorlesung_Final.pptx (Fassung 27.10.2026) Folien 11, 12 und 37; W04_Skript_Vorlesung.html Abschnitt „Block A“</span></div>
+</article><article class="card" id="bias-mitigation">
+<div class="head"><h3>Bias-Mitigation (Pre-, In-, Post-Processing)</h3><span class="en">bias mitigation</span><span class="badge st-verified" title="begutachtete Fachquelle">peer-reviewed</span></div>
+<p class="def">Eingriffe zur Verringerung gemessener Ungleichbehandlung, geordnet nach Ansatzpunkt: Pre-Processing verändert die Daten vor dem Training, In-Processing nimmt eine Fairness-Bedingung in die Optimierung auf, Post-Processing justiert die Entscheidungsschwellen eines fertigen Modells; die Wirkung hängt von Aufgabe, Modell und Metrik ab.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Fairness-Kennzahlen und Gesamtgenauigkeit vor und nach dem Eingriff mit demselben Messcode, Preis in Genauigkeit beziffert; im Arbeitsblatt W04 Teil B, Schritt 3, mit Daten, Training oder Schwelle je Gruppe.</dd></div>
+<div><dt>Verantwortlich</dt><dd>Model Owner</dd></div>
+<div><dt>Quelle</dt><dd>Hort, Chen, Zhang, Harman &amp; Sarro (2023): Bias Mitigation for Machine Learning Classifiers: A Comprehensive Survey, ACM Journal on Responsible Computing, DOI 10.1145/3631326 (peer-reviewed); Chen, Zhang, Sarro &amp; Harman (2023), ACM TOSEM, arXiv 2207.03277</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W04</span></span><span>Siehe: <a href="#fairlearn">fairlearn</a>, <a href="#impossibility-theorem">Unmöglichkeitsresultat (Impossibility Theorem)</a>, <a href="#proxy-variable">Proxy-Variable (Proxy-Merkmal)</a></span><span>Beleg: W04_Vorlesung_Final.pptx (Fassung 27.10.2026) Folien 31, 32 und 37, freiwillige Vertiefung Folie 47; W04_Uebung.pptx (Fassung 27.10.2026) Folien 3 bis 6; Arbeitsblatt Übung W04 (Teil B, Schritt 3)</span></div>
+</article><article class="card" id="demographic-parity">
+<div class="head"><h3>Demografische Parität</h3><span class="en">demographic parity</span><span class="badge st-book" title="zitierfähiges Lehrbuch, kein Primärbeleg">Lehrbuch</span></div>
+<p class="def">Fairness-Kriterium der Independence-Familie, nach dem die Wahrscheinlichkeit einer positiven Entscheidung in allen Gruppen gleich ist, also aus jeder Gruppe der gleiche Anteil ausgewählt wird, unabhängig von der Qualifikation.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>P(Ŷ=1 | A=a) je Gruppe (Auswahlrate); verdichtet als Differenz der Auswahlraten (fairlearn: demographic_parity_difference) oder als Verhältnis; braucht keine Wahrheitslabels, ignoriert aber Qualifikationsunterschiede; im Arbeitsblatt W04 „Differenz Parität“ und „Verhältnis Auswahlraten“.</dd></div>
+<div><dt>Verantwortlich</dt><dd>Model Owner</dd></div>
+<div><dt>Quelle</dt><dd>Barocas, Hardt &amp; Narayanan (2023): Fairness and Machine Learning, MIT Press / fairmlbook.org (Lehrbuch), Kap. Classification</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W04</span></span><span>Siehe: <a href="#four-fifths-rule">Vier-Fünftel-Regel</a>, <a href="#equalized-odds">Angeglichene Chancen (Equalized Odds)</a>, <a href="#group-fairness">Gruppenfairness</a></span><span>Beleg: W04_Vorlesung_Final.pptx (Fassung 27.10.2026) Folien 18, 19 und 37; W04_Uebung.pptx (Fassung 27.10.2026) Folien 6 und 7; Arbeitsblatt Übung W04</span></div>
+</article><article class="card" id="feedback-loop">
+<div class="head"><h3>Feedback-Schleife (Feedback Loop)</h3><span class="en">feedback loop</span><span class="badge st-verified" title="begutachtete Fachquelle">peer-reviewed</span></div>
+<p class="def">Verzerrung im Betrieb, bei der die Ausgaben eines Modells die Trainingsdaten von morgen prägen, etwa weil nur Eingeladene Erfolgsdaten erzeugen, sodass sich kleine Startvorteile selbst verstärken.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Keine direkte Messgröße im statischen Trainingsdatensatz; Nachweis nur über laufendes Monitoring der Fairness-Kennzahlen im Betrieb.</dd></div>
+<div><dt>Verantwortlich</dt><dd>Betreiber*in (Monitoring im Betrieb)</dd></div>
+<div><dt>Quelle</dt><dd>Mehrabi, Morstatter, Saxena, Lerman &amp; Galstyan (2021): A Survey on Bias and Fairness in Machine Learning, ACM Computing Surveys 54(6), Kap. 3 (Daten-Algorithmus-Nutzer*innen-Schleife)</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W04</span></span><span>Siehe: <a href="#bias-drift">Bias-Drift</a>, <a href="#historical-bias">Historische Verzerrung (Historical Bias)</a></span><span>Beleg: W04_Vorlesung_Final.pptx (Fassung 27.10.2026) Folien 12, 16 und 37</span></div>
+</article><article class="card" id="historical-bias">
+<div class="head"><h3>Historische Verzerrung (Historical Bias)</h3><span class="en">historical bias</span><span class="badge st-verified" title="begutachtete Fachquelle">peer-reviewed</span></div>
+<p class="def">Verzerrung auf der Datenebene, bei der korrekt erhobene Daten eine selbst ungerechte frühere Praxis abbilden, etwa frühere Einstellungsentscheidungen als Trainingslabels, die das Modell präzise fortschreibt.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Keine direkte Messgröße; Nachweis über die Analyse der Entscheidungspraxis, die die Labels erzeugt hat (Diagnosefrage: Wollen wir diese Vergangenheit fortschreiben?), und über ungleiche Basisraten, die oft selbst Folge früherer Ungleichbehandlung sind.</dd></div>
+<div><dt>Verantwortlich</dt><dd>Data Owner</dd></div>
+<div><dt>Quelle</dt><dd>Mehrabi, Morstatter, Saxena, Lerman &amp; Galstyan (2021): A Survey on Bias and Fairness in Machine Learning, ACM Computing Surveys 54(6), Kap. 3 (Historical Bias)</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W04</span></span><span>Siehe: <a href="#representation-bias">Repräsentationsverzerrung (Representation Bias)</a>, <a href="#feedback-loop">Feedback-Schleife (Feedback Loop)</a>, <a href="#bias">Bias (systematische Verzerrung)</a></span><span>Beleg: W04_Vorlesung_Final.pptx (Fassung 27.10.2026) Folien 12, 13, 29 und 37</span></div>
+</article><article class="card" id="group-calibration">
+<div class="head"><h3>Kalibrierung über Gruppen</h3><span class="en">calibration (within groups)</span><span class="badge st-book" title="zitierfähiges Lehrbuch, kein Primärbeleg">Lehrbuch</span></div>
+<p class="def">Fairness-Kriterium der Sufficiency-Familie, nach dem ein Score-Wert in jeder Gruppe dieselbe tatsächliche Wahrscheinlichkeit bedeutet, formal P(Y=1 | Ŷ=s, A=a) unabhängig von a.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Anteil tatsächlich Positiver je Score-Wert und Gruppe (Score 0,7 heißt: rund 70 % der Personen mit diesem Wert sind tatsächlich positiv); sagt nichts darüber, wie sich die Fehler auf die Gruppen verteilen.</dd></div>
+<div><dt>Verantwortlich</dt><dd>Model Owner</dd></div>
+<div><dt>Quelle</dt><dd>Barocas, Hardt &amp; Narayanan (2023): Fairness and Machine Learning, MIT Press / fairmlbook.org (Lehrbuch), Kap. Classification</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W04</span></span><span>Siehe: <a href="#predictive-parity">Predictive Parity</a>, <a href="#impossibility-theorem">Unmöglichkeitsresultat (Impossibility Theorem)</a>, <a href="#group-fairness">Gruppenfairness</a></span><span>Beleg: W04_Vorlesung_Final.pptx (Fassung 27.10.2026) Folien 22, 26, 28 und 37</span></div>
+</article><article class="card" id="proxy-variable">
+<div class="head"><h3>Proxy-Variable (Proxy-Merkmal)</h3><span class="en">proxy variable</span><span class="badge st-book" title="zitierfähiges Lehrbuch, kein Primärbeleg">Lehrbuch</span></div>
+<p class="def">Erhobenes, scheinbar neutrales Merkmal wie Postleitzahl, Abschlussjahrgang oder Lücken im Lebenslauf, das mit einem geschützten Attribut so stark zusammenhängt, dass ein Modell dieses Attribut faktisch mitverwendet; deshalb schützt das bloße Weglassen geschützter Merkmale nicht vor Benachteiligung.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Korrelation des Merkmals mit dem geschützten Attribut; im Arbeitsblatt W04 über die Proxy-Stärke als Annahme der Gruppe und über den Daten-Eingriff, der den Zusammenhang der Merkmale mit A entfernt (wie CorrelationRemover in fairlearn); in W05 Rang des Proxy-Merkmals in der Erklärung.</dd></div>
+<div><dt>Verantwortlich</dt><dd>Model Owner</dd></div>
+<div><dt>Quelle</dt><dd>Barocas, Hardt &amp; Narayanan (2023): Fairness and Machine Learning, MIT Press / fairmlbook.org (Lehrbuch), Kap. Classification (Fairness through Unawareness, Redundant Encoding); die Beispiele im Material sind Illustration</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W04</span><span class="chip">W05</span></span><span>Siehe: <a href="#bias">Bias (systematische Verzerrung)</a>, <a href="#measurement-bias">Messverzerrung (Measurement Bias)</a>, <a href="#processing-paradox">Verarbeitungsparadox</a></span><span>Beleg: W04_Vorlesung_Final.pptx (Fassung 27.10.2026) Folien 6, 7, 23 und 37; W04_Uebung.pptx (Fassung 27.10.2026) Folie 5; Arbeitsblatt Übung W04 (Teil A, Schritt 5); W05_Uebung.pptx (Fassung 23.10.2026) Folie 12</span></div>
+</article><article class="card" id="impossibility-theorem">
+<div class="head"><h3>Unmöglichkeitsresultat (Impossibility Theorem)</h3><span class="en">impossibility theorem (fairness)</span><span class="badge st-verified" title="begutachtete Fachquelle">peer-reviewed</span></div>
+<p class="def">Formales Ergebnis, nach dem Kalibrierung (bzw. gleicher positiver Vorhersagewert) und gleiche Fehlerraten über Gruppen bei ungleichen Basisraten nicht zugleich erfüllbar sind, außer bei perfekter Vorhersage oder identischen Basisraten; die Metrikwahl bleibt deshalb eine Wertentscheidung.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Identität nach Chouldechova (2017): FPR = p/(1−p) · (1−PPV)/PPV · (1−FNR) mit der Basisrate (Prävalenz) p je Gruppe; verwandt, aber ein eigener Befund: In der Übung liegen Parität und gleiche Fehlerraten bei ungleichen Basisraten auf verschiedenen Schwellen, weil Auswahlrate = TPR · p + FPR · (1 − p).</dd></div>
+<div><dt>Verantwortlich</dt><dd>Model Owner (Dokumentation von Metrikwahl und akzeptiertem Trade-off)</dd></div>
+<div><dt>Quelle</dt><dd>Chouldechova (2017): Fair Prediction with Disparate Impact, Big Data 5(2), 153–163 (peer-reviewed); Kleinberg, Mullainathan &amp; Raghavan (2016), arXiv 1609.05807</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W04</span><span class="chip">W14</span></span><span>Siehe: <a href="#group-calibration">Kalibrierung über Gruppen</a>, <a href="#predictive-parity">Predictive Parity</a>, <a href="#equalized-odds">Angeglichene Chancen (Equalized Odds)</a></span><span>Beleg: W04_Vorlesung_Final.pptx (Fassung 27.10.2026) Folien 28, 29 und 37, freiwillige Vertiefung Folien 44–46; W04_Uebung.pptx (Fassung 27.10.2026) Folien 2 und 7 (verwandte Spannung zwischen Parität und Fehlerraten); W14_Vorlesung_Final.pptx Folien 26 und 40 (Vertiefung)</span></div>
+</article><article class="card" id="processing-paradox">
+<div class="head"><h3>Verarbeitungsparadox</h3><span class="en">processing paradox (fairness measurement vs. data protection)</span><span class="badge st-module" title="Arbeitsbegriff des Moduls">Modulbegriff</span></div>
+<p class="def">Zielkonflikt, dass zur Messung von Diskriminierung genau die besonders geschützten Merkmale verarbeitet werden müssen; Art. 4a KI-VO, eingefügt durch die VO (EU) 2026/1744 und in Kraft seit 27.07.2026, erlaubt die Verarbeitung besonderer Kategorien zur Bias-Erkennung und -Korrektur nur, wenn sie unbedingt erforderlich ist, und unter Auflagen wie Pseudonymisierung, Zugriffsschutz und Löschung; die DSGVO selbst wurde dafür nicht geändert.</p>
+<dl class="fields"><div><dt>Messgröße</dt><dd>Keine direkte Messgröße; Nachweis über dokumentierte Zwecktrennung von Messen und Entscheiden und über die im Verarbeitungsverzeichnis begründete Erforderlichkeit nach Art. 4a KI-VO.</dd></div>
+<div><dt>Verantwortlich</dt><dd>Datenschutzbeauftragte*r gemeinsam mit Model Owner</dd></div>
+<div><dt>Quelle</dt><dd>Modulbegriff; Art. 4a VO (EU) 2024/1689, eingefügt durch VO (EU) 2026/1744 vom 08.07.2026 (ABl. L vom 24.07.2026), geprüft am 23.10.2026 an EUR-Lex</dd></div></dl>
+<div class="meta"><span>Wochen: <span class="chip home">W04</span><span class="chip">W06</span></span><span>Siehe: <a href="#proxy-variable">Proxy-Variable (Proxy-Merkmal)</a>, <a href="00_Glossar_Gesamt_WS2026-27.html#purpose-limitation">Zweckbindung</a>, <a href="00_Glossar_Gesamt_WS2026-27.html#data-minimisation">Datenminimierung</a>, <a href="00_Glossar_Gesamt_WS2026-27.html#digital-omnibus">Digital Omnibus on AI</a></span><span>Beleg: W04_Vorlesung_Final.pptx (Fassung 27.10.2026) Folien 24 und 37, freiwillige Vertiefung Folie 53; W04_Uebung.pptx (Fassung 27.10.2026) Folie 8 (Kapitelkarte, Schritt 3); W04_Aktualitaetsbriefing_2026-10-23.md R-04; W06_Vorlesung_Final.pptx Folie 29</span></div>
+</article></section><section><div class="eyebrow">W04 // ERGÄNZUNGSBEGRIFFE</div><h2>Zum Nachschlagen</h2>
+<p class="lead">Diese Begriffe kommen in W04 vor, gehören aber nicht zu den Begriffen der Woche und werden im Retrieval nicht abgefragt. Die vollständigen Einträge stehen im Gesamtglossar.</p>
+<ul class="mini"><li><a href="00_Glossar_Gesamt_WS2026-27.html#aggregation-bias">Aggregationsverzerrung (Aggregation Bias)</a> <span class="badge st-verified" title="begutachtete Fachquelle">peer-reviewed</span></li><li><a href="00_Glossar_Gesamt_WS2026-27.html#algorithmic-monoculture">Algorithmische Monokultur</a> <span class="badge st-verified" title="begutachtete Fachquelle">peer-reviewed</span></li><li><a href="00_Glossar_Gesamt_WS2026-27.html#selection-rate">Auswahlrate</a> <span class="badge st-book" title="zitierfähiges Lehrbuch, kein Primärbeleg">Lehrbuch</span></li><li><a href="00_Glossar_Gesamt_WS2026-27.html#base-rate">Basisrate</a> <span class="badge st-book" title="zitierfähiges Lehrbuch, kein Primärbeleg">Lehrbuch</span></li><li><a href="00_Glossar_Gesamt_WS2026-27.html#bias-drift">Bias-Drift</a> <span class="badge st-module" title="Arbeitsbegriff des Moduls">Modulbegriff</span></li><li><a href="00_Glossar_Gesamt_WS2026-27.html#compas">COMPAS (Rückfallprognose)</a> <span class="badge st-verified" title="begutachtete Fachquelle">peer-reviewed</span></li><li><a href="00_Glossar_Gesamt_WS2026-27.html#evaluation-bias">Evaluationsverzerrung (Evaluation Bias)</a> <span class="badge st-verified" title="begutachtete Fachquelle">peer-reviewed</span></li><li><a href="00_Glossar_Gesamt_WS2026-27.html#fairlearn">fairlearn</a> <span class="badge st-open" title="Anbieter- oder Industriequelle">Anbieter</span></li><li><a href="00_Glossar_Gesamt_WS2026-27.html#fairness-through-unawareness">Fairness durch Unkenntnis</a> <span class="badge st-book" title="zitierfähiges Lehrbuch, kein Primärbeleg">Lehrbuch</span></li><li><a href="00_Glossar_Gesamt_WS2026-27.html#false-positive-rate">Falsch-Positiv-Rate (FPR)</a> <span class="badge st-book" title="zitierfähiges Lehrbuch, kein Primärbeleg">Lehrbuch</span></li><li><a href="00_Glossar_Gesamt_WS2026-27.html#equal-opportunity">Gleiche Chancen (Equal Opportunity)</a> <span class="badge st-book" title="zitierfähiges Lehrbuch, kein Primärbeleg">Lehrbuch</span></li><li><a href="00_Glossar_Gesamt_WS2026-27.html#group-fairness">Gruppenfairness</a> <span class="badge st-book" title="zitierfähiges Lehrbuch, kein Primärbeleg">Lehrbuch</span></li><li><a href="00_Glossar_Gesamt_WS2026-27.html#measurement-bias">Messverzerrung (Measurement Bias)</a> <span class="badge st-verified" title="begutachtete Fachquelle">peer-reviewed</span></li><li><a href="00_Glossar_Gesamt_WS2026-27.html#positive-predictive-value">Positiver Vorhersagewert (PPV)</a> <span class="badge st-verified" title="begutachtete Fachquelle">peer-reviewed</span></li><li><a href="00_Glossar_Gesamt_WS2026-27.html#predictive-parity">Predictive Parity</a> <span class="badge st-book" title="zitierfähiges Lehrbuch, kein Primärbeleg">Lehrbuch</span></li><li><a href="00_Glossar_Gesamt_WS2026-27.html#representation-bias">Repräsentationsverzerrung (Representation Bias)</a> <span class="badge st-verified" title="begutachtete Fachquelle">peer-reviewed</span></li><li><a href="00_Glossar_Gesamt_WS2026-27.html#four-fifths-rule">Vier-Fünftel-Regel</a> <span class="badge st-bind" title="bindend, geltendes Recht">Recht</span></li></ul></section><section><div class="eyebrow">W04 // AUFGEGRIFFEN</div><h2>Aus früheren Wochen</h2>
+<p class="lead">Diese Begriffe sind früher eingeführt und werden in W04 wieder tragend. Die vollständigen Einträge stehen im Gesamtglossar.</p>
+<ul class="mini"><li><a href="00_Glossar_Gesamt_WS2026-27.html#fairness">Vielfalt, Nichtdiskriminierung und Fairness</a> <span class="chip">W01</span> <span class="badge st-draft" title="unverbindliche Leitlinie">Leitlinie</span></li><li><a href="00_Glossar_Gesamt_WS2026-27.html#four-level-taxonomy-grid">Vier-Ebenen-Raster (Taxonomie-Raster)</a> <span class="chip">W02</span> <span class="badge st-module" title="Arbeitsbegriff des Moduls">Modulbegriff</span></li></ul></section></main>
+<footer>Trusted &amp; Ethical AI · HTW Dresden · Dr.-Ing. Steffen Tomschke · Stand 2026-10-27</footer>
+</body></html>
