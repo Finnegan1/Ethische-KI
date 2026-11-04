@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>W04 Ergebnis · G10 · Kreditwürdigkeitsprüfung (Label-Bias 0,1)</title>
+<style>
+:root{--void:#0F0B1A;--deep:#24163A;--paper:#FAFAFC;--ink:#1E1A2E;--violet:#7C3AED;--magenta:#C026D3;--glow:#E879F9;--sage:#2E9E7E;
+--body:#4A4460;--mute:#6B6580;--lilac:#EDE7F8;--border:#E4DFEF;--dbody:#C9C2DE;--mono:'Courier New',monospace;--sans:Arial,Helvetica,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.45;padding:16px}
+main{max-width:1000px;margin:0 auto}
+.eyebrow,.tag{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--magenta);text-transform:uppercase}
+.tag{color:var(--violet);display:block;margin-bottom:6px;font-size:11px}
+h1{font-size:26px;margin:6px 0 2px}
+h2{font-size:20px;margin:0 0 8px}
+h3{font-size:16px;margin:14px 0 6px}
+p{color:var(--body)}
+.head{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;justify-content:space-between;margin-bottom:14px}
+.card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.task{background:var(--lilac);border-radius:10px;padding:12px 16px;margin-bottom:12px}
+.task ol{margin:6px 0 6px 22px;color:var(--ink)}
+.task .meta{font-size:14px;color:var(--body)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media(max-width:760px){.grid,.grid3{grid-template-columns:1fr}}
+label{display:block;font-size:14px;color:var(--body);margin:8px 0 3px}
+input[type=text],select,textarea{width:100%;font:inherit;font-size:15px;padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:#fff;color:var(--ink)}
+textarea{min-height:58px;resize:vertical}
+.row{display:flex;align-items:center;gap:10px}
+input[type=range]{flex:1;accent-color:var(--violet);height:30px}
+output{font-family:var(--mono);font-weight:bold;min-width:56px;text-align:right}
+button{font:inherit;font-size:15px;padding:10px 16px;border-radius:8px;border:1px solid var(--violet);background:#fff;color:var(--violet);cursor:pointer;margin:6px 8px 0 0}
+button.primary{background:var(--violet);color:#fff}
+button:disabled{opacity:.45;cursor:default}
+.step{border-top:1px solid var(--border);padding-top:12px;margin-top:12px}
+.step:first-of-type{border-top:0;margin-top:0;padding-top:0}
+.num{display:inline-block;font-family:var(--mono);font-weight:bold;color:var(--violet);margin-right:6px}
+table{border-collapse:collapse;width:100%;font-size:15px;margin-top:8px}
+th,td{border-bottom:1px solid var(--border);padding:6px;text-align:right}
+th:first-child,td:first-child{text-align:left}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--mute);font-weight:normal;text-transform:uppercase}
+.kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+@media(max-width:760px){.kpi{grid-template-columns:repeat(2,1fr)}}
+.kpi div{background:var(--lilac);border-radius:8px;padding:8px 10px}
+.kpi b{display:block;font-size:21px;font-family:var(--mono)}
+.kpi span{font-size:12px;color:var(--body)}
+.info{font-size:14px;color:var(--body);margin-top:6px}
+.inset{background:var(--deep);border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.inset .tag{color:var(--glow)}
+.inset p,.inset li{color:var(--dbody);font-size:14px}
+.inset ul{margin:4px 0 0 18px}
+.inset code{color:#fff}
+code{font-family:var(--mono);font-size:13px}
+.hidden{display:none}
+.line{font-family:var(--mono);font-size:13px;background:#F6F4FA;border:1px solid var(--border);border-radius:6px;padding:8px;word-break:break-word}
+.src{font-size:12px;color:var(--mute);font-style:italic;margin-top:8px}
+.vl{position:relative;display:inline-block;width:16px;height:16px;line-height:14px;border:1px solid var(--violet);border-radius:50%;font-family:var(--mono);font-size:11px;font-weight:bold;font-style:normal;text-align:center;color:var(--violet);background:#fff;cursor:help;vertical-align:2px;margin-left:4px;user-select:none}
+.vl::before{content:"";position:absolute;inset:-5px}
+.vl:hover,.vl:focus{background:var(--violet);color:#fff;outline:none}
+.vl:focus-visible{box-shadow:0 0 0 2px var(--glow)}
+.inset .vl{background:transparent;border-color:var(--glow);color:var(--glow)}
+.inset .vl:hover,.inset .vl:focus{background:var(--glow);color:var(--void)}
+#vltip{position:fixed;z-index:50;max-width:min(330px,calc(100vw - 16px));background:var(--void);border:1px solid var(--violet);border-radius:8px;padding:8px 11px;box-shadow:0 6px 18px rgba(15,11,26,.28);font-size:13px;line-height:1.4;color:var(--dbody);pointer-events:none}
+#vltip .t{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--glow);margin-bottom:4px}
+#vltip .l{display:block}
+#vltip b{color:#fff;font-family:var(--mono);font-weight:bold}
+#vltip i{color:var(--mute)}
+@media print{
+  body{padding:0;font-size:11pt;background:#fff}
+  button,.noprint{display:none!important}
+  .task,.inset,.step,.kpi,table{break-inside:avoid}
+  .card{border:0;padding:0}
+  .grid{grid-template-columns:1fr 1fr!important}
+  .kpi{grid-template-columns:repeat(4,1fr)!important}
+  h1{font-size:20px} h3{margin:8px 0 4px} label{margin:4px 0 2px}
+  textarea{min-height:44px}
+  .inset{background:#fff;border:1px solid var(--border)}
+  .inset .tag,.inset p,.inset li,.inset code{color:var(--ink)}
+  #vltip{display:none!important}
+  .vl{width:auto;height:auto;border:0;border-radius:0;background:none!important;font-size:0;margin-left:3px;vertical-align:baseline}
+  .vl::before{display:none}
+  .vl::after{content:"(VL " attr(data-vl) ")";font-size:8pt;font-weight:normal;color:var(--mute)}
+}
+</style><style>.answer{font:inherit;font-size:15px;padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:#fff;color:var(--ink);white-space:pre-wrap;overflow-wrap:anywhere;min-height:36px}.row .answer{flex:1}@media print{@page{size:A4;margin:12mm}body{font-size:10pt;-webkit-print-color-adjust:exact;print-color-adjust:exact}.answer{font-size:10pt;padding:5px 7px;min-height:24px}label{font-size:9pt}table{font-size:9pt}th{font-size:7pt}.task{padding:10px 12px}.task .meta,.info{font-size:9pt}.kpi b{font-size:17px}#teilB{break-before:page}.head{break-inside:avoid}.inset{break-inside:avoid}}</style></head><body><main>
+
+<div class="head">
+  <div><div class="eyebrow">W04 // Übung // 28.10.2026 // Arbeitsblatt im Browser</div>
+  <h1>Fairness am eigenen Thema</h1>
+  <p>Ausgefüllte Ergebnisfassung · G10 · T01 Kreditwürdigkeitsprüfung · synthetische Daten · Trainingseingriff μ=30 · Label-Bias 0,1 · Proxy: Länge der Kredithistorie</p></div>
+  <div style="min-width:280px" class="grid">
+    <div><label for="gruppe">Gruppe</label><div id="gruppe" class="answer">G10</div></div>
+    <div><label for="thema">Thema</label><div id="thema" class="answer">T01 Kreditwürdigkeitsprüfung</div></div>
+  </div>
+</div>
+
+<!-- TEIL A -->
+<div class="card" id="teilA">
+  <div class="tag">Teil A // Phase 1 // 25 Min</div>
+  <div class="task"><strong>Aufgabenkarte 1: Metrik und Baseline festlegen</strong>
+    <p style="color:var(--ink)"><strong>Ziel:</strong> Messgröße und Ausgangslage festlegen.</p>
+    <ol><li>Beschreiben Sie Entscheidung Ŷ und Merkmal A.</li>
+    <li>Analysieren Sie die Bias-Quelle: Daten, Label, Modell oder Betrieb.</li>
+    <li>Bewerten Sie, welche Metrik zum Schaden passt.</li>
+    <li>Entwerfen Sie den Eingriff: Daten, Training oder nach dem Training.</li>
+    <li>Nennen Sie die Baseline: Basisrate je Gruppe, Proxy, Fallzahl.</li></ol>
+    <p class="meta"><strong>Ergebnis:</strong> Teil A ausgefüllt · <strong>Zeit:</strong> 25 Minuten · <strong>Abgabe:</strong> mit der Ergebnisdatei am Ende</p>
+  </div>
+
+  <div class="step"><h3><span class="num">1</span>Entscheidung und Merkmal <span class="vl" tabindex="0" role="button" data-vl="18" aria-label="Vorlesung W04: Folie 18, Notation an einem Beispiel">i</span></h3>
+    <div class="grid">
+      <div><label for="yhat">Ŷ = 1 bedeutet</label><div id="yhat" class="answer">Der beantragte Kredit wird bewilligt.</div></div>
+      <div><label for="merkmal">Merkmal A <span class="vl" tabindex="0" role="button" data-vl="23, 24" aria-label="Vorlesung W04: Folie 23, Weglassen geschützter Merkmale schützt nicht; Folie 24, Messen braucht geschützte Merkmale">i</span></label><div id="merkmal" class="answer">Altersgruppe</div></div>
+      <div><label for="ga">Gruppe a ist</label><div id="ga" class="answer">35–64 Jahre</div></div>
+      <div><label for="gb">Gruppe b ist</label><div id="gb" class="answer">18–34 Jahre</div></div>
+    </div></div>
+
+  <div class="step"><h3><span class="num">2</span>Bias-Quelle <span class="vl" tabindex="0" role="button" data-vl="11, 12" aria-label="Vorlesung W04: Folie 11, Bias: statistisch und sozial; Folie 12, Bias entlang des ML-Lebenszyklus">i</span></h3>
+    <div class="grid">
+      <div><label for="ebene">Ebene <span class="vl" tabindex="0" role="button" data-vl="13, 14, 15, 16" aria-label="Vorlesung W04: Folie 13, Ebene 1: Daten; Folie 14, Ebene 2: Label / Parameter; Folie 15, Ebene 3: Modell; Folie 16, Ebene 4: Betrieb">i</span></label><div id="ebene" class="answer">Label</div></div>
+      <div><label for="quelle">In einem Satz: woher der Bias kommt</label><div id="quelle" class="answer">Label-Bias: In den historischen Kreditdaten werden 10 % der rückzahlungsfähigen 18–34-Jährigen fälschlich als ungeeignet erfasst, weil die Kredithistorie junger Menschen kürzer ist und frühere Ablehnungen sich häufen.</div></div>
+    </div></div>
+
+  <div class="step"><h3><span class="num">3</span>Zielmetrik <span class="vl" tabindex="0" role="button" data-vl="19, 21, 22" aria-label="Vorlesung W04: Folie 19, Demografische Parität; Folie 21, Angeglichene Chancen (Equalized Odds); Folie 22, Kalibrierung über Gruppen">i</span></h3>
+    <div class="grid">
+      <div><label for="ziel">Zielmetrik</label><div id="ziel" class="answer">Equalized Odds (gleiche TPR und FPR)</div></div>
+      <div><label for="zielwarum">Begründung: Wer trägt welchen Fehler? <span class="vl" tabindex="0" role="button" data-vl="20, 30" aria-label="Vorlesung W04: Folie 20, Fehlerraten an einem Beispiel; Folie 30, Metrikwahl ist eine Wertentscheidung">i</span></label><div id="zielwarum" class="answer">Rückzahlungsfähige 18–34-Jährige sollen nicht häufiger zu Unrecht abgelehnt werden als rückzahlungsfähige 35–64-Jährige (gleiche TPR/FNR). Zugleich sollen Fehlbewilligungen nicht einseitig eine Altersgruppe treffen (gleiche FPR), da sie Ausfallrisiken für die Bank und mögliche Überschuldung für Kreditnehmende bedeuten.</div></div>
+    </div></div>
+
+  <div class="step"><h3><span class="num">4</span>Eingriff <span class="vl" tabindex="0" role="button" data-vl="31, 47" aria-label="Vorlesung W04: Folie 31, Mitigation im Überblick; Folie 47, Steckbriefe: Hort et al. und Chen et al. (2023) (freiwillige Vertiefung)">i</span></h3>
+    <div class="grid">
+      <div><label for="eingriff">Eingriff</label><div id="eingriff" class="answer">Training (Fairness-Bedingung)</div></div>
+      <div><label for="zugriff">Begründung über den Zugriff</label><div id="zugriff" class="answer">Im Laborszenario haben wir Zugriff auf Trainingsdaten, Altersgruppen und das Modelltraining. Daher ergänzen wir das Training um eine Fairness-Bedingung mit dem Ziel Equalized Odds. Die Altersgruppe dient der Fairness-Optimierung und Auswertung, nicht als direktes Modellmerkmal; für beide Gruppen bleibt die Entscheidungsschwelle gleich.</div></div>
+    </div></div>
+
+  <div class="step"><h3><span class="num">5</span>Baseline</h3>
+    <p class="info">Annahmen, keine Recherche. Sie steuern die Daten in Teil B.</p>
+    <div class="grid">
+      <div><label for="pa">Basisrate Gruppe a (Anteil tatsächlich Geeigneter) <span class="vl" tabindex="0" role="button" data-vl="18, 29" aria-label="Vorlesung W04: Folie 18, Notation an einem Beispiel; Folie 29, Was ungleiche Basisraten bewirken">i</span></label><div class="row"><div id="pa" class="answer">0.85</div></div></div>
+      <div><label for="pb">Basisrate Gruppe b</label><div class="row"><div id="pb" class="answer">0.65</div></div></div>
+      <div><label for="proxyname">Proxy: Merkmal, das die Gruppe verrät <span class="vl" tabindex="0" role="button" data-vl="6, 7, 23" aria-label="Vorlesung W04: Folie 6, Proxy-Merkmale im Bewerbungsformular; Folie 7, Was ein Proxy-Merkmal ist; Folie 23, Weglassen geschützter Merkmale schützt nicht">i</span></label><div id="proxyname" class="answer">Länge der Kredithistorie</div></div>
+      <div><label for="proxy">Proxy-Stärke (0 verrät nichts, 1 verrät die Gruppe fast sicher)</label><div class="row"><div id="proxy" class="answer">0.8</div></div></div>
+      <div><label for="n">Fallzahl</label><div id="n" class="answer">5.000</div></div>
+      <div><label for="anteilb">Anteil der Gruppe b</label><div class="row"><div id="anteilb" class="answer">0.4</div></div></div>
+      <div><label for="labelbias">Label-Bias: Anteil Geeigneter in b, in den Altdaten als ungeeignet erfasst <span class="vl" tabindex="0" role="button" data-vl="14, 21" aria-label="Vorlesung W04: Folie 14, Ebene 2: Label / Parameter; Folie 21, Angeglichene Chancen (Equalized Odds)">i</span></label><div class="row"><div id="labelbias" class="answer">0.1</div></div></div>
+      <div><label for="seed">Zufallswert (Seed)</label><div id="seed" class="answer">42</div></div>
+      <div><label for="f1">Fachmerkmal 1 (hängt mit der Eignung zusammen)</label><div id="f1" class="answer">Haushaltsüberschuss</div></div>
+      <div><label for="f2">Fachmerkmal 2</label><div id="f2" class="answer">Zahlungszuverlässigkeit</div></div>
+    </div></div>
+</div>
+
+<!-- TEIL B -->
+<div class="card" id="teilB">
+  <div class="tag">Teil B // Phase 2 // 35 Min</div>
+  <div class="task"><strong>Aufgabenkarte 2: Erzeugen, messen, mitigieren</strong>
+    <p style="color:var(--ink)"><strong>Ziel:</strong> Ungleichbehandlung zeigen, gezielt verringern, Preis beziffern.</p>
+    <ol><li>Nennen Sie Ihre Baseline in Teil A, erzeugen Sie die Daten.</li>
+    <li>Analysieren Sie Auswahlrate, TPR und FPR je Gruppe.</li>
+    <li>Analysieren Sie Ihren Eingriff aus Teil A.</li>
+    <li>Bewerten Sie den Preis: Genauigkeit und zweite Metrik, vorher und nachher.</li></ol>
+    <p class="meta"><strong>Ergebnis:</strong> Teil B ausgefüllt, Zeile in der Vergleichsmatrix · <strong>Zeit:</strong> 35 Minuten · <strong>Abgabe:</strong> Ergebnisdatei ins OPAL</p>
+  </div>
+
+  <div class="step"><h3><span class="num">1</span>Daten erzeugen</h3>
+    <p class="info" id="genInfo">5000 Fälle erzeugt, davon 2019 in Gruppe b. Anteil Geeigneter in den Altdaten: a 0,85, b 0,58. Training: 3500 Fälle, Messung: 1500 Fälle.</p></div>
+
+  <div class="step"><h3><span class="num">2</span>Basismodell messen <span class="vl" tabindex="0" role="button" data-vl="15, 19, 20, 21" aria-label="Vorlesung W04: Folie 15, Ebene 3: Modell; Folie 19, Demografische Parität; Folie 20, Fehlerraten an einem Beispiel; Folie 21, Angeglichene Chancen (Equalized Odds)">i</span></h3>
+    <div id="baseOut"><table><thead><tr><th>Gruppe</th><th>Fälle</th><th>Basisrate</th><th>Auswahlrate</th><th>TPR</th><th>FPR</th></tr></thead><tbody><tr><td>a (35–64 Jahre)</td><td>900</td><td>0,85</td><td>0,92</td><td>0,97</td><td>0,61</td></tr><tr><td>b (18–34 Jahre)</td><td>600</td><td>0,61</td><td>0,69</td><td>0,86</td><td>0,44</td></tr></tbody></table><div class="kpi"><div><b>0,827</b><span>Genauigkeit</span></div><div><b>0,225</b><span>Differenz Parität</span></div><div><b>0,755</b><span>Verhältnis Auswahlraten</span></div><div><b>0,177</b><span>Differenz Chancen</span></div></div></div></div>
+
+  <div class="step"><h3><span class="num">3</span>Eingriff <span class="vl" tabindex="0" role="button" data-vl="31" aria-label="Vorlesung W04: Folie 31, Mitigation im Überblick">i</span></h3>
+    <p class="info" id="eingriffInfo">Ihr Eingriff aus Teil A: Training (Fairness-Bedingung) · Zielmetrik: Equalized Odds. Ändern Sie beides in Teil A, Schritte 3 und 4.</p>
+    <div id="optTrain" class=""><label for="mu">Stärke der Fairness-Bedingung im Training</label><div class="row"><div id="mu" class="answer">30</div></div></div>
+    <div id="optPost" class="hidden">
+      <label for="postmode">Schwellen</label><div id="postmode" class="answer">automatisch: Schwelle a bleibt 0,50, Schwelle b gleicht die Zielmetrik aus</div>
+      <div id="handBox" class="hidden grid">
+        <div><label for="ta">Schwelle Gruppe a</label><div class="row"><div id="ta" class="answer">0.5</div></div></div>
+        <div><label for="tb">Schwelle Gruppe b</label><div class="row"><div id="tb" class="answer">0.5</div></div></div>
+      </div>
+    </div>
+    <div id="mitOut"><p class="info">Training mit Fairness-Bedingung, Stärke 30.</p><table><thead><tr><th>Gruppe</th><th>Fälle</th><th>Basisrate</th><th>Auswahlrate</th><th>TPR</th><th>FPR</th></tr></thead><tbody><tr><td>a (35–64 Jahre)</td><td>900</td><td>0,85</td><td>0,90</td><td>0,96</td><td>0,58</td></tr><tr><td>b (18–34 Jahre)</td><td>600</td><td>0,61</td><td>0,76</td><td>0,92</td><td>0,52</td></tr></tbody></table><table><thead><tr><th></th><th>Genauigkeit</th><th>Differenz Parität</th><th>Verhältnis</th><th>Differenz Chancen</th></tr></thead><tbody><tr><td>Basismodell</td><td>0,827</td><td>0,225</td><td>0,755</td><td>0,177</td></tr><tr><td>Nach Eingriff</td><td>0,827</td><td>0,138</td><td>0,847</td><td>0,059</td></tr></tbody></table></div></div>
+
+  <div class="step"><h3><span class="num">4</span>Preis bewerten <span class="vl" tabindex="0" role="button" data-vl="28, 30" aria-label="Vorlesung W04: Folie 28, Unvereinbare Ansprüche bei ungleichen Basisraten; Folie 30, Metrikwahl ist eine Wertentscheidung">i</span></h3>
+    <div class="grid">
+      <div><label for="preis">Preis in einem Satz</label><div id="preis" class="answer">Mit dem Trainingseingriff (μ=30) sinkt die Differenz Chancen von 0,18 auf 0,06 und die Differenz Parität von 0,22 auf 0,14; die Genauigkeit bleibt mit 0,827 ≈ 0,827 praktisch gleich. Bei jüngeren Personen (Gruppe b) sinken die falschen Ablehnungen von 52 auf 28, während die Fehlbewilligungen von 103 auf 122 steigen.</div></div>
+      <div><label for="grenze">Grenze der Messung <span class="vl" tabindex="0" role="button" data-vl="32, 33" aria-label="Vorlesung W04: Folie 32, Forschungsstand zur Messung; Folie 33, Audits gelten für den geprüften Stand">i</span></label><div id="grenze" class="answer">Synthetisches Szenario mit Basisraten 0,85 und 0,65, Seed 42 und nur einem Split. Label-Bias 0,10 verfälscht die Altdatenlabels: in Gruppe b werden Geeignete systematisch als ungeeignet erfasst (sichtbar an der Basisrate der Altdaten b = 0,58 gegenüber wahrer Basisrate 0,65). Die FPR beruht auf 132 nicht rückzahlungsfähigen Personen in a und 236 in b. Nach dem Eingriff bleiben die FPR mit 57,58 % und 51,69 % hoch. μ=30 wurde beibehalten, aber nicht unabhängig validiert. Die kleineren Gruppenabstände allein rechtfertigen keinen realen Einsatz.</div></div>
+    </div></div>
+</div>
+
+<!-- ABGABE -->
+<div class="card">
+  <div class="tag">Abgabe</div>
+  <p>Zeile für die Vergleichsmatrix:</p>
+  <div class="line" id="matrixLine">G10 · T01 · Equalized Odds · Training · Differenz Chancen 0,18 → 0,06 · Genauigkeit 0,83 → 0,83</div>
+  <p class="info">Ins OPAL: Ergebnisdatei und Datensatz (CSV). W05 arbeitet mit dem Datensatz weiter.</p>
+</div>
+
+<div class="inset">
+  <div class="tag">Was im Hintergrund passiert</div>
+  <ul>
+    <li><strong>Daten:</strong> je Fall Gruppe, wahre Eignung nach Basisrate, zwei Fachmerkmale, ein Proxy. Label-Bias erfasst Geeignete in b als ungeeignet.</li>
+    <li><strong>Basismodell:</strong> logistische Regression auf 70 Prozent der Fälle, ohne A; gemessen auf den übrigen 30 Prozent. <span class="vl" tabindex="0" role="button" data-vl="23" aria-label="Vorlesung W04: Folie 23, Weglassen geschützter Merkmale schützt nicht">i</span></li>
+    <li><strong>Daten-Eingriff:</strong> entfernt den linearen Zusammenhang der Merkmale mit A, wie <code>CorrelationRemover</code> in fairlearn. <span class="vl" tabindex="0" role="button" data-vl="31" aria-label="Vorlesung W04: Folie 31, Mitigation im Überblick">i</span></li>
+    <li><strong>Training:</strong> logistische Regression mit Strafterm für ungleiche mittlere Scores; Ziel wie <code>ExponentiatedGradient</code>, anderes Verfahren.</li>
+    <li><strong>Nach dem Training:</strong> eigene Schwelle für Gruppe b, gewählt auf den Trainingsdaten; Ziel wie <code>ThresholdOptimizer</code>, aber ohne Zufallsanteil.</li>
+    <li><strong>Kennzahlen:</strong> Differenz Parität = Abstand der Auswahlraten; Verhältnis = kleinere durch größere Rate; Differenz Chancen = größerer Abstand von TPR oder FPR, wie <code>equalized_odds_difference</code>. <span class="vl" tabindex="0" role="button" data-vl="19, 21" aria-label="Vorlesung W04: Folie 19, Demografische Parität; Folie 21, Angeglichene Chancen (Equalized Odds)">i</span></li>
+  </ul>
+</div>
+
+<div class="card">
+  <div class="tag">Dokumentation // Entstehungsbedingungen des Datensatzes</div>
+  <p class="info">Diese statische Seite nachvollziehbar dokumentiert, unter welchen Parametern die synthetischen Daten und Messwerte entstanden sind. Alle Angaben entsprechen der exakt ausgeführten Simulation (identischer Zufallsgenerator wie das Browser-Arbeitsblatt, Seed 42).</p>
+  <h3>Parameter der Datenerzeugung (Teil A, Schritt 5)</h3>
+  <table><thead><tr><th>Parameter</th><th>Wert</th><th>Bedeutung</th></tr></thead><tbody>
+  <tr><td>Gruppe / Thema</td><td>G10 · T01 Kreditwürdigkeitsprüfung</td><td>Bearbeitungsgruppe und Szenario</td></tr>
+  <tr><td>Ŷ = 1</td><td>Kredit wird bewilligt</td><td>Entscheidung des Modells</td></tr>
+  <tr><td>Merkmal A</td><td>Altersgruppe (a: 35–64, b: 18–34 Jahre)</td><td>Geschütztes Merkmal</td></tr>
+  <tr><td>Basisrate p(a)</td><td>0,85</td><td>Anteil tatsächlich Geeigneter in Gruppe a</td></tr>
+  <tr><td>Basisrate p(b)</td><td>0,65</td><td>Anteil tatsächlich Geeigneter in Gruppe b</td></tr>
+  <tr><td>Proxy-Merkmal</td><td>Länge der Kredithistorie</td><td>Verrät die Gruppenzugehörigkeit</td></tr>
+  <tr><td>Proxy-Stärke</td><td>0,8</td><td>2,5 · 0,8 · Normal(0,1) Offset auf Proxy je Gruppe b</td></tr>
+  <tr><td>Fallzahl n</td><td>5.000</td><td>Gesamtzahl synthetischer Fälle</td></tr>
+  <tr><td>Anteil Gruppe b</td><td>0,40</td><td>2.019 Fälle in b, 2.981 in a</td></tr>
+  <tr><td><strong>Label-Bias</strong></td><td><strong>0,1</strong></td><td>10 % der Geeigneten in b werden in Altdaten als ungeeignet gelabelt (129 Fälle im CSV: y_wahr=1, y_altdaten=0)</td></tr>
+  <tr><td>Seed</td><td>42</td><td>Zufallsgenerator (LCG a+0x6D2B79F5), identisch zum JS im Arbeitsblatt</td></tr>
+  <tr><td>Fachmerkmal 1</td><td>Haushaltsüberschuss</td><td>x₁ = 1,2·y_wahr + Normal(0,1)</td></tr>
+  <tr><td>Fachmerkmal 2</td><td>Zahlungszuverlässigkeit</td><td>x₂ = 0,8·y_wahr + Normal(0,1)</td></tr>
+  <tr><td>Train/Test-Split</td><td>70 % / 30 %</td><td>3.500 Training, 1.500 Messung (randomisiert nach Seed)</td></tr>
+  </tbody></table>
+  <h3>Modell und Eingriff (Teil B)</h3>
+  <table><thead><tr><th>Schritt</th><th>Verfahren</th><th>Details</th></tr></thead><tbody>
+  <tr><td>Basismodell</td><td>Logistische Regression (Newton, 30 Iterationen, L2 = C⁻¹ = 1 auf Gewichte außer Bias)</td><td>Trainiert auf x₁, x₂, Proxy (ohne A), Schwelle 0,50</td></tr>
+  <tr><td>Eingriff</td><td>Training mit Fairness-Bedingung (Adam, 700 Iterationen, lr = 0,05)</td><td>Strafterm μ = 30 auf ungleiche mittlere Scores getrennt nach (Gruppe × Label), Ziel Equalized Odds</td></tr>
+  <tr><td>Messung</td><td>Auf Test-Split (1.500 Fälle), gegen Altdatenlabels (y_altdaten)</td><td>TPR/FPR/Basisrate je Gruppe, plus aggregierte Fairness-KPIs</td></tr>
+  </tbody></table>
+  <h3>Ergebnisse im Überblick</h3>
+  <table><thead><tr><th></th><th>Genauigkeit</th><th>Differenz Parität</th><th>Verhältnis</th><th>Differenz Chancen</th></tr></thead><tbody>
+  <tr><td>Basismodell</td><td>0,827</td><td>0,225</td><td>0,755</td><td>0,177</td></tr>
+  <tr><td>Nach Eingriff (μ=30)</td><td>0,827</td><td>0,138</td><td>0,847</td><td>0,059</td></tr>
+  </tbody></table>
+  <p class="info"><strong>Effekt des Label-Bias:</strong> Wegen Label-Bias 0,1 erscheint die Basisrate in den Altdaten für Gruppe b bei 0,58 (statt wahr 0,65). Das Modell lernt aus verzerrten Labels; die Fairness-Metrik misst daher gegen die verzerrten Altdaten, nicht gegen die wahre Eignung.</p>
+  <h3>Reproduzierbarkeit</h3>
+  <p class="info">CSV-Spalten: <code>gruppe</code> (a/b), <code>haushaltsueberschuss</code>, <code>zahlungszuverlaessigkeit</code>, <code>laenge_der_kredithistorie</code> (Proxy), <code>y_altdaten</code> (mit Label-Bias), <code>y_wahr</code> (wahre Eignung), <code>teil</code> (training/messung). Datei: <code>W04_G10_Datensatz_neu.csv</code> (5.001 Zeilen inkl. Header). Dieselben Daten lassen sich im originalen Arbeitsblatt <code>W04_Arbeitsblatt_Uebung-neu.html</code> mit denselben Parametern (Seed 42, pa 0,85, pb 0,65, Proxy 0,8, n 5000, Anteil b 0,4, Label-Bias 0,1) neu erzeugen.</p>
+</div>
+<p class="src">G10 · Ergebnisfassung W04 · Statische Momentaufnahme der ausgeführten Simulation · Label-Bias 0,1 · Proxy: Länge der Kredithistorie · Daten synthetisch; ursprüngliches Arbeitsblatt: Fassung 27.10.2026.</p>
+</main>
+
+
+</body></html>

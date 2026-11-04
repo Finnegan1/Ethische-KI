@@ -1,0 +1,24 @@
+# W04 Ergebnis · G10 · T01 Kreditwürdigkeitsprüfung
+
+## Teil A
+1. Ŷ = 1 bedeutet: Der beantragte Kredit wird bewilligt. · Merkmal A: Altersgruppe (a: 35–64 Jahre, b: 18–34 Jahre)
+2. Bias-Quelle: Label · In den historischen Kreditdaten werden 10 % der rückzahlungsfähigen 18–34-Jährigen fälschlich als ungeeignet erfasst, weil die Kredithistorie junger Menschen kürzer ist und frühere Ablehnungen sich häufen.
+3. Zielmetrik: Equalized Odds (gleiche TPR und FPR) · Rückzahlungsfähige 18–34-Jährige sollen nicht häufiger zu Unrecht abgelehnt werden als rückzahlungsfähige 35–64-Jährige (gleiche TPR/FNR). Zugleich sollen Fehlbewilligungen nicht einseitig eine Altersgruppe treffen (gleiche FPR), da sie Ausfallrisiken für die Bank und mögliche Überschuldung für Kreditnehmende bedeuten.
+4. Eingriff: Training (Fairness-Bedingung) · Im Laborszenario haben wir Zugriff auf Trainingsdaten, Altersgruppen und das Modelltraining. Daher ergänzen wir das Training um eine Fairness-Bedingung mit dem Ziel Equalized Odds. Die Altersgruppe dient der Fairness-Optimierung und Auswertung, nicht als direktes Modellmerkmal; für beide Gruppen bleibt die Entscheidungsschwelle gleich.
+5. Baseline: Basisrate a 0,85, b 0,65 · Proxy Länge der Kredithistorie, Stärke 0,80 · Fallzahl 5000 · Anteil b 0,40 · Label-Bias 0,10 · Seed 42 · Fachmerkmale: Haushaltsüberschuss, Zahlungszuverlässigkeit
+
+## Teil B
+Basismodell a (35–64 Jahre): Auswahlrate 0,92, TPR 0,97, FPR 0,61
+Basismodell b (18–34 Jahre): Auswahlrate 0,69, TPR 0,86, FPR 0,44
+Basismodell: Genauigkeit 0,827, Differenz Parität 0,225, Verhältnis 0,754, Differenz Chancen 0,177
+Eingriff: Training mit Fairness-Bedingung, Stärke 30.
+Nach Eingriff a (35–64 Jahre): Auswahlrate 0,90, TPR 0,96, FPR 0,58
+Nach Eingriff b (18–34 Jahre): Auswahlrate 0,76, TPR 0,92, FPR 0,52
+Nach Eingriff: Genauigkeit 0,827, Differenz Parität 0,138, Verhältnis 0,847, Differenz Chancen 0,059
+
+Vergleichsmatrix: G10 · T01 · Equalized Odds · Training · Differenz Chancen 0,18 → 0,06 · Genauigkeit 0,83 → 0,83
+
+Preis: Mit dem Trainingseingriff (μ=30) sinkt die Differenz Chancen von 0,18 auf 0,06 und die Differenz Parität von 0,22 auf 0,14; die Genauigkeit bleibt mit 0,827 ≈ 0,827 praktisch gleich. Bei jüngeren Personen (Gruppe b) sinken die falschen Ablehnungen von 52 auf 28, während die Fehlbewilligungen von 103 auf 122 steigen.
+Grenze: Synthetisches Szenario mit Basisraten 0,85 und 0,65, Seed 42 und nur einem Split. Label-Bias 0,10 verfälscht die Altdatenlabels: in Gruppe b werden Geeignete systematisch als ungeeignet erfasst (sichtbar an der Basisrate der Altdaten b = 0,58 gegenüber wahrer Basisrate 0,65). Die FPR beruht auf 132 nicht rückzahlungsfähigen Personen in a und 236 in b. Nach dem Eingriff bleiben die FPR mit 57,58 % und 51,69 % hoch. μ=30 wurde beibehalten, aber nicht unabhängig validiert. Die kleineren Gruppenabstände allein rechtfertigen keinen realen Einsatz.
+
+Arbeitsblatt W04, Fassung 27.10.2026. Daten synthetisch. Label-Bias 0,1 · Proxy: Länge der Kredithistorie.
