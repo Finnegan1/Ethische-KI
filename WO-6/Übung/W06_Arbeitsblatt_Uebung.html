@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="de"><head><meta charset="UTF-8">
+<meta name="color-scheme" content="only light">
+<style id="abCompat">:root{color-scheme:only light}#jsWarn{display:block;margin:12px auto;max-width:1100px;padding:12px 16px;border:2px solid #C026D3;background:#FDF4FF;color:#1E1B2E;font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;border-radius:6px}#jsWarn b{display:block;margin-bottom:4px}#jsErr{display:block;margin-top:6px;font-size:13px;color:#6B6880}#abDL{display:none;margin:12px auto;max-width:1100px;padding:12px 16px;border:1px solid #D9D6E8;background:#fff;color:#1E1B2E;font:14px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;border-radius:6px}#abDL textarea{width:100%;box-sizing:border-box;min-height:140px;font:12px/1.4 ui-monospace,Menlo,Consolas,monospace;margin-top:6px}/* 10.11.2026: lange Auswahltexte nicht über den Rand (WebKit/Safari) */select{max-width:100%;box-sizing:border-box;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;contain:paint}</style>
+<script>/* Kompatibilitaet 05.11.2026: Fehleranzeige, Kopieren und Download mit Rueckfallweg */
+window.onerror=function(m){try{var w=document.getElementById('jsWarn');if(w){w.style.display='block';var e=document.getElementById('jsErr');if(e)e.textContent='Technischer Hinweis für die Fehlermeldung: '+m;}}catch(x){}};
+window.__abCopy=function(t,btn){function fb(){var ta=document.createElement('textarea');ta.value=t;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.top='0';ta.style.opacity='0';document.body.appendChild(ta);ta.focus();ta.select();try{ta.setSelectionRange(0,t.length);}catch(x){}var ok=false;try{ok=document.execCommand('copy');}catch(x){}ta.remove();return ok;}
+ function say(ok){if(!btn)return;var o=btn.getAttribute('data-l')||btn.textContent;btn.setAttribute('data-l',o);btn.textContent=ok?'Kopiert':'Bitte Zeile markieren und kopieren';setTimeout(function(){btn.textContent=o;},2500);}
+ try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){say(true);},function(){say(fb());});return;}}catch(x){}say(fb());};
+window.__abDL=function(name,text){var d=document.getElementById('abDL');if(!d)return;d.style.display='block';document.getElementById('abDLname').textContent=name;document.getElementById('abDLtext').value=text;};
+;window.__AB_OK=true;
+</script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>W06 Arbeitsblatt · Agenten-Verfassung</title>
+<style>
+:root{--void:#0F0B1A;--deep:#24163A;--paper:#FAFAFC;--ink:#1E1A2E;--violet:#7C3AED;--magenta:#C026D3;--glow:#E879F9;--sage:#2E9E7E;
+--body:#4A4460;--mute:#6B6580;--lilac:#EDE7F8;--border:#E4DFEF;--dbody:#C9C2DE;--mono:'Courier New',monospace;--sans:Arial,Helvetica,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.45;padding:16px}
+main{max-width:1000px;margin:0 auto}
+.eyebrow,.tag{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--magenta);text-transform:uppercase}
+.tag{color:var(--violet);display:block;margin-bottom:6px;font-size:11px}
+h1{font-size:26px;margin:6px 0 2px}
+h2{font-size:20px;margin:0 0 8px}
+h3{font-size:16px;margin:14px 0 6px}
+p{color:var(--body)}
+.head{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;justify-content:space-between;margin-bottom:14px}
+.head>div{min-width:0}
+.card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.task{background:var(--lilac);border-radius:10px;padding:12px 16px;margin-bottom:12px}
+.task ol{margin:6px 0 6px 22px;color:var(--ink)}
+.task .meta{font-size:14px;color:var(--body)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid>div{min-width:0}
+.tool{display:grid;grid-template-columns:1.3fr 1.2fr 2fr;gap:10px;padding:6px 0;border-bottom:1px solid var(--border)}
+.tool:last-child{border-bottom:0}
+.tool>div{min-width:0}
+.checks{display:grid;grid-template-columns:1fr 1fr;gap:4px 14px;margin-top:4px}
+.checks label{display:flex;gap:8px;align-items:flex-start;margin:4px 0;color:var(--ink);font-size:15px;cursor:pointer}
+.checks input{width:18px;height:18px;margin-top:2px;flex:0 0 auto;accent-color:var(--violet)}
+@media(max-width:760px){.grid,.checks{grid-template-columns:1fr}.tool{grid-template-columns:1fr 1fr}.tool>div:first-child{grid-column:1/-1}}
+label{display:block;font-size:14px;color:var(--body);margin:8px 0 3px}
+input[type=text],select,textarea{width:100%;font:inherit;font-size:15px;padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:#fff;color:var(--ink)}
+textarea{min-height:58px;resize:vertical}
+.row{display:flex;align-items:center;gap:10px}
+input[type=range]{flex:1;min-width:0;accent-color:var(--violet);height:30px}
+output{font-family:var(--mono);font-weight:bold;min-width:56px;text-align:right}
+button{font:inherit;font-size:15px;padding:10px 16px;border-radius:8px;border:1px solid var(--violet);background:#fff;color:var(--violet);cursor:pointer;margin:6px 8px 0 0}
+button.primary{background:var(--violet);color:#fff}
+button:disabled{opacity:.45;cursor:default}
+.step{border-top:1px solid var(--border);padding-top:12px;margin-top:12px}
+.step:first-of-type{border-top:0;margin-top:0;padding-top:0}
+.num{display:inline-block;font-family:var(--mono);font-weight:bold;color:var(--violet);margin-right:6px}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:15px;margin-top:8px}
+th,td{border-bottom:1px solid var(--border);padding:6px;text-align:right}
+th:first-child,td:first-child{text-align:left}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--mute);font-weight:normal;text-transform:uppercase}
+td.l{text-align:left}
+tr.own td{background:#F6F1FE;font-weight:bold}
+.mk{display:block;font-family:var(--mono);font-size:12px;color:var(--magenta);white-space:nowrap}
+.kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+.kpi.k3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:760px){.kpi,.kpi.k3{grid-template-columns:repeat(2,1fr)}}
+.kpi div{background:var(--lilac);border-radius:8px;padding:8px 10px;min-width:0}
+.kpi b{display:block;font-size:21px;font-family:var(--mono);overflow-wrap:anywhere}
+.kpi span{font-size:13px;color:var(--body)}
+.info{font-size:14px;color:var(--body);margin-top:6px}
+.note{font-size:14px;color:var(--ink);margin-top:8px;padding:6px 10px;border-left:3px solid var(--magenta);background:#FBF5FD}
+.bars{margin-top:10px}
+.bar{display:grid;grid-template-columns:minmax(110px,220px) 1fr 84px;gap:10px;align-items:center;font-size:14px;margin:4px 0}
+.bar .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink)}
+.bar.own .nm{font-weight:bold}
+.bar .tr{position:relative;height:18px;background:#F6F4FA;border-radius:4px}
+.bar .fl{position:absolute;top:0;bottom:0;border-radius:3px}
+.bar .v{font-family:var(--mono);font-size:14px;text-align:right}
+.pos{background:var(--violet)}
+.neg{background:repeating-linear-gradient(45deg,var(--magenta) 0 4px,#D95BE6 4px 8px)}
+.legend{font-size:13px;color:var(--mute);margin-top:4px}
+.sw{display:inline-block;width:12px;height:12px;border-radius:2px;vertical-align:-1px;margin:0 4px 0 2px}
+.inset{background:var(--deep);border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.inset .tag{color:var(--glow)}
+.inset p,.inset li{color:var(--dbody);font-size:14px}
+.inset ul{margin:4px 0 0 18px}
+.inset li{margin-bottom:4px}
+.inset strong{color:#fff}
+.inset code{color:#fff;overflow-wrap:anywhere}
+.inset .src{color:var(--dbody)}
+code{font-family:var(--mono);font-size:13px}
+.vl{position:relative;display:inline-block;width:16px;height:16px;line-height:14px;border:1px solid var(--violet);border-radius:50%;font-family:var(--mono);font-size:11px;font-weight:bold;font-style:normal;text-align:center;color:var(--violet);background:#fff;cursor:help;vertical-align:2px;margin-left:4px;user-select:none}
+.vl::before{content:"";position:absolute;inset:-5px}
+.vl:hover,.vl:focus{background:var(--violet);color:#fff;outline:none}
+.vl:focus-visible{box-shadow:0 0 0 2px var(--glow)}
+.inset .vl{background:transparent;border-color:var(--glow);color:var(--glow)}
+.inset .vl:hover,.inset .vl:focus{background:var(--glow);color:var(--void)}
+#vltip{position:fixed;z-index:50;max-width:min(330px,calc(100vw - 16px));background:var(--void);border:1px solid var(--violet);border-radius:8px;padding:8px 11px;box-shadow:0 6px 18px rgba(15,11,26,.28);font-size:13px;line-height:1.4;color:var(--dbody);pointer-events:none}
+#vltip .t{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--glow);margin-bottom:4px}
+#vltip .l{display:block}
+#vltip b{color:#fff;font-family:var(--mono);font-weight:bold}
+#vltip i{color:var(--mute)}
+.hidden{display:none}
+.line{font-family:var(--mono);font-size:14px;background:#F6F4FA;border:1px solid var(--border);border-radius:6px;padding:8px;word-break:break-word}
+.src{font-size:12px;color:var(--mute);font-style:italic;margin-top:8px}
+.rng{font-size:14px;color:var(--body);margin-top:4px;line-height:1.35}
+.rng b{color:var(--ink);font-weight:bold}
+.fassung{font-size:14px;color:var(--ink);margin-top:6px;padding:6px 10px;border-left:3px solid var(--violet);background:var(--lilac);border-radius:0 6px 6px 0}
+.explain{background:var(--lilac);border-radius:8px;padding:10px 14px;margin:10px 0 4px;font-size:14px;color:var(--ink)}
+.explain ul{margin:4px 0 0 18px}
+.explain li{margin-bottom:3px}
+.explain table{font-size:14px;margin-top:6px}
+.explain th,.explain td{text-align:left;vertical-align:top}
+.err{font-size:14px;color:#9D1C8F;font-weight:bold;margin-top:4px;padding:4px 8px;border-left:3px solid var(--magenta);background:#FBF5FD}
+input.bad{border-color:var(--magenta);box-shadow:0 0 0 1px var(--magenta)}
+.why{font-size:14px;color:var(--ink);margin-top:8px;padding:6px 10px;border-left:3px solid var(--violet);background:#F6F1FE}
+.frei{margin-top:6px}
+details.stat{border:1px solid var(--border);border-left:3px solid var(--violet);border-radius:6px;background:#fff;padding:6px 10px;margin:8px 0;font-size:14px;color:var(--body)}
+details.stat summary{cursor:pointer;color:var(--violet);font-weight:bold}
+details.stat summary .tag{display:inline;margin:0 6px 0 0;font-size:10px}
+details.stat p{margin-top:6px}
+details.stat .more{font-size:14px;color:var(--mute);font-style:italic}
+@media(max-width:480px){.bar{grid-template-columns:minmax(0,1fr) 72px;gap:2px 8px;margin:8px 0}.bar .nm{grid-column:1/-1;white-space:normal}.bar .v{font-size:13px}.tool{grid-template-columns:1fr}}
+@media print{
+  body{padding:0;font-size:11pt;background:#fff}
+  button,.noprint{display:none!important}
+  .task,.inset,.kpi,table,.tool,.bar{break-inside:avoid}
+  .card{border:0;padding:0}
+  .grid,.checks{grid-template-columns:1fr 1fr!important}
+  .tool{grid-template-columns:1.3fr 1.2fr 2fr!important}
+  .tool>div:first-child{grid-column:auto!important}
+  .kpi{grid-template-columns:repeat(4,1fr)!important}
+  .kpi.k3{grid-template-columns:repeat(3,1fr)!important}
+  h1{font-size:20px} h3{margin:8px 0 4px;break-after:avoid} label{margin:4px 0 2px;break-after:avoid}
+  .grid>div,.checks label{break-inside:avoid}
+  textarea{min-height:44px}
+  .inset{background:#fff;border:1px solid var(--border)}
+  .inset .tag,.inset p,.inset li,.inset code,.inset strong,.inset .src{color:var(--ink)}
+  .pos,.neg,.sw,tr.own td{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  #vltip{display:none!important}
+  details.stat{break-inside:avoid}
+  details.stat::details-content{content-visibility:visible;display:block}
+  .rng,details.stat,.explain,.fassung{font-size:9.5pt}
+  .inset{break-inside:auto!important}
+  .inset li{break-inside:avoid}
+  details.stat summary{list-style:none}
+  .err:empty,.why:empty{display:none}
+  .vl{width:auto;height:auto;border:0;border-radius:0;background:none!important;font-size:0;margin-left:3px;vertical-align:baseline}
+  .vl::before{display:none}
+  .vl::after{content:"(VL " attr(data-vl) ")";font-size:8pt;font-weight:normal;color:var(--mute)}
+}
+</style></head><body>
+<div id="jsWarn" role="alert"><b>⚠ Das Arbeitsblatt läuft hier nicht vollständig.</b>Bitte die Datei herunterladen und direkt im Browser öffnen (Chrome, Edge, Firefox oder Safari, möglichst aktuell). In der OPAL-Vorschau, in Mail- oder Teams-Vorschauen und in der Dateivorschau auf iPhone und iPad laufen die Berechnungen nicht.<span id="jsErr"></span></div>
+<noscript><div style="padding:12px;border:2px solid #C026D3;margin:12px">JavaScript ist ausgeschaltet. Das Arbeitsblatt braucht JavaScript.</div></noscript>
+<main>
+
+<div class="head">
+  <div><div class="eyebrow">W06 // Übung // 11.11.2026 // Arbeitsblatt im Browser</div>
+  <h1>Design-Sprint: Agenten-Verfassung</h1>
+  <p>Keine Installation. Alles läuft in diesem Browserfenster, nichts wird gesendet. Die Daten in Teil B sind synthetisch.</p>
+  <p class="fassung" id="fassung">Fassung 05.11.2026: Abgabefrist ergänzt, Erklärungskästen und Wertebereiche vereinheitlicht, Begriffe an die Vorlesung angeglichen; Rechnung unverändert.</p></div>
+  <div style="min-width:280px" class="grid">
+    <div><label for="gruppe">Gruppe</label><select id="gruppe"></select></div>
+    <div><label for="thema">Thema</label><select id="thema"></select></div>
+  </div>
+</div>
+
+<!-- TEIL A -->
+<div class="card" id="teilA">
+  <div class="tag">Teil A // Phase 1 // 25 Min</div>
+  <div class="task"><strong>Aufgabenkarte 1: Agenten-Verfassung entwerfen</strong>
+    <p style="color:var(--ink)"><strong>Ziel:</strong> Festlegen, was der Agent in Ihrem System tun darf und wann ein Mensch entscheidet.</p>
+    <ol><li>Nennen Sie Zweck und Auftraggeber des Agenten.</li>
+    <li>Beschreiben Sie seine Werkzeuge, Rechte und Grenzen (Mandat).</li>
+    <li>Entwerfen Sie die Rangfolge bei Konflikten und die Verbote.</li>
+    <li>Entwerfen Sie Eskalationsregel, Aufsicht, Audit-Trail und sicheren Zustand nach der Stopptaste.</li></ol>
+    <p class="meta"><strong>Ergebnis:</strong> SOUL.md · <strong>Zeit:</strong> 25 Minuten · <strong>Abgabe:</strong> mit der Ergebnisdatei</p>
+  </div>
+
+  <div class="step"><h3><span class="num">1</span>Zweck und Auftraggeber <span class="vl" tabindex="0" role="button" data-vl="6, 7, 13">i</span></h3>
+    <p class="info">Denken Sie den Agenten in Ihrem System, bei einem System ohne Agenten die agentische Komponente, die es bekäme.</p>
+    <div class="grid">
+      <div><label for="aname">Name des Agenten</label><input type="text" id="aname" placeholder="z. B. Reisebuchungsagent"></div>
+      <div><label for="auftrag">In wessen Auftrag handelt er?</label><input type="text" id="auftrag" placeholder="z. B. Reisestelle der Hochschule, für Beschäftigte"></div>
+      <div><label for="zweck">Zweck in einem Satz</label><textarea id="zweck" placeholder="z. B. Dienstreisen nach Antrag buchen: Bahn, Flug, Hotel, innerhalb der Reiserichtlinie."></textarea></div>
+      <div><label for="nichtzweck">Wofür ausdrücklich nicht</label><textarea id="nichtzweck" placeholder="z. B. keine Privatreisen, keine Änderung genehmigter Anträge."></textarea></div>
+    </div></div>
+
+  <div class="step"><h3><span class="num">2</span>Werkzeuge und Rechte (Mandat) <span class="vl" tabindex="0" role="button" data-vl="14, 17">i</span></h3>
+    <p class="info">Least Privilege: nur die Rechte, die der Zweck verlangt. Je Werkzeug eine Grenze mit Zahl oder Bedingung. Bis zu vier Werkzeuge.</p>
+    <div id="toolBox"></div></div>
+
+  <div class="step"><h3><span class="num">3</span>Rangfolge und Verbote <span class="vl" tabindex="0" role="button" data-vl="18, 19">i</span></h3>
+    <p class="info">Welcher Wert setzt sich durch, wenn zwei kollidieren? Rang 1 bis 3 wählen, Rang 4 nach Bedarf. Verbote gelten auch auf ausdrückliche Aufforderung.</p>
+    <div class="grid" id="rangBox"></div>
+    <p class="note hidden" id="rangNote"></p>
+    <div class="grid" style="margin-top:4px">
+      <div><label for="verbot0">Verbot 1</label><input type="text" id="verbot0" placeholder="z. B. keine Buchung ohne genehmigten Reiseantrag"></div>
+      <div><label for="verbot1">Verbot 2</label><input type="text" id="verbot1"></div>
+      <div><label for="verbot2">Verbot 3</label><input type="text" id="verbot2"></div>
+    </div></div>
+
+  <div class="step"><h3><span class="num">4</span>Eskalation, Aufsicht, Audit-Trail, Stopp <span class="vl" tabindex="0" role="button" data-vl="23, 28, 29, 31, 32">i</span></h3>
+    <div class="explain" id="regelInfo"><strong>Was die Eskalationsregel festlegt</strong><ul>
+      <li><b>Schwelle S:</b> Aktionen mit höherer Wirkung gehen vor der Ausführung zur Freigabe. Bewirkt in Teil B: wie viele Freigaben je Tag anfallen.</li>
+      <li><b>Zusatzregel:</b> Im riskanten Kontext geht jede Aktion zur Freigabe, auch unter S. Bewirkt in Teil B: zusätzliche Freigaben dort, wo Fehler häufiger sind.</li>
+      <li><b>Aufsichtsmodell:</b> wie ein Mensch eingebunden ist. Bewirkt in Teil B: nichts; der Simulator rechnet jede eskalierte Aktion als Freigabe vor der Ausführung.</li>
+      <li><b>Ausfallverhalten:</b> was geschieht, wenn die Kontrollinstanz nicht antwortet. Bewirkt in Teil B: nichts; es steht in der SOUL.md.</li>
+      <li>Legen Sie die Regel vor Teil B fest. Eine spätere Änderung setzt Teil B, Schritte 3 und 4 zurück.</li></ul></div>
+    <div class="grid">
+      <div><label for="schwelle">Freigabe vor der Aktion, wenn die Wirkung höher ist als S (in €; leer: keine Betragsschwelle)</label><input type="text" id="schwelle" value="100" inputmode="decimal"></div>
+      <div><label for="zusatz">Zusätzlich immer Freigabe im riskanten Kontext?</label><select id="zusatz"><option value="nein">nein</option><option value="ja">ja</option></select></div>
+      <div><label for="bez">Bezeichnung des riskanten Kontexts</label><input type="text" id="bez" placeholder="z. B. außerhalb der Richtlinie"></div>
+      <div><label for="aufsicht">Aufsichtsmodell</label><select id="aufsicht"><option value="">bitte wählen</option>
+        <option value="HITL">HITL (Human-in-the-Loop): eskalierte Aktion wartet auf Freigabe</option>
+        <option value="HOTL">HOTL (Human-on-the-Loop): Mensch überwacht und greift ein</option>
+        <option value="HIC">HIC (Human-in-Command): Mensch steuert den Einsatz insgesamt</option>
+        <option value="andere">andere (Freitext)</option></select>
+        <input type="text" id="aufsicht_frei" class="frei hidden" aria-label="Aufsichtsmodell, eigene Angabe" placeholder="eigenes Aufsichtsmodell beschreiben"></div>
+      <div style="grid-column:1/-1"><label for="ausfall">Wenn die Kontrollinstanz ausfällt (in der Vorlesung: Guardian, prüft jede Aktion vor der Ausführung)</label><select id="ausfall"><option value="">bitte wählen</option>
+        <option value="anhalten">anhalten, bis die Kontrollinstanz wieder antwortet (fail-safe)</option>
+        <option value="weiter">weiterlaufen ohne Prüfung (fail-open)</option>
+        <option value="andere">andere (Freitext)</option></select>
+        <input type="text" id="ausfall_frei" class="frei hidden" aria-label="Verhalten bei Ausfall, eigene Angabe" placeholder="z. B. nur noch lesen, schreibende Aufrufe gesperrt"></div>
+    </div>
+    <label>Felder des Audit-Trails, je Schritt an der Werkzeugschnittstelle</label>
+    <div class="checks" id="logBox"></div>
+    <p class="info">Wozu: Mit diesen Feldern lässt sich später rekonstruieren, wer was in wessen Auftrag mit welchem Recht und welchem Ergebnis getan hat. Vorgeschrieben ist die automatische Protokollierung nur für Hochrisiko-KI-Systeme (Art. 12 KI-VO); für andere Systeme ist sie gute Praxis.</p>
+    <label for="stopp">Sicherer Zustand nach der Stopptaste: Was passiert mit laufenden und angefangenen Vorgängen?</label>
+    <textarea id="stopp" placeholder="z. B. Laufende Aufrufe werden beendet oder als fehlgeschlagen markiert; offene Buchungen gehen als „manuell prüfen“ an die Reisestelle; Lesezugriff bleibt für die Rekonstruktion."></textarea>
+    <p class="info">Die Matrixzeile übernimmt bis zu 60 Zeichen, bei längerem Text bis zum letzten Satzzeichen davor.</p>
+    <details class="stat" id="boxCard"><summary><span class="tag">Begriffe kurz</span>Model Card, Agent Card, Verfassung</summary>
+      <p>Die Model Card (Mitchell et al. 2019) dokumentiert ein Modell mit Einsatz und Grenzen als Text für Menschen; eine System Card ist ein Bericht des Anbieters über ein ganzes System mit Tests und Schutzmaßnahmen. Die Agent Card im Protokoll A2A ist eine maschinenlesbare Selbstauskunft eines Agenten als JSON mit Name, Skills, Endpunkt und Authentifizierung, abgelegt unter <code>/.well-known/agent-card.json</code>. Die SOUL.md aus Teil A legt Regeln für den Agenten fest; sie dokumentiert ihn nicht.</p>
+      <p class="more">Quelle: Mitchell et al. (2019); A2A: Anbieterangabe; geprüft am 04.11.2026 und 09.11.2026 · Vorlesung <span class="vl" tabindex="0" role="button" data-vl="20, 21, 22">i</span></p></details>
+    <button class="primary noprint" id="btnSoul">SOUL.md herunterladen</button>
+    <p class="info">Teil B rechnet mit der Eskalationsregel aus diesem Schritt. Lehrkontext, keine Rechtsberatung.</p></div>
+</div>
+
+<!-- TEIL B -->
+<div class="card" id="teilB">
+  <div class="tag">Teil B // Phase 2 // 35 Min</div>
+  <div class="task"><strong>Aufgabenkarte 2: Eskalationsregel prüfen</strong>
+    <p style="color:var(--ink)"><strong>Ziel:</strong> Prüfen, ob Ihre Regel Schaden senkt, ohne die Aufsicht zu überlasten.</p>
+    <ol><li>Beschreiben Sie Ihr System in Zahlen.</li>
+    <li>Erläutern Sie die Grenzfälle voll autonom und alles freigeben.</li>
+    <li>Analysieren Sie Ihre Regel aus Teil A.</li>
+    <li>Nennen Sie die Minima im Schwellenvergleich.</li>
+    <li>Bewerten Sie, ob Ihre Regel trägt und was sie kostet.</li></ol>
+    <p class="meta"><strong>Ergebnis:</strong> Matrixzeile und Bewertung · <strong>Zeit:</strong> 35 Minuten · <strong>Abgabe:</strong> Ergebnisdatei</p>
+  </div>
+
+  <div class="step"><h3><span class="num">1</span>Ihr System in Zahlen <span class="vl" tabindex="0" role="button" data-vl="24, 25">i</span></h3>
+    <p class="info">Startwerte: Agent E, der Einkaufsagent aus der Vorlesung. Passen Sie die Werte an Ihr System an; geschätzte Werte sind erlaubt, wenn Sie sie begründen können. Unter jedem Feld stehen Min, Max, Standardwert und Wirkung; Werte außerhalb des Bereichs werden gemeldet und nicht gerechnet. Die Kästen „Statistik kurz“ erläutern Statistik-Begriffe, ausführlicher die Statistik-Kurzreferenz im OPAL (<code>Statistik_Kurzreferenz_I050_2026-11-05.pdf</code>).</p>
+    <div class="explain" id="parInfo"><strong>Was die Parameter festlegen</strong>
+      <div class="tbl"><table><thead><tr><th>Gruppe</th><th>Parameter</th><th>legt fest</th></tr></thead><tbody>
+      <tr><td>Menge und Wirkung</td><td>Aktionen je Monat, Median, Streuung σ</td><td>wie viele Aktionen es gibt und wie groß ihre Wirkung in € ist</td></tr>
+      <tr><td>Kontext und Fehler</td><td>Anteil riskanter Kontext, beide Fehlerraten, Schadensquote</td><td>wie oft eine Aktion falsch ist und wie viel ihrer Wirkung dann verloren geht</td></tr>
+      <tr><td>Aufsicht</td><td>Grunderkennung r0, Minuten je Freigabe, Prüfkapazität, Arbeitstage</td><td>wie viele Fehler eine Freigabe abfängt und ab wann die Prüfenden überlastet sind</td></tr>
+      <tr><td>Kosten</td><td>Stundensatz</td><td>was eine Prüfstunde kostet</td></tr>
+      <tr><td>Zufall</td><td>Seed</td><td>welche Stichprobe gezogen wird; gleicher Seed, gleiche Daten</td></tr>
+      </tbody></table></div></div>
+    <div class="grid">
+      <div><label for="n">Aktionen je Monat</label><input type="text" id="n" value="1000" inputmode="numeric"></div>
+      <div><label for="median">Median der Wirkung je Aktion in € (Betrag oder Schaden im Fehlerfall)</label><input type="text" id="median" value="40" inputmode="decimal"></div>
+      <div><label for="sigma">Streuung σ der Wirkung (lognormal)</label><div class="row"><input type="range" id="sigma" min="0.1" max="2" step="0.05" value="0.9"><output id="o_sigma"></output></div></div>
+      <div><label for="anteil" id="l_anteil">Anteil riskanter Kontext</label><div class="row"><input type="range" id="anteil" min="0" max="1" step="0.05" value="0.2"><output id="o_anteil"></output></div></div>
+      <div><label for="pn">Fehlerrate im normalen Kontext</label><div class="row"><input type="range" id="pn" min="0" max="0.3" step="0.01" value="0.02"><output id="o_pn"></output></div></div>
+      <div><label for="pr" id="l_pr">Fehlerrate im riskanten Kontext</label><div class="row"><input type="range" id="pr" min="0" max="0.5" step="0.01" value="0.08"><output id="o_pr"></output></div></div>
+      <div><label for="quote">Schadensquote: Anteil der Wirkung, der bei einem Fehler verloren geht</label><div class="row"><input type="range" id="quote" min="0" max="1" step="0.05" value="0.5"><output id="o_quote"></output></div></div>
+      <div><label for="r0">Grunderkennung r0: Erkennungsrate einer Freigabe bis zur Kapazität</label><div class="row"><input type="range" id="r0" min="0" max="1" step="0.05" value="0.9"><output id="o_r0"></output></div></div>
+      <div><label for="minuten">Minuten je Freigabe</label><input type="text" id="minuten" value="2" inputmode="decimal"></div>
+      <div><label for="kap">Prüfkapazität: Freigaben je Arbeitstag mit voller Sorgfalt</label><input type="text" id="kap" value="15" inputmode="decimal"></div>
+      <div><label for="tage">Arbeitstage je Monat</label><input type="text" id="tage" value="22" inputmode="numeric"></div>
+      <div><label for="stundensatz">Stundensatz der Prüfenden in €</label><input type="text" id="stundensatz" value="45" inputmode="decimal"></div>
+      <div><label for="seed">Zufallswert (Seed)</label><input type="text" id="seed" value="11" inputmode="numeric"></div>
+    </div>
+    <button class="primary" id="btn1">Daten erzeugen</button>
+    <div id="out1"></div></div>
+
+  <div class="step"><h3><span class="num">2</span>Grenzfälle: voll autonom und alles freigeben <span class="vl" tabindex="0" role="button" data-vl="27, 47">i</span></h3>
+    <div id="box_erw"></div>
+    <button class="primary" id="btn2" disabled>Grenzfälle rechnen</button>
+    <div id="out2"></div></div>
+
+  <div class="step"><h3><span class="num">3</span>Ihre Regel aus Teil A <span class="vl" tabindex="0" role="button" data-vl="28, 48">i</span></h3>
+    <p class="info">Legen Sie vor dem Rechnen fest, was „tragfähig“ für Ihr System heißt, etwa Freigaben je Tag unter der Prüfkapazität und eine Mindestsenkung des Schadens gegenüber voll autonom.</p>
+    <p class="info" id="ruleInfo"></p>
+    <button class="primary" id="btn3" disabled>Eigene Regel rechnen</button>
+    <div id="out3"></div></div>
+
+  <div class="step"><h3><span class="num">4</span>Schwellenvergleich <span class="vl" tabindex="0" role="button" data-vl="27, 47">i</span></h3>
+    <button class="primary" id="btn4" disabled>Vergleich rechnen</button>
+    <div id="out4"></div></div>
+
+  <div class="step"><h3><span class="num">5</span>Bewertung <span class="vl" tabindex="0" role="button" data-vl="26, 33">i</span></h3>
+    <label for="bewertung">Trägt Ihre Regel? Was ist der Preis?</label>
+    <textarea id="bewertung" style="min-height:96px" placeholder="Unsere Regel senkt den Schaden um …; dafür … Prüfstunden je Monat; die Kapazität ist zu … ausgelastet; nicht abgedeckt ist …"></textarea>
+    <div class="grid"><div><label for="urteil">Urteil (optional)</label><select id="urteil"><option value="">kein Urteil gewählt</option><option value="trägt">Regel trägt für unser System</option><option value="trägt nicht">Regel trägt nicht für unser System</option></select></div></div>
+    <p class="info">Das Urteil ist freiwillig und keine zusätzliche Abgabeanforderung. Wählen Sie es, steht es in der Ergebnisdatei.</p></div>
+</div>
+
+<!-- ABGABE -->
+<div class="card">
+  <div class="tag">Abgabe // bis So 15.11.2026, 23:59 Uhr // OPAL</div>
+  <p>Zeile für die Vergleichsmatrix:</p>
+  <div class="line" id="matrixLine">erscheint nach Schritt 4</div>
+  <button id="btnCopy" class="noprint" disabled>Zeile kopieren</button>
+  <button class="primary noprint" id="btnSave">Ergebnisdatei herunterladen</button>
+  <button class="noprint" id="btnSoul2">SOUL.md herunterladen</button>
+  <button class="noprint" id="btnPrint">Drucken oder als PDF sichern</button>
+  <p class="info" id="copyInfo" aria-live="polite"></p>
+  <p class="info"><strong>Abgabe bis Ende KW46, So 15.11.2026, 23:59 Uhr, im OPAL:</strong> SOUL.md und Ergebnisdatei. Die Matrixzeile tragen Sie heute im Debrief ein; sie steht auch in der Ergebnisdatei. Die SOUL.md kann als Baustein für Kapitel 5 dienen.</p>
+</div>
+
+<div class="inset">
+  <div class="tag">Was im Hintergrund passiert</div>
+  <ul>
+    <li><strong>Lehrmodell:</strong> Der Simulator ist ein konstruiertes Lehrmodell, keine Messung. Er zeigt, wie Ihre Annahmen zusammenwirken, nicht, wie sich ein reales System verhält. Gerechnet werden Erwartungswerte je Monat, keine einzelnen Fehlerereignisse.</li>
+    <li><strong>Daten:</strong> Für jede der n Aktionen eine Wirkung W = exp(ln(Median) + σ · z) mit standardnormalem z, auf Cent gerundet; mit Wahrscheinlichkeit „Anteil“ liegt die Aktion im riskanten Kontext. Fehlerwahrscheinlichkeit p je Aktion: Fehlerrate normal oder riskant. Zufallszahlen aus einem festen Generator (mulberry32, Normalverteilung nach Box-Muller): gleicher Seed, gleiche Daten.</li>
+    <li><strong>Regel:</strong> Eine Aktion geht vor der Ausführung zur Freigabe, wenn W &gt; S ist oder wenn sie im riskanten Kontext liegt und die Zusatzregel gilt. Sonst läuft sie ohne Prüfung. Freigaben je Tag = Freigaben je Monat / Arbeitstage.</li>
+    <li><strong>Kapazität:</strong> Eigene Modellannahme: Eine Freigabe erkennt einen Fehler mit r = r<sub>0</sub> · min(1, Kapazität / Freigaben je Tag); ohne Freigaben gilt r<sub>0</sub>. Wer mehr vorlegt, als geprüft werden kann, prüft im Modell flacher. Motiviert ist die Annahme durch Turan (2026), ein Preprint ohne Begutachtung, nach dem Aufsicht eine Kapazität hat; der Autor nennt seine Befunde selbst „modeling results that motivate a human study“. Die Formel hier ist gesetzt, nicht aus Turan übernommen. Dass zu viele Freigaben den Schaden wieder erhöhen, ist deshalb im Modell angelegt, nicht beobachtet.</li>
+    <li><strong>Kennzahlen:</strong> Erwarteter Schaden = Σ p · Schadensquote · W, bei Aktionen mit Freigabe mal (1 − r). Prüfminuten = Freigaben · Minuten je Freigabe. Gesamtkosten = Schaden + Prüfminuten / 60 · Stundensatz. Nicht im Modell: Wartezeit der Betroffenen, Schwankung über den Tag, Ermüdung über Wochen, Aufteilen von Aktionen unter die Schwelle, Fehlentscheidungen der Prüfenden gegen korrekte Aktionen.</li>
+    <li><strong>Eingaben und Hinweise:</strong> Jedes Zahlenfeld hat einen festen Bereich; liegt ein Wert außerhalb oder ist er keine Zahl, meldet das Blatt das am Feld und rechnet den Schritt nicht. Ändert eine Eingabe am Ergebnis nichts, etwa eine Schwelle über der größten Wirkung oder eine Kapazität, die nicht erreicht wird, nennt ein Hinweis den Grund. Die Rechnung selbst ist seit der Fassung vom 02.11.2026 unverändert.</li>
+    <li><strong>Antworten der Kontrollinstanz:</strong> Das Modell kennt nur zwei: ausführen und rückfragen. Der Agent Control Standard (ACS) sieht fünf vor, <code>allow</code>, <code>deny</code>, <code>modify</code>, <code>ask</code>, <code>defer</code>; fällt der Guardian aus, ist das Standardverhalten laut Projekt <code>proceed</code>, also weiterlaufen (Projektangabe). Saltzer &amp; Schroeder (1975) verlangen dagegen sichere Voreinstellungen (fail-safe defaults) und das kleinste nötige Recht: „Every program and every user of the system should operate using the least set of privileges necessary to complete the job.“</li>
+    <li><strong>Recht (Hochrisiko-KI-Systeme):</strong> Art. 14 Abs. 3 KI-VO: Aufsichtsmaßnahmen müssen „den Risiken, dem Grad der Autonomie und dem Kontext der Nutzung“ angemessen sein; die Schwelle ist eine solche Abstufung. Art. 14 Abs. 4 lit. e: eine „Stopptaste“ oder ein ähnliches Verfahren, „was dem System ermöglicht, in einem sicheren Zustand zum Stillstand zu kommen“; daher der sichere Zustand in Teil A. Art. 12 Abs. 1: automatische Protokollierung von Ereignissen; Betreiber bewahren die Protokolle mindestens sechs Monate auf (Art. 26 Abs. 6). Lehrkontext, keine Rechtsberatung.</li>
+    <li><strong>Aufsichtsmodelle:</strong> HITL (Human-in-the-Loop), HOTL (Human-on-the-Loop) und HIC (Human-in-Command) stammen aus den Ethik-Leitlinien der Hochrangigen Expertengruppe (HLEG 2019); die KI-VO verwendet keinen dieser Begriffe. HITL ist dort die Fähigkeit, in jeden Entscheidungszyklus einzugreifen, „was in vielen Fällen weder möglich noch wünschenswert wäre“; HOTL umfasst Eingriffe in den Entwurfszyklus und die Überwachung des Betriebs; HIC die Gesamtsteuerung bis zur Entscheidung, das System nicht zu verwenden. Die Kurzfassungen in Teil A sind betriebliche Arbeitsdefinitionen.</li>
+  </ul>
+  <p class="src">VO (EU) 2024/1689, Art. 12, 14, 26, konsolidierte Fassung vom 27.07.2026 · HLEG für KI (2019), Ethik-Leitlinien für eine vertrauenswürdige KI, S. 19 · Saltzer &amp; Schroeder (1975), Proceedings of the IEEE 63(9), 1278–1308 · Turan (2026), arXiv:2606.08919, Preprint · Agent Control Standard, README (Projektangabe) · alle geprüft am 02.11.2026</p>
+</div>
+<p class="src">I050 Ethische und vertrauenswürdige KI · HTW Dresden · Übung am 11.11.2026 · Fassung 05.11.2026 · Eingaben bleiben nur in diesem Browser gespeichert.</p>
+</main>
+<script>
+(function(){
+"use strict";
+var $=function(id){return document.getElementById(id);};
+var fx=function(v,d){return (isFinite(v)?v:0).toFixed(d).replace('.',',');};
+var f2=function(v){return fx(v,2);};
+var grp=function(v,d){var s=(isFinite(v)?Math.abs(v):0).toFixed(d),p=s.split('.'),i=p[0].replace(/\B(?=(\d{3})+(?!\d))/g,'.');return (v<0&&+s!==0?'−':'')+i+(p[1]?','+p[1]:'');};
+var eur=function(v){return grp(v,2);},eur0=function(v){return grp(Math.round(v),0);};
+var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});};
+
+/* ---------- Rechenkern (1:1 in W06_simulator_nachrechnen.py) ---------- */
+var E={};
+E.rng=function(seed){var a=seed>>>0;return function(){a=(a+0x6D2B79F5)|0;var t=Math.imul(a^(a>>>15),1|a);t=(t+Math.imul(t^(t>>>7),61|t))^t;return((t^(t>>>14))>>>0)/4294967296;};};
+E.normal=function(r){var u=0,v=0;while(u===0)u=r();while(v===0)v=r();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);};
+E.r2=function(x){return Math.round(x*100)/100;};
+E.START={n:1000,median:40,sigma:0.9,anteil:0.2,pn:0.02,pr:0.08,quote:0.5,minuten:2,kap:15,tage:22,r0:0.9,stundensatz:45,seed:11};
+E.generate=function(P){ /* erst n Wirkungen, dann n Kontexte, wie w06_rechenbeispiel.py */
+  var r=E.rng(P.seed),n=P.n,lm=Math.log(P.median),W=new Array(n),risk=new Array(n),p=new Array(n),i;
+  for(i=0;i<n;i++)W[i]=E.r2(Math.exp(lm+P.sigma*E.normal(r)));
+  for(i=0;i<n;i++){risk[i]=r()<P.anteil?1:0;p[i]=risk[i]?P.pr:P.pn;}
+  return {W:W,risk:risk,p:p};};
+E.median=function(a){var s=a.slice().sort(function(x,y){return x-y;}),n=s.length;return n%2?s[(n-1)/2]:(s[n/2-1]+s[n/2])/2;};
+E.stats=function(d,P){var n=d.W.length,sum=0,mx=-Infinity,over=0,nr=0,ef=0,sch=0,i;
+  for(i=0;i<n;i++){sum+=d.W[i];if(d.W[i]>mx)mx=d.W[i];if(d.W[i]>100)over++;nr+=d.risk[i];ef+=d.p[i];sch+=d.p[i]*P.quote*d.W[i];}
+  return {summe:sum,median:E.median(d.W),mittel:sum/n,max:mx,anteil_ueber_100:over/n,riskant:nr,erw_fehler:ef,schaden_ohne_aufsicht:sch};};
+E.policy=function(d,P,S,zus){var n=d.W.length,esk=new Array(n),k=0,i;
+  for(i=0;i<n;i++){esk[i]=(d.W[i]>S)||(zus&&d.risk[i]===1);if(esk[i])k++;}
+  var jt=k/P.tage,r=jt>0?P.r0*Math.min(1,P.kap/jt):P.r0,sch=0;
+  for(i=0;i<n;i++)sch+=d.p[i]*P.quote*d.W[i]*(esk[i]?1-r:1);
+  var min=k*P.minuten,pk=min/60*P.stundensatz;
+  return {S:S,zus:!!zus,freigaben:k,je_tag:jt,erkennung:r,schaden:sch,minuten:min,stunden:min/60,pruefkosten:pk,gesamt:sch+pk,ueberlast:jt>P.kap};};
+E.CURVE=[Infinity,250,100,50,25,0];
+E.curve=function(d,P,own){var rows=[],ownIn=false;
+  E.CURVE.forEach(function(S){[false,true].forEach(function(z){var x=E.policy(d,P,S,z);x.own=(S===own.S&&z===own.zus);if(x.own)ownIn=true;rows.push(x);});});
+  if(!ownIn){var o=E.policy(d,P,own.S,own.zus);o.own=true;o.extra=true;rows.push(o);}
+  var iS=0,iG=0;rows.forEach(function(x,i){if(x.schaden<rows[iS].schaden)iS=i;if(x.gesamt<rows[iG].gesamt)iG=i;});
+  rows[iS].minSchaden=true;rows[iG].minGesamt=true;
+  return {rows:rows,iS:iS,iG:iG};};
+window.W06Engine=E;
+
+/* ---------- Oberfläche ---------- */
+var G=['G01','G02','G03','G04','G05','G06','G07','G08','G09','G10','G11','G12'];
+var T=['T01 Kreditwürdigkeitsprüfung','T02 Empfehlungssystem im Online-Handel','T03 Vorauswahl von Bewerbungen','T04 Generativer Kundenservice-Assistent','T05 Verifizierter Einkaufsagent','T06 Digitaler Produktpass','T07 Humanoider Serviceroboter','T08 Herkunftsnachweise in der Bildredaktion','T09 KI-gestützte Lernplattform'];
+$('gruppe').innerHTML='<option value="">bitte wählen</option>'+G.map(function(g){return '<option>'+g+'</option>';}).join('');
+$('thema').innerHTML='<option value="">bitte wählen</option>'+T.map(function(t){return '<option>'+t+'</option>';}).join('');
+var RECHT={lesen:'lesen',schreiben:'schreiben, umkehrbar',irrev:'irreversibel'};
+var PH=[['Buchungsportal','lesen','nur Angebote im Rahmenvertrag'],['Buchung anlegen','schreiben','nur mit genehmigtem Antrag, stornierbar'],['Zahlung mit Firmenkarte','irrev','bis 400 € je Buchung'],['','','']];
+$('toolBox').innerHTML=[0,1,2,3].map(function(j){return '<div class="tool">'+
+  '<div><label for="wn'+j+'">Werkzeug '+(j+1)+'</label><input type="text" id="wn'+j+'"'+(PH[j][0]?' placeholder="z. B. '+PH[j][0]+'"':'')+'></div>'+
+  '<div><label for="wr'+j+'">Recht</label><select id="wr'+j+'"><option value="">bitte wählen</option><option value="lesen">lesen</option><option value="schreiben">schreiben, umkehrbar</option><option value="irrev">irreversibel</option><option value="andere">andere (Freitext)</option></select>'+
+  '<input type="text" id="wr'+j+'_frei" class="frei hidden" aria-label="Recht von Werkzeug '+(j+1)+', eigene Angabe" placeholder="eigenes Recht beschreiben"></div>'+
+  '<div><label for="wg'+j+'">Grenze</label><input type="text" id="wg'+j+'"'+(PH[j][2]?' placeholder="z. B. '+PH[j][2]+'"':'')+'></div></div>';}).join('');
+var WERTE=['Schaden von Betroffenen abwenden','Rechtskonformität','Nachweisbarkeit','Datenschutz und Datenminimierung','Interessen des Auftraggebers','Interessen Dritter','Kosten','Geschwindigkeit','Bequemlichkeit für Nutzende'];
+$('rangBox').innerHTML=[0,1,2,3].map(function(j){return '<div><label for="rang'+j+'">Rang '+(j+1)+(j===3?' (optional)':'')+'</label><select id="rang'+j+'"><option value="">'+(j===3?'kein vierter Wert':'bitte wählen')+'</option>'+WERTE.map(function(w){return '<option>'+w+'</option>';}).join('')+'<option value="andere">andere (Freitext)</option></select>'+
+  '<input type="text" id="rang'+j+'_frei" class="frei hidden" aria-label="Rang '+(j+1)+', eigener Wert" placeholder="eigenen Wert nennen"></div>';}).join('');
+var LOG=[['lf_id','Agenten-Kennung und Version'],['lf_auftrag','Auftraggeber (in wessen Auftrag)'],['lf_vorgang','Vorgangsbezug'],['lf_aufruf','Werkzeugaufruf mit Argumenten'],['lf_entsch','Entscheidung der Kontrollinstanz'],['lf_freigabe','Freigabe: Rolle und Ergebnis'],['lf_ergebnis','tatsächliches Ergebnis mit Fehlermeldung'],['lf_zeit','Zeitstempel, manipulationsgeschützt']];
+$('logBox').innerHTML=LOG.map(function(l){return '<label><input type="checkbox" id="'+l[0]+'"><span>'+l[1]+'</span></label>';}).join('');
+
+var PAR=['n','median','sigma','anteil','pn','pr','quote','r0','minuten','kap','tage','stundensatz','seed'],RULE=['schwelle','zusatz'];
+var TXT=['gruppe','thema','aname','auftrag','zweck','nichtzweck','verbot0','verbot1','verbot2','bez','aufsicht','ausfall','stopp','bewertung','urteil'];
+var TOOLS=[];[0,1,2,3].forEach(function(j){TOOLS.push('wn'+j,'wr'+j,'wg'+j);});
+var RANG=['rang0','rang1','rang2','rang3'],CHK=LOG.map(function(l){return l[0];});
+var FREI=['wr0','wr1','wr2','wr3','rang0','rang1','rang2','rang3','aufsicht','ausfall'];
+var FIELDS=TXT.concat(TOOLS,RANG,PAR,RULE,FREI.map(function(id){return id+'_frei';}));
+var KEY='W06_Arbeitsblatt_v1';
+function save(){try{var o={};FIELDS.forEach(function(f){o[f]=$(f).value;});CHK.forEach(function(f){o[f]=$(f).checked;});localStorage.setItem(KEY,JSON.stringify(o));}catch(e){}}
+function load(){try{var o=JSON.parse(localStorage.getItem(KEY)||'null');if(o){FIELDS.forEach(function(f){if(o[f]!==undefined)$(f).value=o[f];});CHK.forEach(function(f){if(o[f]!==undefined)$(f).checked=!!o[f];});}}catch(e){}}
+
+function pnum(id,lo,hi,def,isInt){if(SPEC[id]){var c0=chk(id);if(c0.ok)return c0.x;}var s=String($(id).value).trim().replace(/\s/g,'');
+  if(isInt)s=s.replace(/\./g,'');else if(s.indexOf(',')>=0)s=s.replace(/\./g,'').replace(',','.');
+  var x=isInt?parseInt(s,10):parseFloat(s);if(!isFinite(x))x=def;return Math.min(Math.max(x,lo),hi);}
+function params(){return {n:pnum('n',1,100000,1000,true),median:pnum('median',0.01,1e7,40),sigma:+$('sigma').value,anteil:+$('anteil').value,pn:+$('pn').value,pr:+$('pr').value,
+  quote:+$('quote').value,minuten:pnum('minuten',0,600,2),kap:pnum('kap',0,10000,15),tage:pnum('tage',1,31,22,true),r0:+$('r0').value,stundensatz:pnum('stundensatz',0,10000,45),seed:pnum('seed',0,4294967295,11,true)};}
+function rule(){var s=String($('schwelle').value).trim();var S=s===''?Infinity:pnum('schwelle',0,1e9,Infinity);var c=chk('schwelle');if(c.ok)S=c.x;return {S:S,zus:$('zusatz').value==='ja'};}
+
+/* ---------- Wertebereiche, Prüfung der Eingaben, Erklärungen (Fassung 04.11.2026; Rechnung unverändert) ---------- */
+var SPEC={
+  n:{min:1,max:100000,def:1000,int:true,eff:'Zahl der simulierten Aktionen je Monat. Mehr Aktionen heißen bei gleicher Regel mehr Freigaben je Tag.',sinn:'Ihre geschätzte Monatsmenge; Beispiel Reisebuchung: 300.'},
+  median:{min:0.01,max:1e7,def:40,eh:' €',eff:'Typische Wirkung einer Aktion: Die Hälfte der Aktionen liegt darunter, die Hälfte darüber. Ändern Sie ihn, verschieben sich alle Beträge im selben Verhältnis.',sinn:'der typische Betrag oder Fehlerschaden einer Aktion in Ihrem System.'},
+  sigma:{eff:'Wie stark die Beträge um den Median streuen. Größeres σ: mehr sehr kleine und sehr große Aktionen, der Mittelwert steigt über den Median.'},
+  anteil:{eff:'Wahrscheinlichkeit, dass eine Aktion im riskanten Kontext liegt. Wirkt auf die Fehlerrate und auf die Zusatzregel aus Teil A.'},
+  pn:{eff:'Wahrscheinlichkeit, dass eine Aktion im normalen Kontext fehlerhaft ist.',sinn:'unter der Fehlerrate im riskanten Kontext.'},
+  pr:{eff:'Wahrscheinlichkeit, dass eine Aktion im riskanten Kontext fehlerhaft ist.',sinn:'mindestens so hoch wie im normalen Kontext, sonst ist der Kontext nicht riskant.'},
+  quote:{eff:'Anteil der Wirkung, der bei einem Fehler verloren geht. 0: Fehler kosten nichts; 1: die ganze Wirkung ist verloren.'},
+  r0:{eff:'Anteil der Fehler, den eine Freigabe abfängt, solange die Kapazität reicht. Wirkt nur auf Aktionen mit Freigabe.'},
+  minuten:{min:0,max:600,def:2,eh:' min',eff:'Arbeitszeit je Freigabe. Wirkt nur auf Prüfstunden und Prüfkosten, nicht auf den Schaden.',sinn:'1–30 min je nach Prüfung.'},
+  kap:{min:0,max:10000,def:15,eff:'Freigaben je Arbeitstag mit voller Sorgfalt. Liegen die Freigaben je Tag darüber, sinkt die Erkennung; liegen sie darunter, ändert die Kapazität nichts.',sinn:'so viele, wie die eingeplanten Personen im eigenen System tatsächlich schaffen; 0 heißt, niemand prüft.'},
+  tage:{min:1,max:31,def:22,int:true,eff:'Verteilt die Freigaben je Monat auf Arbeitstage. Weniger Tage: mehr Freigaben je Tag.',sinn:'rund 20–23 bei Fünftagewoche, 30 bei Betrieb an allen Tagen.'},
+  stundensatz:{min:0,max:10000,def:45,eh:' €',eff:'Kosten einer Prüfstunde. Wirkt nur auf Prüfkosten und Gesamtkosten.',sinn:'30–120 € mit Arbeitgeberanteil.'},
+  seed:{min:0,max:4294967295,def:11,int:true,eff:'Startwert des Zufallsgenerators. Gleicher Seed, gleiche Daten; anderer Seed, andere Stichprobe derselben Verteilung.'},
+  schwelle:{min:0,max:1e9,def:100,eh:' €',leer:true,eff:'Aktionen mit höherer Wirkung gehen vor der Ausführung zur Freigabe. 0: jede Aktion; leer: keine Betragsschwelle.',sinn:'Beispiel Agent E 100 €; ob Ihre Schwelle passt, sehen Sie in Teil B, Schritt 1 an kleinster und größter Wirkung.'}
+};
+var MEHR='<p class="more">Mehr: Statistik-Kurzreferenz im OPAL (Statistik_Kurzreferenz_I050_2026-11-05.pdf)</p>';
+var BOX={
+  median:['Median und Mittelwert','Der Median ist der mittlere Wert: Die Hälfte der Aktionen liegt darunter, die Hälfte darüber. Der Mittelwert ist die Summe geteilt durch die Anzahl; wenige sehr große Beträge ziehen ihn nach oben, den Median kaum. Im Simulator liegt der Mittelwert deshalb über dem Median.'],
+  sigma:['Lognormalverteilung und σ','Lognormalverteilt heißt: Der Logarithmus der Beträge ist normalverteilt. Daraus folgen nur positive Beträge, viele kleine und wenige sehr große; σ bestimmt, wie weit sie streuen. Der Mittelwert ist exp(σ²/2)-mal so groß wie der Median, bei σ = 0,9 rund 1,5-mal.'],
+  anteil:['Wahrscheinlichkeit und Anteil','Eine Wahrscheinlichkeit von 0,20 heißt: Auf lange Sicht trifft es 20 von 100 Fällen; in einer einzelnen Stichprobe können es auch 17 oder 23 sein. Anteil und Fehlerraten sind im Simulator solche Wahrscheinlichkeiten je Aktion.'],
+  quote:['Fehlerrate und Schadensquote','Die Fehlerrate sagt, wie oft eine Aktion falsch ist; die Schadensquote, wie viel ihrer Wirkung dann verloren ist. Beispiel: Fehlerrate 0,02, Schadensquote 0,5, Wirkung 80 € ergeben 0,02 · 0,5 · 80 € = 0,80 € erwarteten Schaden je Aktion.'],
+  r0:['Erkennungsrate','Die Erkennungsrate ist der Anteil fehlerhafter Aktionen, den eine Freigabe stoppt: Bei 0,9 fängt die prüfende Person im Mittel 9 von 10 Fehlern ab, einer geht durch. Aktionen ohne Freigabe prüft niemand; dass eine Prüfung korrekte Aktionen fälschlich ablehnt, kennt das Modell nicht.'],
+  kap:['Kapazität und Überlast','Die Kapazität ist die Zahl der Freigaben, die je Arbeitstag mit voller Sorgfalt möglich sind; was darüber liegt, ist Überlast. Das Modell senkt dann die Erkennung im Verhältnis, r = r0 · Kapazität / Freigaben je Tag, bei doppelter Last also auf die Hälfte. Das ist eine gesetzte Modellannahme, keine Messung.'],
+  seed:['Zufallszahl und Seed','Der Simulator zieht Pseudozufallszahlen: Ein festes Rechenverfahren erzeugt aus einem Startwert, dem Seed, eine Folge, die wie Zufall aussieht. Gleicher Seed, gleiche Daten; deshalb lassen sich Ergebnisse vergleichen und nachrechnen. Ändert ein anderer Seed Ihre Schlussfolgerung, ist sie nicht robust.'],
+  erw:['Erwartungswert','Der Erwartungswert ist der Durchschnitt, der sich bei sehr vielen Wiederholungen einstellt: 1.000 Aktionen mit Fehlerrate 0,02 ergeben 20 erwartete Fehler, in einem einzelnen Monat können es mehr oder weniger sein. Der Simulator rechnet nur Erwartungswerte, deshalb erscheinen Kommazahlen wie 31,8 Fehler; wie stark ein einzelner Monat schwankt, zeigt er nicht.']
+};
+function kurz(k){return '<details class="stat"><summary><span class="tag">Statistik kurz</span>'+BOX[k][0]+'</summary><p>'+BOX[k][1]+'</p>'+MEHR+'</details>';}
+function nfmt(x){if(!isFinite(x))return '∞';var d=x%1?Math.min(4,(String(x).split('.')[1]||'').length):0;return grp(x,d);}
+function lim(id){var sp=SPEC[id],e=$(id);if(e.type==='range')return {min:+e.min,max:+e.max,def:+e.defaultValue,step:e.step};return sp;}
+function bereich(id){var l=lim(id),eh=SPEC[id].eh||'';return nfmt(l.min)+'\u2013'+nfmt(l.max)+eh;}
+function lbl(id){var l=document.querySelector('label[for="'+id+'"]');return l?l.textContent.replace(/\s*\(.*$/,'').trim():id;}
+function chk(id){var sp=SPEC[id],raw=String($(id).value).trim(),s=raw.replace(/\s/g,'').replace(/€$/,'');
+  if($(id).type==='range')return {ok:true,x:+$(id).value};
+  if(s==='')return sp.leer?{ok:true,x:Infinity}:{ok:false,msg:'Feld ist leer. Erlaubt: '+bereich(id)+'.'};
+  if(sp.int&&s.indexOf(',')>=0)return {ok:false,msg:'Bitte eine ganze Zahl eingeben. Erlaubt: '+bereich(id)+'.'};
+  if(sp.int)s=s.replace(/\./g,'');else if(s.indexOf(',')>=0)s=s.replace(/\./g,'').replace(',','.');
+  var x=Number(s);
+  if(!isFinite(x))return {ok:false,msg:'„'+raw+'“ ist keine Zahl. Erlaubt: '+bereich(id)+'.'};
+  if(sp.int&&x%1!==0)return {ok:false,msg:'Bitte eine ganze Zahl eingeben. Erlaubt: '+bereich(id)+'.'};
+  if(x<sp.min||x>sp.max)return {ok:false,x:x,msg:'Außerhalb des Bereichs: '+nfmt(x)+(sp.eh||'')+'. Erlaubt: '+bereich(id)+'. Der Schritt wird erst gerechnet, wenn der Wert im Bereich liegt.'};
+  return {ok:true,x:x};}
+function badList(ids){return ids.filter(function(id){return !chk(id).ok;});}
+/* Hinweiszeilen und Kästen an die Felder hängen */
+Object.keys(SPEC).forEach(function(id){var e=$(id),cell=e.closest('.grid>div'),l=lim(id),sp=SPEC[id];
+  var rg=e.type==='range',eh=sp.eh||'',nf=function(x){return rg?fx(x,2):nfmt(x)+eh;};
+  /* Format W05: Min · Max · Schritt · Standard · aktuell; fachlich sinnvoll; Bewirkt */
+  var h='<p class="rng" id="h_'+id+'">'+(sp.int?'Ganze Zahl · ':'')+(sp.sinn&&!rg?'technisch ':'')+'Min '+nf(l.min)+' · Max '+nf(l.max)+(sp.leer?' oder leer':'')+(rg?' · Schritt '+fx(+l.step,2):'')+' · Standard '+nf(l.def)+(rg?' · aktuell <b id="r_'+id+'"></b>':'')+
+    (sp.sinn?'; fachlich sinnvoll: '+sp.sinn.replace(/\.$/,''):'')+'. Bewirkt: '+sp.eff+' <span class="akt" id="a_'+id+'"></span></p>';
+  if(e.type!=='range')h+='<p class="err hidden" id="e_'+id+'" role="alert"></p>';
+  if(BOX[id])h+=kurz(id);
+  cell.insertAdjacentHTML('beforeend',h);});
+$('box_erw').innerHTML=kurz('erw');
+function num1(v){return Math.abs(v-Math.round(v))<1e-9?grp(Math.round(v),0):grp(v,1);}
+function pct(v){return num1(v*100)+' %';}
+function sel(id){var e=$(id);if(e.value!=='andere')return e.value;var f=$(id+'_frei').value.trim();return f||'andere (nicht beschrieben)';}
+function why(a){return a.filter(Boolean).map(function(t){return '<p class="why">'+t+'</p>';}).join('');}
+function kapTxt(P){return grp(P.kap,P.kap%1?1:0);}
+function minW(d){var m=Infinity;for(var i=0;i<d.W.length;i++)if(d.W[i]<m)m=d.W[i];return m;}
+function live(){
+  Object.keys(SPEC).forEach(function(id){var e=$(id);if(e.type==='range')return;var c=chk(id),er=$('e_'+id);
+    er.textContent=c.ok?'':c.msg;er.classList.toggle('hidden',c.ok);e.classList.toggle('bad',!c.ok);e.setAttribute('aria-invalid',c.ok?'false':'true');});
+  FREI.forEach(function(id){$(id+'_frei').classList.toggle('hidden',$(id).value!=='andere');});
+  var sg=+$('sigma').value,cm=chk('median'),z=1.6449;
+  $('a_sigma').textContent=cm.ok?'Das heißt: Rund 90 % der Wirkungen liegen zwischen '+eur(cm.x*Math.exp(-z*sg))+' € und '+eur(cm.x*Math.exp(z*sg))+' €; der Mittelwert ist rund '+fx(Math.exp(sg*sg/2),2)+'-mal so groß wie der Median.':'';
+  $('a_anteil').textContent='Das heißt: '+pct(+$('anteil').value)+' der Aktionen.';
+  $('a_pn').textContent='Das heißt: '+pct(+$('pn').value)+' der Aktionen im normalen Kontext.';
+  $('a_pr').textContent='Das heißt: '+pct(+$('pr').value)+' der Aktionen im riskanten Kontext.'+(+$('pr').value<+$('pn').value?' ⚠ Liegt unter der Fehlerrate im normalen Kontext.':'');
+  $('a_quote').textContent='Das heißt: '+pct(+$('quote').value)+' der Wirkung gehen bei einem Fehler verloren.';
+  $('a_r0').textContent='Das heißt: '+num1(+$('r0').value*10)+' von 10 Fehlern in einer Freigabe erkannt, solange die Kapazität reicht.';
+  var cs=chk('schwelle'),a='';
+  if(cs.ok&&S.data){var mn=minW(S.data),mx=S.st.max,k=0;S.data.W.forEach(function(w){if(w>cs.x)k++;});
+    a='Mit den Daten aus Teil B: '+grp(k,0)+' von '+grp(S.data.W.length,0)+' Aktionen liegen über der Schwelle (kleinste Wirkung '+eur(mn)+' €, größte '+eur(mx)+' €).'+
+      (isFinite(cs.x)&&cs.x>=mx?' Die Schwelle liegt über allen Wirkungen und löst keine Freigabe aus.':'')+(cs.x<mn?' Die Schwelle liegt unter allen Wirkungen: Jede Aktion geht zur Freigabe.':'');}
+  $('a_schwelle').textContent=a;}
+function bez(){return $('bez').value.trim()||'riskanter Kontext';}
+function imKtx(){var b=$('bez').value.trim();return b?'im Kontext „'+b+'“':'im riskanten Kontext';}
+function ktxSuffix(){var b=$('bez').value.trim();return b?' („'+b+'“)':'';}
+function ruleLabel(S,zus){var a=isFinite(S)?'> '+grp(S,S%1?2:0)+' €':'keine Schwelle';return a+(zus?' + '+bez():'');}
+function curveLabel(x){if(!isFinite(x.S)&&!x.zus)return 'voll autonom';if(x.S===0)return ruleLabel(0,x.zus)+' (alles)';if(!isFinite(x.S))return 'nur '+bez();return ruleLabel(x.S,x.zus);}
+function outs(){[['sigma',f2],['anteil',f2],['pn',f2],['pr',f2],['quote',f2],['r0',f2]].forEach(function(e){$('o_'+e[0]).textContent=e[1](+$(e[0]).value);$('r_'+e[0]).textContent=e[1](+$(e[0]).value);});
+  $('l_anteil').textContent='Anteil riskanter Kontext'+ktxSuffix();$('l_pr').textContent='Fehlerrate im riskanten Kontext'+ktxSuffix();
+  var r=rule();$('ruleInfo').textContent='Regel aus Teil A, Schritt 4: Freigabe, wenn '+(isFinite(r.S)?'Wirkung > '+grp(r.S,r.S%1?2:0)+' €':'(keine Betragsschwelle)')+(r.zus?(isFinite(r.S)?' oder ':' ')+imKtx():'')+'.'+(!isFinite(r.S)&&!r.zus?' Ohne Schwelle und ohne Zusatzregel läuft der Agent voll autonom.':'');
+  if(!chk('schwelle').ok)$('ruleInfo').textContent='Die Schwelle in Teil A, Schritt 4 ist ungültig; bitte dort korrigieren.';
+  var rv=RANG.map(function(id){return $(id).value?sel(id):'';}).filter(Boolean),rl=rv.map(function(x){return x.toLowerCase();}),dup=rv.filter(function(v,i){return rl.indexOf(v.toLowerCase())!==i;});
+  $('rangNote').textContent=dup.length?'Doppelt gewählt: '+dup.join(', ')+'. Jeder Wert nur einmal.':'';$('rangNote').classList.toggle('hidden',!dup.length);
+  live();}
+function kpis(a,cls){return '<div class="kpi'+(cls?' '+cls:'')+'">'+a.map(function(k){return '<div><b>'+k[0]+'</b><span>'+k[1]+'</span></div>';}).join('')+'</div>';}
+function tbl(head,rows,cls){return '<div class="tbl"><table><thead><tr>'+head.map(function(h){return '<th>'+h+'</th>';}).join('')+'</tr></thead><tbody>'+rows.map(function(r,i){return '<tr'+(cls&&cls[i]?' class="'+cls[i]+'"':'')+'>'+r.map(function(c){return '<td>'+c+'</td>';}).join('')+'</tr>';}).join('')+'</tbody></table></div>';}
+
+var S={P:null,data:null,st:null,ext:null,own:null,ownRule:null,curve:null,msg:{}};
+function note(k){return S.msg[k]?'<p class="note">'+S.msg[k]+'</p>':'';}
+/* Zurücksetzen: 1 Daten, 2 Grenzfälle, 3 eigene Regel, 4 Kurve */
+function reset(from,why){var had={1:!!S.data,2:!!S.ext,3:!!S.own,4:!!S.curve};
+  if(from<=1){S.data=null;S.st=null;S.P=null;}
+  if(from<=2)S.ext=null;
+  if(from<=3){S.own=null;S.ownRule=null;}
+  S.curve=null;S.msg={};
+  if(why)[1,2,3,4].forEach(function(k){if(k>=from&&had[k])S.msg[k]='Zurückgesetzt: '+why+'. Bitte diesen Schritt erneut ausführen.';});
+  render();}
+function step1(){var bad=badList(['n','median','minuten','kap','tage','stundensatz','seed']);
+  if(bad.length){reset(1);S.msg[1]='Nicht gerechnet: '+bad.map(lbl).join('; ')+'. Bitte die markierten Felder korrigieren.';render();return;}
+  var P=params();S.P=P;S.data=E.generate(P);S.st=E.stats(S.data,P);reset(2);}
+function step2(){S.ext=[E.policy(S.data,S.P,Infinity,false),E.policy(S.data,S.P,0,false)];reset(3);}
+function step3(){if(!chk('schwelle').ok){reset(3);S.msg[3]='Nicht gerechnet: Die Schwelle in Teil A, Schritt 4 ist ungültig. Bitte dort korrigieren.';render();return;}
+  var r=rule();S.ownRule=r;S.own=E.policy(S.data,S.P,r.S,r.zus);reset(4);}
+function step4(){S.curve=E.curve(S.data,S.P,S.ownRule);S.msg={};render();}
+
+function polRow(x,label){return [esc(label),grp(x.freigaben,0),fx(x.je_tag,1),fx(x.erkennung,2),eur(x.schaden),fx(x.stunden,1),eur(x.pruefkosten),eur(x.gesamt)];}
+function sTxt(S){return 'S = '+grp(S,S%1?2:0)+' €';}
+function ownWhy(o,P,d,st){var r=S.ownRule,a=[],mn=minW(d),mx=st.max;
+  if(isFinite(r.S)&&r.S>=mx)a.push('Ihre Schwelle ('+sTxt(r.S)+') liegt über der größten Wirkung ('+eur(mx)+' €): Keine Aktion überschreitet sie. '+(r.zus?'Die Regel wirkt nur über den Zusatz „'+esc(bez())+'“.':'Die Regel wirkt wie voll autonom.'));
+  if(r.S<mn)a.push('Ihre Schwelle ('+sTxt(r.S)+') liegt unter der kleinsten Wirkung ('+eur(mn)+' €): Jede Aktion geht zur Freigabe, wie bei S = 0.');
+  if(r.zus&&st.riskant>0&&E.policy(d,P,r.S,false).freigaben===o.freigaben)a.push('Die Zusatzregel ändert nichts: Alle Aktionen '+esc(imKtx())+' liegen schon über der Schwelle.');
+  if(r.zus&&st.riskant===0)a.push('Die Zusatzregel ändert nichts: In den Daten liegt keine Aktion '+esc(imKtx())+'.');
+  if(o.freigaben===0)a.push('Keine Freigaben: Erkennungsrate, Kapazität, Minuten je Freigabe und Stundensatz wirken auf diese Regel nicht; der Schaden ist der von voll autonom.');
+  else if(!o.ueberlast)a.push('Kapazität nicht erreicht ('+fx(o.je_tag,1)+' Freigaben je Tag, Kapazität '+kapTxt(P)+'): Die Erkennung bleibt bei der Grunderkennung r0 = '+f2(o.erkennung)+'. Eine höhere Kapazität ändert hier nichts; erst eine Kapazität unter '+fx(o.je_tag,1)+' je Tag senkt die Erkennung.');
+  if(o.freigaben>0&&(P.minuten===0||P.stundensatz===0))a.push('Prüfkosten 0 €, weil '+(P.minuten===0?'die Minuten je Freigabe':'der Stundensatz')+' 0 ist: Gesamtkosten und Schaden sind gleich.');
+  return a;}
+function curveWhy(c,P,d){var rows=c.rows,a=[],at=function(S,z){for(var i=0;i<rows.length;i++)if(!rows[i].extra&&rows[i].S===S&&rows[i].zus===z)return rows[i];};
+  E.CURVE.forEach(function(Sv,i){var f=at(Sv,false),t=at(Sv,true);
+    if(f.freigaben===t.freigaben)a.push((isFinite(Sv)?sTxt(Sv):'Ohne Schwelle')+': mit und ohne Zusatzregel gleich, weil '+(isFinite(Sv)?'alle Aktionen '+esc(imKtx())+' schon über der Schwelle liegen':'keine Aktion '+esc(imKtx())+' liegt')+'.');
+    if(i===0)return;var hi=E.CURVE[i-1],f0=at(hi,false),t0=at(hi,true);
+    if(f0.freigaben===f.freigaben)a.push((isFinite(hi)?sTxt(Sv)+' und '+sTxt(hi)+' liefern ohne Zusatzregel dasselbe: Keine Wirkung liegt über '+grp(Sv,0)+' € und bis '+grp(hi,0)+' €.':sTxt(Sv)+' wirkt ohne Zusatzregel wie keine Schwelle: Keine Wirkung liegt über '+grp(Sv,0)+' €.')+(t0.freigaben===t.freigaben?' Mit Zusatzregel ebenso.':''));
+    else if(t0.freigaben===t.freigaben)a.push(sTxt(Sv)+' und '+(isFinite(hi)?sTxt(hi):'keine Schwelle')+' liefern mit Zusatzregel dasselbe: Alle Aktionen dazwischen liegen ohnehin '+esc(imKtx())+'.');});
+  var tie=function(k,i){return rows.filter(function(x){return x[k]===rows[i][k];}).length;};
+  if(tie('schaden',c.iS)>1)a.push('Gleichstand beim minimalen Schaden: '+tie('schaden',c.iS)+' Regeln erreichen '+eur(rows[c.iS].schaden)+' €; markiert ist die erste in der Tabelle.');
+  if(tie('gesamt',c.iG)>1)a.push('Gleichstand bei den minimalen Gesamtkosten: '+tie('gesamt',c.iG)+' Regeln erreichen '+eur(rows[c.iG].gesamt)+' €; markiert ist die erste in der Tabelle.');
+  return a;}
+var POLH=['Regel','Freigaben/Monat','je Tag','Erkennung','Schaden €','Prüfstunden','Prüfkosten €','Gesamt €'];
+
+function render(){var P=S.P,st=S.st,d=S.data,ex=S.ext,o=S.own,c=S.curve;
+  outs();
+  $('btn2').disabled=!d;$('btn3').disabled=!ex;$('btn4').disabled=!o;
+  /* Schritt 1 */
+  var h1=note(1);
+  if(st){h1+='<p class="info">Verwendet: '+grp(P.n,0)+' Aktionen, Median '+eur(P.median)+' €, σ '+f2(P.sigma)+', Anteil riskanter Kontext'+esc(ktxSuffix())+' '+f2(P.anteil)+', Fehlerrate '+f2(P.pn)+' bzw. '+f2(P.pr)+', Schadensquote '+f2(P.quote)+', '+grp(P.minuten,P.minuten%1?1:0)+' min je Freigabe, Kapazität '+grp(P.kap,P.kap%1?1:0)+' je Tag, '+P.tage+' Tage, Erkennung '+f2(P.r0)+', '+eur(P.stundensatz)+' €/h, Seed '+P.seed+'.</p>'+
+    kpis([[eur0(st.summe)+' €','Summe der Wirkung je Monat'],[eur(st.median)+' €','Median'],[fx(st.anteil_ueber_100*100,1)+' %','Anteil über 100 €'],[grp(st.riskant,0),'Aktionen '+esc(imKtx())],[fx(st.erw_fehler,1),'erwartete Fehler je Monat'],[eur(st.schaden_ohne_aufsicht)+' €','erwarteter Schaden ohne Aufsicht']],'k3')+
+    '<p class="legend">Mittelwert '+eur(st.mittel)+' €, kleinste Wirkung '+eur(minW(d))+' €, größte Wirkung '+eur(st.max)+' €.'+(st.mittel>st.median?' Der Mittelwert liegt über dem Median, weil wenige große Aktionen die Summe tragen.':'')+'</p>'+
+    why([st.riskant===0?'Keine Aktion im riskanten Kontext (Anteil '+f2(P.anteil)+'): Die Zusatzregel aus Teil A und die Fehlerrate im riskanten Kontext wirken in diesen Daten nicht.':'',
+      st.riskant===P.n?'Alle Aktionen liegen im riskanten Kontext (Anteil 1): Die Fehlerrate im normalen Kontext wirkt nicht, die Zusatzregel legt jede Aktion zur Freigabe vor.':'',
+      P.pr<P.pn?'⚠ Die Fehlerrate im riskanten Kontext ('+f2(P.pr)+') liegt unter der im normalen ('+f2(P.pn)+'): Der „riskante“ Kontext ist im Modell der sicherere. Prüfen Sie die Eingabe.':'',
+      P.pr===P.pn&&st.riskant>0&&st.riskant<P.n?'Beide Fehlerraten sind gleich: Der Kontext ändert das Fehlerrisiko nicht; die Zusatzregel wählt dann Aktionen ohne höheres Risiko aus.':'',
+      (P.quote===0||(P.pn===0&&P.pr===0))?'Kein erwarteter Schaden möglich ('+(P.quote===0?'Schadensquote 0':'beide Fehlerraten 0')+'): Jede Regel hat Schaden 0 €, sie unterscheiden sich nur in den Prüfkosten.':'']);}
+  $('out1').innerHTML=h1;
+  /* Schritt 2 */
+  var h2=note(2);
+  if(ex){h2+=tbl(POLH,[polRow(ex[0],'voll autonom (S = ∞)'),polRow(ex[1],'alles freigeben (S = 0)')])+
+    '<p class="legend">Alles freigeben heißt '+fx(ex[1].je_tag,1)+' Freigaben je Tag bei einer Kapazität von '+grp(P.kap,P.kap%1?1:0)+'. '+(ex[1].ueberlast?'Die Erkennung sinkt im Modell von '+f2(P.r0)+' auf '+f2(ex[1].erkennung)+'.':'Kapazität nicht erreicht: Die Erkennung bleibt bei der Grunderkennung r0 = '+f2(ex[1].erkennung)+'.')+'</p>';}
+  $('out2').innerHTML=h2;
+  /* Schritt 3 */
+  var h3=note(3);
+  if(o){var base=ex[0],dS=base.schaden>0?(base.schaden-o.schaden)/base.schaden:0;
+    h3+=kpis([[grp(o.freigaben,0),'Freigaben je Monat'],[fx(o.je_tag,1),'Freigaben je Tag (Kapazität '+grp(P.kap,P.kap%1?1:0)+')'],[f2(o.erkennung),'Erkennungsrate'],[eur(o.schaden)+' €','erwarteter Schaden'],[fx(o.stunden,1)+' h','Prüfstunden je Monat'],[eur(o.gesamt)+' €','Gesamtkosten']],'k3')+
+      '<p class="legend">Regel '+esc(ruleLabel(S.ownRule.S,S.ownRule.zus))+': Schaden '+(dS>=0?'−':'+')+fx(Math.abs(dS)*100,1)+' % gegenüber voll autonom; Preis: '+fx(o.stunden,1)+' Prüfstunden oder '+eur(o.pruefkosten)+' € je Monat.</p>'+
+      (o.ueberlast?'<p class="note">Überlast: '+fx(o.je_tag,1)+' Freigaben je Tag bei einer Kapazität von '+grp(P.kap,P.kap%1?1:0)+'. Die Erkennung sinkt im Modell auf '+f2(o.erkennung)+'. Die volle Grunderkennung r0 = '+f2(P.r0)+' gälte erst ab einer Kapazität von '+fx(o.je_tag,1)+' je Tag.</p>':'')+
+      why(ownWhy(o,P,d,st));}
+  $('out3').innerHTML=h3;
+  /* Schritt 4 */
+  var h4=note(4);
+  if(c){var rows=c.rows,mx=Math.max.apply(null,rows.map(function(x){return x.gesamt;}))||1,pc=function(v){return (v/mx*100).toFixed(2)+'%';};
+    var mk=function(x){var m=[];if(x.own)m.push('eigene Regel');if(x.minSchaden)m.push('min. Schaden');if(x.minGesamt)m.push('min. Gesamt');if(x.ueberlast)m.push('Überlast');return '<span class="mk">'+m.join(' · ')+'</span>';};
+    h4+=tbl(['Regel','Freigaben/Tag','Erkennung','Schaden €','Prüfkosten €','Gesamt €','Markierung'],rows.map(function(x){return [esc(curveLabel(x))+(x.extra?' (eigene)':''),fx(x.je_tag,1),fx(x.erkennung,2),eur(x.schaden),eur(x.pruefkosten),eur(x.gesamt),mk(x)];}),rows.map(function(x){return x.own?'own':'';}))+
+      '<div class="bars">'+rows.map(function(x){return '<div class="bar'+(x.own?' own':'')+'"><span class="nm" title="'+esc(curveLabel(x))+'">'+esc(curveLabel(x))+'</span><span class="tr"><span class="fl pos" style="left:0;width:'+pc(x.schaden)+'"></span><span class="fl neg" style="left:'+pc(x.schaden)+';width:'+pc(x.pruefkosten)+'"></span></span><span class="v">'+eur0(x.gesamt)+'</span></div>';}).join('')+'</div>'+
+      '<p class="legend"><span class="sw pos"></span>erwarteter Schaden <span class="sw neg"></span>Prüfkosten; Zahl rechts: Gesamtkosten in € je Monat. S in €; „+ '+esc(bez())+'“: Zusatzregel aktiv.</p>'+
+      '<p class="info">Minimaler Schaden: '+esc(curveLabel(rows[c.iS]))+' ('+eur(rows[c.iS].schaden)+' €). Minimale Gesamtkosten: '+esc(curveLabel(rows[c.iG]))+' ('+eur(rows[c.iG].gesamt)+' €). Ihre Regel: '+eur(o.schaden)+' € Schaden, '+eur(o.gesamt)+' € gesamt.</p>'+
+      '<p class="legend">Die Erkennung liegt nur in Zeilen mit „Überlast“ unter der Grunderkennung r0 = '+f2(P.r0)+'; dort übersteigen die Freigaben je Tag die Kapazität von '+kapTxt(P)+'.</p>'+why(curveWhy(c,P,d));}
+  $('out4').innerHTML=h4;
+  $('matrixLine').textContent=c?matrix():'erscheint nach Schritt 4';$('btnCopy').disabled=!c;}
+
+function stoppKurz(){var t=$('stopp').value.replace(/\s+/g,' ').trim();if(!t)return 'nicht festgelegt';if(t.length<=60)return t;
+  var k=t.slice(0,61),c=Math.max(k.lastIndexOf(','),k.lastIndexOf(';'),k.lastIndexOf('.')),i=k.lastIndexOf(' ');
+  return (c>=15?k.slice(0,c):(i>15?k.slice(0,i):k.slice(0,60))).replace(/[,;:.\s]+$/,'')+' …';}
+function matrix(){var o=S.own,r=S.ownRule;
+  return ($('gruppe').value||'G??')+' · '+(($('thema').value||'T??').split(' ')[0])+' · Regel: '+ruleLabel(r.S,r.zus)+' · Freigaben/Tag '+fx(o.je_tag,1)+' · Erkennung '+f2(o.erkennung)+' · Schaden '+eur0(o.schaden)+' € · Gesamt '+eur0(o.gesamt)+' € · Stopp: '+stoppKurz();}
+
+function today(){var d=new Date(),z=function(x){return (x<10?'0':'')+x;};return z(d.getDate())+'.'+z(d.getMonth()+1)+'.'+d.getFullYear();}
+function v(id){return $(id).value.trim();}
+function selText(id){var a=$(id),o=a.options[a.selectedIndex];if(!a.value)return '';return a.value==='andere'?'andere: '+sel(id):o.textContent;}
+function aufsichtText(){return selText('aufsicht');}
+function ausfallText(){return selText('ausfall');}
+function soul(){return ['# SOUL.md · '+(v('aname')||'Agent'),'','- Gruppe: '+(v('gruppe')||'G??'),'- Thema: '+(v('thema')||'T??'),'- Datum: '+today(),'- Fassung: Arbeitsblatt W06, 11.11.2026',''].concat(soulBody(),['---','I050 Ethische und vertrauenswürdige KI · HTW Dresden · Arbeitsblatt W06, Fassung 11.11.2026']).join('\n')+'\n';}
+function soulBody(){var r=rule(),L=[];
+  L.push('## 1 Zweck','','- Zweck: '+v('zweck'),'- In wessen Auftrag: '+v('auftrag'),'- Ausdrücklich nicht: '+v('nichtzweck'),'');
+  L.push('## 2 Werkzeuge und Rechte (Mandat, Least Privilege)','','| Werkzeug | Recht | Grenze |','|---|---|---|');
+  var nt=0;[0,1,2,3].forEach(function(j){if(v('wn'+j)){nt++;L.push('| '+v('wn'+j).replace(/\|/g,'/')+' | '+($('wr'+j).value==='andere'?sel('wr'+j).replace(/\|/g,'/'):(RECHT[$('wr'+j).value]||'offen'))+' | '+(v('wg'+j).replace(/\|/g,'/')||'offen')+' |');}});
+  if(!nt)L.push('| offen | offen | offen |');
+  L.push('','## 3 Rangfolge bei Konflikten','');
+  var rk=RANG.map(function(id){return $(id).value?sel(id):'';}).filter(Boolean);
+  if(rk.length)rk.forEach(function(w,i){L.push((i+1)+'. '+w);});else L.push('offen');
+  L.push('','## 4 Verbote (gelten auch auf ausdrückliche Aufforderung)','');
+  var vb=['verbot0','verbot1','verbot2'].map(v).filter(Boolean);
+  if(vb.length)vb.forEach(function(x){L.push('- '+x);});else L.push('- offen');
+  L.push('','## 5 Eskalation und Aufsicht','');
+  L.push('- Regel: Freigabe vor der Aktion, wenn '+(isFinite(r.S)?'die Wirkung '+grp(r.S,r.S%1?2:0)+' € übersteigt':'(keine Betragsschwelle)')+(r.zus?(isFinite(r.S)?' oder ':' ')+'die Aktion '+imKtx()+' liegt':'')+(!isFinite(r.S)&&!r.zus?'; ohne Schwelle und Zusatzregel keine Freigabe':'')+'.');
+  if(!chk('schwelle').ok)L.push('- Hinweis: Die Eingabe „'+$('schwelle').value.trim()+'“ für die Schwelle ist ungültig (Bereich '+bereich('schwelle')+' oder leer); bitte im Arbeitsblatt korrigieren.');
+  L.push('- Kurzform: '+ruleLabel(r.S,r.zus));
+  L.push('- Aufsichtsmodell: '+(aufsichtText()||'offen'));
+  L.push('- Bei Ausfall der Kontrollinstanz: '+(ausfallText()||'offen'));
+  if(S.curve)L.push('- Geprüft im Simulator: '+fx(S.own.je_tag,1)+' Freigaben je Tag bei Kapazität '+grp(S.P.kap,S.P.kap%1?1:0)+', Erkennung '+f2(S.own.erkennung)+', erwarteter Schaden '+eur(S.own.schaden)+' € und Gesamtkosten '+eur(S.own.gesamt)+' € je Monat (Lehrmodell, Seed '+S.P.seed+').');
+  L.push('','## 6 Audit-Trail','','Je Schritt an der Werkzeugschnittstelle, außerhalb des Agenten:','');
+  var lf=LOG.filter(function(l){return $(l[0]).checked;});
+  if(lf.length)lf.forEach(function(l){L.push('- '+l[1]);});else L.push('- offen');
+  L.push('','## 7 Stopp','','- Zustand nach der Stopptaste: '+(v('stopp')||'offen'),'');
+  return L;}
+function report(){var P=S.P,st=S.st,L=['# W06 Ergebnis · '+(v('gruppe')||'Gruppe')+' · '+v('thema'),'','## Teil A: Agenten-Verfassung',''];
+  L=L.concat(soulBody());
+  L.push('## Teil B: Eskalationsregel prüfen');
+  if(st){L.push('1. Parameter: '+grp(P.n,0)+' Aktionen je Monat, Median '+eur(P.median)+' €, σ '+f2(P.sigma)+', Anteil riskanter Kontext'+ktxSuffix()+' '+f2(P.anteil)+', Fehlerrate '+f2(P.pn)+' / '+f2(P.pr)+', Schadensquote '+f2(P.quote)+', '+grp(P.minuten,P.minuten%1?1:0)+' min je Freigabe, Kapazität '+grp(P.kap,P.kap%1?1:0)+' je Tag, '+P.tage+' Arbeitstage, Erkennung '+f2(P.r0)+', Stundensatz '+eur(P.stundensatz)+' €, Seed '+P.seed);
+    L.push('   Daten: Summe '+eur(st.summe)+' €, Median '+eur(st.median)+' €, Mittel '+eur(st.mittel)+' €, Maximum '+eur(st.max)+' €, Anteil über 100 € '+fx(st.anteil_ueber_100*100,1)+' %, '+st.riskant+' Aktionen '+imKtx()+', erwartete Fehler '+fx(st.erw_fehler,1)+', Schaden ohne Aufsicht '+eur(st.schaden_ohne_aufsicht)+' €');}
+  var line=function(x,l){return l+': '+x.freigaben+' Freigaben, '+fx(x.je_tag,1)+' je Tag, Erkennung '+f2(x.erkennung)+', Schaden '+eur(x.schaden)+' €, '+fx(x.stunden,1)+' Prüfstunden, Prüfkosten '+eur(x.pruefkosten)+' €, Gesamt '+eur(x.gesamt)+' €';};
+  if(S.ext){L.push('2. '+line(S.ext[0],'Voll autonom (S = ∞)'));L.push('   '+line(S.ext[1],'Alles freigeben (S = 0)'));}
+  if(S.own)L.push('3. '+line(S.own,'Eigene Regel '+ruleLabel(S.ownRule.S,S.ownRule.zus)));
+  if(S.curve){L.push('4. Schwellenvergleich (Schaden / Gesamt in €):');S.curve.rows.forEach(function(x){var m=[];if(x.own)m.push('eigene Regel');if(x.minSchaden)m.push('min. Schaden');if(x.minGesamt)m.push('min. Gesamt');
+      L.push('   '+curveLabel(x)+': '+fx(x.je_tag,1)+' je Tag, Erkennung '+f2(x.erkennung)+', '+eur(x.schaden)+' / '+eur(x.gesamt)+(m.length?'  ['+m.join(', ')+']':''));});}
+  L.push('5. Bewertung: '+v('bewertung'));
+  if($('urteil').value)L.push('   Urteil (optional): Die Regel '+$('urteil').value+' für unser System.');
+  if(S.curve)L.push('','Vergleichsmatrix: '+matrix());
+  L.push('','Arbeitsblatt W06, Fassung 11.11.2026. Lehrmodell, Daten synthetisch.');
+  return L.join('\n');}
+function download(name,text,type){var blob=new Blob([text],{type:type});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();if(window.__abDL)window.__abDL(name,text);setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},500);}
+function legacyCopy(t){try{var ta=document.createElement('textarea');ta.value=t;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.left='-9999px';document.body.appendChild(ta);ta.select();var ok=document.execCommand('copy');ta.remove();return ok;}catch(e){return false;}}
+function copyLine(){render();var t=$('matrixLine').textContent,done=function(ok){$('copyInfo').textContent=ok?'Zeile kopiert.':'Kopieren nicht möglich. Bitte die Zeile markieren und kopieren.';};
+  try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){done(true);},function(){done(legacyCopy(t));});return;}}catch(e){}
+  done(legacyCopy(t));}
+
+load();render();
+PAR.forEach(function(id){$(id).addEventListener('change',function(){if(S.data)reset(1,'Parameter in Teil B, Schritt 1 geändert');});});
+RULE.forEach(function(id){$(id).addEventListener('change',function(){if(S.own)reset(3,'Eskalationsregel in Teil A, Schritt 4 geändert');});});
+FIELDS.concat(CHK).forEach(function(id){$(id).addEventListener('input',function(){render();save();});$(id).addEventListener('change',function(){render();save();});});
+$('btn1').addEventListener('click',step1);
+$('btn2').addEventListener('click',step2);
+$('btn3').addEventListener('click',step3);
+$('btn4').addEventListener('click',step4);
+$('btnCopy').addEventListener('click',copyLine);
+$('btnSave').addEventListener('click',function(){download('W06_'+($('gruppe').value||'Gruppe')+'_Ergebnis.txt',report(),'text/plain;charset=utf-8');});
+[$('btnSoul'),$('btnSoul2')].forEach(function(b){b.addEventListener('click',function(){download('SOUL.md',soul(),'text/markdown;charset=utf-8');});});
+$('btnPrint').addEventListener('click',function(){window.print();});
+var offen=[];window.addEventListener('beforeprint',function(){offen=[];Array.prototype.forEach.call(document.querySelectorAll('details.stat'),function(x){if(!x.open){x.open=true;offen.push(x);}});});
+window.addEventListener('afterprint',function(){offen.forEach(function(x){x.open=false;});offen=[];});
+window.W06App={step1:step1,step2:step2,step3:step3,step4:step4,reset:reset,state:S,report:report,soul:soul,matrix:matrix,params:params,rule:rule,chk:chk,spec:SPEC};
+})();
+</script>
+<script>
+/* Info-Symbole: Verweise auf die Folien der Vorlesung W06 (Hover, Fokus, Tippen); Zählung der Vorlesung vom 09.11.2026 mit Folie 7 „KI-Agent in fünf Disziplinen“ und Folie 22 „Beispiel T05“ */
+(function(){
+var F={"6": "KI-Agent in fünf Disziplinen", "7": "KI-Agent", "13": "Agentenprofile nach Kasirzadeh und Gabriel", "14": "Das Risiko hängt an den Werkzeugen", "17": "Least Privilege", "18": "Agenten-Verfassung", "19": "Rangfolge bei Konflikten", "20": "Model Card, System Card, Agent Card", "21": "Aufbau: Agent Card und SOUL.md", "22": "Beispiel T05: verifizierter Einkaufsagent", "23": "Aufsicht durch Menschen", "24": "Notation an einem Beispiel", "25": "Das Modell hinter Agent E", "26": "Machen mehr Freigaben Agent E sicherer?", "27": "Freigabeschwelle und erwarteter Schaden", "28": "Eskalieren nach Wirkung", "29": "Guardrails und ihr Standardverhalten", "31": "Protokoll und Audit-Trail", "32": "Stopptaste und sicherer Zustand", "33": "Sechs Prinzipien am Fall Agent E", "47": "Rechenweg: Freigabeschwelle und erwarteter Schaden", "48": "Rechenweg: Eskalationsregel"};
+var VERT=45;
+var tip=document.createElement('div');tip.id='vltip';tip.setAttribute('role','tooltip');tip.hidden=true;document.body.appendChild(tip);
+var cur=null,pin=null;
+function nums(el){return el.getAttribute('data-vl').split(',').map(function(x){return parseInt(x,10);});}
+function zusatz(n){return n>=VERT?' (freiwillige Vertiefung)':'';}
+function show(el){if(pin&&pin!==el)pin=null;if(cur&&cur!==el)cur.removeAttribute('aria-describedby');cur=el;
+  tip.innerHTML='<span class="t">Vorlesung W06</span>'+nums(el).map(function(n){return '<span class="l"><b>Folie '+n+'</b> · '+F[n].replace(/&/g,'&amp;')+(n>=VERT?' <i>(freiwillige Vertiefung)</i>':'')+'</span>';}).join('');
+  tip.hidden=false;el.setAttribute('aria-describedby','vltip');
+  var r=el.getBoundingClientRect(),w=tip.offsetWidth,h=tip.offsetHeight,vw=document.documentElement.clientWidth,vh=window.innerHeight;
+  var x=Math.min(Math.max(8,r.left+r.width/2-w/2),vw-w-8),y=r.bottom+8;if(y+h>vh-8)y=Math.max(8,r.top-h-8);
+  tip.style.left=x+'px';tip.style.top=y+'px';}
+function hide(){tip.hidden=true;if(cur)cur.removeAttribute('aria-describedby');cur=null;pin=null;}
+function toggle(el){if(pin===el){hide();}else{show(el);pin=el;}}
+Array.prototype.forEach.call(document.querySelectorAll('.vl'),function(el){
+  el.setAttribute('aria-label','Vorlesung W06: '+nums(el).map(function(n){return 'Folie '+n+', '+F[n]+zusatz(n);}).join('; '));
+  el.addEventListener('mouseenter',function(){show(el);});
+  el.addEventListener('mouseleave',function(){if(pin!==el&&document.activeElement!==el)hide();});
+  el.addEventListener('focus',function(){show(el);});
+  el.addEventListener('blur',function(){if(pin!==el)hide();});
+  el.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();toggle(el);});
+  el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle(el);}});
+});
+document.addEventListener('click',function(){if(cur)hide();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')hide();});
+window.addEventListener('scroll',function(){if(cur)hide();},{passive:true});
+window.addEventListener('resize',function(){if(cur)hide();});
+})();
+;(function(){try{var w=document.getElementById('jsWarn');if(window.__AB_OK&&w&&!(document.getElementById('jsErr')||{}).textContent)w.style.display='none';}catch(x){}})();
+</script>
+<div id="abDL"><b>Download nicht gestartet?</b> Manche Browser (z. B. in Apps oder auf dem Tablet) laden keine Dateien herunter. Dann den Inhalt unten markieren, kopieren und als Textdatei <span id="abDLname"></span> speichern.<textarea id="abDLtext" readonly></textarea></div>
+</body></html>
